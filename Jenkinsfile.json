@@ -1,0 +1,17 @@
+{
+    "develop": {
+        "urlWlBirc": "t3://10.1.5.153:3061", 
+        "idUserANDPassWlBirc": "weblogic-develop-console-user",
+        "idUserANDPassShh": "avaluos-develop-console-user",
+        "artifactNameWlBirc": "FacturaElectronicaEAR",
+        "domainWlBirc": "/oracle/app/wlogic12c/Oracle/Middleware/Oracle_Home/user_projects/domains/transversalesdesa/bin/",
+        "pathwlBirc": "/oracle/app/wlogic12c/Oracle/Middleware/Oracle_Home/user_projects/domains/base_domain/deploysJenkins/App/birc",
+        "clusterWlBirc": "ClusterTransversales",                                                        
+        "serverWlSshBirc":"10.1.5.153",
+        "puertoWlSshBirc":22,
+        "extension":"ear",
+        "projectName":"Birc",
+        "channelName":"birc-automatizacion"
+        
+    }
+}
