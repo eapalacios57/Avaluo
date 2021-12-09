@@ -1,0 +1,87 @@
+<!-- 
+ * Pantalla para realizar el cargue masivo de aval�os, incluidos los de tipo
+ * constructor, el usuario carga los archivos comprimidos con los aval�os a cargar
+ * al sistema, tambien debe asociar un archivo comprimido con el registro
+ * fotografico para cada archivo con la informaci�n de los aval�os.
+ * @author John Fredy Rincon
+ * @version 1.0
+ * @created 31-ago-2017 10:30:40 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" style="width:100%" id="cargueTab">
+	<h:outputLabel value="#{etq.car_label_proyectoconstructor}" styleClass="avaluos-tittle" />
+	<p:separator />
+	<h:panelGrid columns="3" cellspacing="5">
+		<p:selectBooleanCheckbox styleClass="avaluos-checkbox" disabled="#{not empty cargueMasivoBean.listaCargueMasivo}" id="cargueProyectoConstructor"
+			value="#{cargueMasivoBean.proyectoConstructor}">
+			<p:ajax update="cargueMasArchivos cargueMasFotog" listener="#{cargueMasivoBean.cambiaProyectoConstructor}" />
+		</p:selectBooleanCheckbox>
+		<h:outputLabel value="#{etq.car_seleccione_proyecto_constructor}" />
+		<p:message for="cargueProyectoConstructor" />
+	</h:panelGrid>
+	<h:panelGrid columns="2" cellspacing="5" style="width:100%;margin-top:30px">
+		<p:fileUpload styleClass="avaluos-zona-cargando" id="cargueMasArchivos" dragDropSupport="true" invalidFileMessage="#{etq.car_label_invalidfile}"
+			label="#{etq.car_carguetxt}" fileLimitMessage="#{etq.car_maximo} #{cargueMasivoBean.cantidadArchivos} #{etq.car_archivos}"
+			fileLimit="#{cargueMasivoBean.cantidadArchivos}" fileUploadListener="#{cargueMasivoBean.subirArchivos}" sequential="true"
+			disabled="#{sesion.permisosEspecificos.get('ADMINISTRADOR')}" invalidSizeMessage="#{etq.car_tamanio_max}" multiple="true" auto="true" mode="advanced"
+			rendered="#{cargueMasivoBean.verCargueTxt}" allowTypes="/(\.|\/)(txt)$/" update="cargueForm:tab:cargueTab,procesarArchivos">
+			<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
+					<h:outputText value="#{etq.car_label_carguetxt}" />
+					<h:outputText value="#{etq.car_tamanio_max}" />
+					<h:outputText value="#{etq.car_maximo} #{cargueMasivoBean.cantidadArchivos} #{etq.car_archivos}" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:fileUpload>
+		<p:fileUpload styleClass="avaluos-zona-cargando" id="cargueMasFotog" dragDropSupport="true" invalidFileMessage="#{etq.car_label_invalidfile}"
+			label="#{etq.car_carguezip}" fileLimit="#{cargueMasivoBean.cantidadArchivos}" fileUploadListener="#{cargueMasivoBean.subirArchivos}" sequential="true"
+			multiple="true" auto="true" mode="advanced" rendered="#{cargueMasivoBean.verCargueFoto}" allowTypes="/(\.|\/)(zip)$/"
+			disabled="#{sesion.permisosEspecificos.get('ADMINISTRADOR')}" update="cargueForm:tab:cargueTab, procesarArchivos">
+			<h:panelGrid>
+				<h:outputText value="#{etq.car_label_carguezip}" />
+				<h:outputText value="#{etq.car_tamanio_max}" />
+				<h:outputText value="#{etq.car_maximo} #{cargueMasivoBean.cantidadArchivos} #{etq.car_archivos}" />
+			</h:panelGrid>
+		</p:fileUpload>
+		<p:message for="cargueMasArchivos" />
+		<p:message for="cargueMasFotog" />
+	</h:panelGrid>
+	<h:outputLabel value="#{etq.car_mensaje_archivos}" styleClass="avaluos-texto-aclaratorio" />
+	<p:separator />
+	<h:panelGrid id="ArchivosCargados" columns="1" rendered="#{not empty cargueMasivoBean.listaCargueMasivo}">
+		<p:dataTable styleClass="avaluos-gen-table" var="cargue" emptyMessage="#{etq.car_label_tb_empty}" value="#{cargueMasivoBean.listaCargueMasivo}"
+			binding="#{cargueMasivoBean.table}" id="cargueData" paginator="true" paginatorAlwaysVisible="false" currentPageReportTemplate="{currentPage}/{totalPages}"
+			paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" rows="10" paginatorPosition="bottom">
+			<p:column>
+				<p:outputPanel>
+					<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.eliminar}" actionListener="#{cargueMasivoBean.eliminarCargue}"
+						update=" cargueForm:tab:cargueTab,errorForm">
+						<p:confirm header="#{etq.confirmar}" message="#{etq.confirmarEliminacion}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:outputPanel>
+			</p:column>
+			<p:column headerText="#{etq.car_label_tb_nombretxt}" sortBy="#{cargue.nombreTxt}">
+				<h:outputText value="#{cargue.nombreTxt}" />
+			</p:column>
+			<p:column headerText="#{etq.car_label_tb_fechatxt}" sortBy="#{cargue.fechaCargueTxt}">
+				<h:outputText value="#{cargue.fechaCargueTxt}">
+					<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="#{etq.car_label_tb_nombrezip}" sortBy="#{cargue.nombreZip}">
+				<h:outputText value="#{cargue.nombreZip}" />
+			</p:column>
+			<p:column headerText="#{etq.car_label_tb_fechazip}" sortBy="#{cargue.fechaCargueZip}">
+				<h:outputText value="#{cargue.fechaCargueZip}">
+					<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+		<!-- 		<h:outputText value="Tamaño del Cargue: #{cargueMasivoBean.tamanioCargado}MB" /> -->
+	</h:panelGrid>
+	<p:panelGrid>
+		<p:commandButton rendered="#{not empty cargueMasivoBean.listaCargueMasivo}" styleClass="avaluos-subir-archivo" update="cargueForm:tab:cargueTab,errorForm"
+			id="procesarArchivos" value="Subir Archivos" actionListener="#{cargueMasivoBean.cargarArchivos}"
+			disabled="#{sesion.permisosEspecificos.get('ADMINISTRADOR')}" />
+	</p:panelGrid>
+</h:panelGrid>

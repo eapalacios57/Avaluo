@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_informe_avaluos_sub_oferta" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="1088390a-2e6e-4386-aadc-22b2ae252000">
+	<property name="ireport.zoom" value="2.848123751874315"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="usuarioTransaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaTransaccion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaTransaccion]]></fieldDescription>
+	</field>
+	<field name="tipoComercializacion" class="java.lang.Long">
+		<fieldDescription><![CDATA[tipoComercializacion]]></fieldDescription>
+	</field>
+	<field name="actualidadEdificadora" class="java.lang.String">
+		<fieldDescription><![CDATA[actualidadEdificadora]]></fieldDescription>
+	</field>
+	<field name="idAvaluo" class="java.lang.Long">
+		<fieldDescription><![CDATA[idAvaluo]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="comportamiento" class="java.lang.String">
+		<fieldDescription><![CDATA[comportamiento]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="10" splitType="Stretch">
+			<staticText>
+				<reportElement x="217" y="1" width="169" height="9" uuid="d3357e35-a539-4edf-99a0-50de981b4959"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[COMPORTAMIENTO DE OFERTA Y DEMANDA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="539" y="2" width="32" height="7" uuid="0f84c630-8244-489b-b40a-eb78dbc064bf"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoComercializacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="2" width="137" height="7" uuid="ec1a3357-2492-47cf-9afa-bd47f61554ef"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[TIEMPO ESPERADO DE COMERCIALIZACIÓN EN MESES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="2" width="110" height="7" uuid="ad776251-0989-4f1f-8ec2-58dddb9612da"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[ACTUALIDAD EDIFICADORA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="-9" width="574" height="48" uuid="79ff7463-8a7e-414e-9339-2bf6babebedd"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="217" y="0" width="354" height="38" uuid="093ff032-c1f3-419d-a32f-a5f76af68d22"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comportamiento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="214" height="38" uuid="7a8d04ed-f776-4db1-a6be-df5113e774e0"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{actualidadEdificadora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

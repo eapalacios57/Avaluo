@@ -1,0 +1,57 @@
+<svg id="Indicador" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""/>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?></metadata>
+<defs>
+    <style>
+      .cls-1 {
+        opacity: 0.5;
+      }
+
+      .cls-2 {
+        fill: #d2d2d2;
+      }
+
+      .cls-3 {
+        fill: #007f3e;
+        fill-rule: evenodd;
+        filter: url(#filter);
+      }
+    </style>
+    <filter id="filter" x="26" y="27.188" width="48" height="59.813" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="5" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="2.236"/>
+      <feFlood result="flood" flood-color="#0a0a0a" flood-opacity="0.3"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse class="cls-1" cx="42.656" cy="76.438" rx="6.344" ry="1.563"/>
+  <circle class="cls-2" cx="49.5" cy="46.719" r="23.5"/>
+  <path id="Forma_1749" data-name="Forma 1749" class="cls-3" d="M54.149,27.827A19.242,19.242,0,0,0,30.7,41.76C27.367,54.631,41.705,76.313,41.705,76.313S64.618,64.369,67.949,51.5A19.422,19.422,0,0,0,54.149,27.827Zm-7.04,27.43a8.919,8.919,0,0,1-6.333-10.862A8.824,8.824,0,0,1,51.538,38a8.919,8.919,0,0,1,6.333,10.863A8.824,8.824,0,0,1,47.109,55.257Z"/>
+</svg>

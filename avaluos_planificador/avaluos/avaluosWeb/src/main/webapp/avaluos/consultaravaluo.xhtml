@@ -1,0 +1,587 @@
+<!-- 
+ * Interfaz para la gestión y consulta de los avalúos registrados en el sistema.
+ * Desde esta pantalla el usuario puede realizar las principales funciones y
+ * operaciones que aplican a un avalúo.
+ * 
+ * La pantalla permite la visualización de la ubicación de los avalúos, una vez se
+ * realiza la consulta.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+  -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml" xmlns:gis="http://gisfaces.com">
+	<ui:define name="content">
+		<style>
+html, body, #mapDiv {
+	padding: 0;
+	margin: 0;
+	height: 300px;
+}
+
+#applicationDiv {
+	padding: 0;
+	margin: 0;
+}
+</style>
+		<script type="text/javascript">
+			function showStatus() {
+				PF('statusDialog').show();
+			}
+			function hideStatus() {
+				PF('statusDialog').hide();
+				confirmarDescarga();
+			}
+		</script>
+		<h:form id="consultarForm">
+			<p:remoteCommand name="rcActualizarMapa" />
+			<p:remoteCommand name="confirmarDescarga" update="errorForm" actionListener="#{consultarAvaluoBean.confirmarDescarga}" />
+			<p:hotkey bind="alt+c" update="seccionFiltros,errorForm" actionListener="#{consultarAvaluoBean.consultarAvaluo}" />
+			<p:panelGrid columns="1">
+				<p:panelGrid columns="2" id="seccionTitulo">
+					<h:outputText value="#{etq.tituloInformeAvaluos}" styleClass="avaluos-tittle" />
+					<p:commandButton styleClass="#{consultarAvaluoBean.verFiltros?'avaluos-add-row':'avaluos-btn-mostrar-filtro'}"
+						value="#{consultarAvaluoBean.verFiltros?etq.ocultarFiltros:etq.mostrarFiltros}" actionListener="#{consultarAvaluoBean.mostrarFiltro}" ajax="true"
+						update="seccionFiltros,seccionTitulo" />
+				</p:panelGrid>
+				<h:outputText value="#{etq.ca_descripcion_informe_avaluos}" rendered="#{consultarAvaluoBean.verFiltros}" styleClass="avaluos-subtittle" />
+				<h:panelGrid id="seccionFiltros">
+					<h:panelGrid columns="1" rendered="#{consultarAvaluoBean.verFiltros}">
+						<h:panelGrid columns="4">
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.tipoIdentificacion}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="tipoDocumento"
+									value="#{consultarAvaluoBean.consulta.idTipoIdentificacion}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+								</p:selectOneMenu>
+								<p:message for="tipoDocumento" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.numeroIdentificacion}" />
+								<p:inputNumber styleClass="avaluos-input-txt" id="numeroIdentificacion" value="#{consultarAvaluoBean.consulta.numeroIdentificacion}"
+									label="NumeroDocumento" thousandSeparator="," decimalPlaces="0" minValue="0" maxValue="9999999999" size="32" />
+								<p:message for="numeroIdentificacion" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.departamento}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="departamento"
+									value="#{consultarAvaluoBean.consulta.idDepartamento}">
+									<p:ajax update="ciudad" oncomplete="$(function(){PrimeFaces.focus('consultarForm:ciudad');})" />
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+								</p:selectOneMenu>
+								<p:message for="departamento" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid>
+									<h:outputText value="#{etq.ciudad}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="ciudad"
+										value="#{consultarAvaluoBean.consulta.idCiudad}" disabled="#{empty consultarAvaluoBean.consulta.idDepartamento}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+										<f:selectItems value="#{lista.cargarCiudades(consultarAvaluoBean.consulta.idDepartamento)}" />
+									</p:selectOneMenu>
+									<p:message for="ciudad" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</h:panelGrid>
+						<p:separator />
+						<h:panelGrid columns="4">
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_tipoAvaluo}" />
+								<h:panelGrid columns="4">
+									<h:outputText value="#{lista.descDominio('TIPOAVALUO',1)}" />
+									<p:selectBooleanCheckbox styleClass="avaluos-checkbox" value="#{consultarAvaluoBean.consulta.tipoAvaluoProvisional}" />
+									<h:outputText value="#{lista.descDominio('TIPOAVALUO',2)}" />
+									<p:selectBooleanCheckbox styleClass="avaluos-checkbox" value="#{consultarAvaluoBean.consulta.tipoAvaluoDefinitivo}" />
+								</h:panelGrid>
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_fecha_cargue_f}" />
+								<h:panelGrid columns="2" id="fechaCargue">
+									<p:calendar styleClass="avaluos-calendario-add" id="cargueDesde" value="#{consultarAvaluoBean.consulta.fechaCargueDesde}" showOn="both"
+										pattern="#{etq.formatoFecha}" size="6" />
+									<p:calendar styleClass="avaluos-calendario-add" id="cargueHasta" value="#{consultarAvaluoBean.consulta.fecharCargueHasta}" showOn="both"
+										pattern="#{etq.formatoFecha}" size="6" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+								</h:panelGrid>
+								<p:message for="fechaCargue" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_fecha_avaluo_f}" />
+								<h:panelGrid columns="2" id="fechaAvaluo">
+									<p:calendar styleClass="avaluos-calendario-add" id="avaluosDesde" value="#{consultarAvaluoBean.consulta.fechaAvaluoDesde}" showOn="both"
+										pattern="#{etq.formatoFecha}" size="6" />
+									<p:calendar styleClass="avaluos-calendario-add" id="avaluosHasta" value="#{consultarAvaluoBean.consulta.fechaAvaluoHasta}" showOn="both"
+										pattern="#{etq.formatoFecha}" size="6" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+								</h:panelGrid>
+								<p:message for="fechaAvaluo" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_perito_f}" />
+								<h:panelGrid columns="2">
+									<p:inputText styleClass="avaluos-input-txt" id="perito" value="#{consultarAvaluoBean.consulta.usuarioCreacion}" disabled="true" size="25" />
+									<p:commandButton styleClass="avaluos-cta-gen-aceptar" icon="ui-icon-extlink" update="peritoConsultaForm" ajax="true"
+										actionListener="#{consultarAvaluoBean.consultarPeritos}" />
+								</h:panelGrid>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_nombre_edificio_f}" />
+								<p:inputText styleClass="avaluos-input-txt" id="nombreEdificio" value="#{consultarAvaluoBean.consulta.nombreConjuntoEdificio}" size="32" />
+								<p:message for="nombreEdificio" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.direccion}" />
+								<p:inputText styleClass="avaluos-input-txt" id="direccion" value="#{consultarAvaluoBean.consulta.direccionInmueble}" size="32" />
+								<p:message for="direccion" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_tipo_vivienda_f}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="tipoVivienda"
+									value="#{consultarAvaluoBean.consulta.tipoVivienda}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('TIPOVIVIENDA')}" />
+								</p:selectOneMenu>
+								<p:message for="tipoVivienda" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_estado_construccion_f}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="estadoConstruccion"
+									value="#{consultarAvaluoBean.consulta.estadoConstruccion}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('ESTADOCONSTRUCCION')}" />
+								</p:selectOneMenu>
+								<p:message for="estadoConstruccion" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid columns="2">
+									<p:selectBooleanCheckbox styleClass="avaluos-checkbox" value="#{consultarAvaluoBean.consulta.constructor}" />
+									<h:outputText value="#{etq.ca_constructora}  " />
+								</h:panelGrid>
+								<p:inputText styleClass="avaluos-input-txt" id="nombreConstructora" value="#{consultarAvaluoBean.consulta.nombreConstructora}" maxlength="40" size="32"
+									disabled="#{not consultarAvaluoBean.consulta.constructor}" />
+								<p:message for="nombreConstructora" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_matriculaInmobiliaria}" />
+								<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliaria" value="#{consultarAvaluoBean.consulta.matricula}" maxlength="20" size="32" />
+								<p:message for="matriculaInmobiliaria" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_estrato_f}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="estrato"
+									value="#{consultarAvaluoBean.consulta.estrato}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('ESTRATO')}" />
+								</p:selectOneMenu>
+								<p:message for="estrato" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_estadoAvaluo}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="estadoAvaluo"
+									value="#{consultarAvaluoBean.consulta.estadoAvaluo}" disabled="#{sesion.permisosEspecificos['CONSULTANUEVO']}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('ESTADOAVALUO')}" />
+								</p:selectOneMenu>
+								<p:message for="estadoAvaluo" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_nombreTxt}" />
+								<p:inputText styleClass="avaluos-input-txt" value="#{consultarAvaluoBean.consulta.nombrePlano}" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_fecha_impresion_f}" id="fechaImpresion" />
+								<h:panelGrid columns="2">
+									<p:calendar styleClass="avaluos-calendario-add" id="impresionDesde" value="#{consultarAvaluoBean.consulta.fechaImpresionDesde}" showOn="both" size="6"
+										pattern="#{etq.formatoFecha}" />
+									<p:calendar styleClass="avaluos-calendario-add" id="impresionHasta" value="#{consultarAvaluoBean.consulta.fechaImpresionHasta}" showOn="both" size="6"
+										pattern="#{etq.formatoFecha}" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+								</h:panelGrid>
+								<p:message for="fechaImpresion" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_calificacion_f}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="calificacion"
+									value="#{consultarAvaluoBean.consulta.calificacion}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('CALGARANTIA')}" />
+								</p:selectOneMenu>
+								<p:message for="calificacion" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_avance_f}" />
+								<h:panelGrid columns="2" id="avance">
+									<p:spinner id="avanceDesde" styleClass="avaluos-input-txt" size="8" value="#{consultarAvaluoBean.consulta.avanceDesde}" suffix="%" max="100" min="0" />
+									<p:spinner id="avanceHasta" styleClass="avaluos-input-txt" size="8" value="#{consultarAvaluoBean.consulta.avanceHasta}" suffix="%" max="100" min="0" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+									<p:message for="avanceDesde" />
+									<p:message for="avanceHasta" />
+								</h:panelGrid>
+								<p:message for="avance" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_valorTotal}" />
+								<h:panelGrid columns="4" id="valorTotal">
+									<p:inputNumber styleClass="avaluos-input-txt" id="valorDesde" size="8" value="#{consultarAvaluoBean.consulta.valorDesde}" />
+									<h:outputText value="$" styleClass="avaluos-valor-signo" />
+									<p:inputNumber styleClass="avaluos-input-txt" id="valorHasta" size="8" value="#{consultarAvaluoBean.consulta.valorHasta}" />
+									<h:outputText value="$" styleClass="avaluos-valor-signo" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+								</h:panelGrid>
+								<p:message for="valorTotal" />
+							</h:panelGrid>
+							<h:panelGrid>
+								<h:outputText value="#{etq.ca_vetustez_f}" id="vetustez" />
+								<h:panelGrid columns="2">
+									<p:inputNumber styleClass="avaluos-input-txt" size="8" value="#{consultarAvaluoBean.consulta.vetustezDesde}" decimalPlaces="0" />
+									<p:inputNumber styleClass="avaluos-input-txt" size="8" value="#{consultarAvaluoBean.consulta.vetustezHasta}" decimalPlaces="0" />
+									<h:outputText value="#{etq.ca_fecha_desde}" />
+									<h:outputText value="#{etq.ca_fecha_hasta}" />
+								</h:panelGrid>
+								<p:message for="vetustez" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_linea_f}" />
+								<p:inputNumber styleClass="avaluos-input-txt" value="#{consultarAvaluoBean.consulta.numLinea}" size="32" />
+							</h:panelGrid>
+							<h:panelGrid columns="1" width="100">
+								<h:outputText value="#{etq.ca_alerta}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="tipoAlerta"
+									value="#{consultarAvaluoBean.consulta.tiposAlerta}" disabled="#{not sesion.permisosEspecificos['ALERTAASEGURA']}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('ALERTA')}" />
+								</p:selectOneMenu>
+								<p:message for="tipoAlerta" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_asegurable_f}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="asegurable"
+									value="#{consultarAvaluoBean.consulta.asegurabilidad}" disabled="#{not sesion.permisosEspecificos['ALERTAASEGURA']}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('SI_NO')}" />
+								</p:selectOneMenu>
+								<p:message for="asegurable" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_procedencia}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="procedencia"
+									value="#{consultarAvaluoBean.consulta.codigoProcedencia}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('PROCEDENCIA_AVALUO')}" />
+								</p:selectOneMenu>
+								<p:message for="procedencia" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.ca_consecutivo_f}" />
+								<p:watermark for="consecutivoBanco" value="#{etq.ina_consecutivoBanco}" />
+								<p:inputText styleClass="avaluos-input-txt" value="#{consultarAvaluoBean.consulta.consecutivoBanco}" id="consecutivoBanco" maxlength="22"
+									onkeypress="return numeroEntero(event);" size="32" />
+								<p:message for="consecutivoBanco" />
+							</h:panelGrid>
+							
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.inm_idCategoria}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="categoria" value="#{consultarAvaluoBean.consulta.categoria}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+									<f:selectItems value="#{lista.cargarLista('CATEGORIA')}" />
+								</p:selectOneMenu>
+								<p:message for="categoria" />
+							</h:panelGrid>
+							
+							<h:panelGrid columns="1">
+								<h:outputText value="#{etq.inm_claseInmueble}" />
+								<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="claseInmueble" value="#{consultarAvaluoBean.consulta.claseInmueble}">
+									<f:selectItem itemLabel="#{etq.seleccione}" itemValue=""/>
+									<f:selectItems value="#{lista.cargarLista('CLASEINMUEBLE')}" />
+								</p:selectOneMenu>
+								<p:message for="claseInmueble" />
+							</h:panelGrid>
+							
+						</h:panelGrid>
+						<p:panelGrid columns="1" styleClass="avaluos-cta-informe " rendered="#{consultarAvaluoBean.verFiltros}">
+							<p:commandButton styleClass="avaluos-filtros-mapa" id="consultarBtn" value="#{etq.ca_consultar}" actionListener="#{consultarAvaluoBean.consultarAvaluo}"
+								ajax="true" update="seccionFiltros,seccionInformacion,errorForm" />
+						</p:panelGrid>
+						<p:defaultCommand target="dummy" />
+						<p:commandButton id="dummy" process="@none" global="false" style="display:none;" />
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid id="seccionInformacion" rendered="#{consultarAvaluoBean.verTabla}">
+					<!--Tabla de consulta-->
+					<p:dataTable styleClass="avaluos-gen-table" id="tablaAvaluos" var="avaluo" scrollable="true" value="#{consultarAvaluoBean.listado}" scrollHeight="400"
+						widgetVar="entidadTable" lazy="true" emptyMessage="#{etq.ca_no_existen_registro}" currentPageReportTemplate="{currentPage}/{totalPages}"
+						paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" rows="#{consultarAvaluoBean.registroPagina}"
+						paginatorPosition="top" paginatorAlwaysVisible="true" selection="#{consultarAvaluoBean.seleccionados}">
+						<p:ajax event="page" update="tablaAvaluos,errorForm" />
+						<p:ajax event="sort" update="tablaAvaluos,errorForm" />
+						<f:facet name="header">
+							<h:panelGrid columns="1">
+								<h:panelGrid columnClasses="avaluos-informe-ancho" columns="7">
+									<h:outputLabel value="#{etq.ca_resultado_busqueda}" styleClass="avaluos-resultado-busqueda" />
+									<p:outputLabel styleClass="avaluos-favorable" />
+									<h:outputLabel value="#{etq.ca_favorable}" />
+									<p:outputLabel styleClass="avaluos-desfavorable" />
+									<h:outputLabel value="#{etq.ca_desfavorable}" />
+									<p:outputLabel styleClass="avaluos-sin-calificar" />
+									<h:outputLabel value="#{etq.ca_sin_calificar}" />
+								</h:panelGrid>
+								<h:panelGrid id="seccionMapa" width="100%" columns="1">
+									<p:panel id="mapaPanel" visible="#{consultarAvaluoBean.verMapa}" styleClass="gisfacesMapPanel">
+										<div id="applicationDiv">
+											<div id="mapDiv"></div>
+										</div>
+									</p:panel>
+								</h:panelGrid>
+								<h:panelGrid columns="1">
+									<p:commandButton styleClass="avaluos-cta-mapa" value="#{consultarAvaluoBean.verMapa ? etq.ca_ocultar_mapa:etq.ca_ver_mapa}"
+										actionListener="#{consultarAvaluoBean.ocultarMapa}" ajax="true" update="tablaAvaluos" />
+									<h:outputLabel value="#{etq.ca_cantidad_registros} #{consultarAvaluoBean.cantidadRegistros}" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</f:facet>
+						<p:column selectionMode="multiple" width="20" exportable="false" />
+						<p:column width="45" exportable="false">
+							<p:commandButton styleClass="avaluos-ver-opt" id="menu" type="button" icon="ui-icon-gear">
+								<p:menu styleClass="avaluos-ver-opt" id="menuOpciones" overlay="true" trigger="menu" my="left top" at="left bottom">
+									<p:menuitem styleClass="#{not avaluo.aprobado ? 'avaluos-edit' : 'avaluos-opt-consultar'}"
+										value="#{not avaluo.aprobado and sesion.editable ? etq.ca_editar: etq.consultar}" actionListener="#{consultarAvaluoBean.editar}" />
+									<p:menuitem styleClass="avaluos-opt-transcribir" value="#{etq.ca_transcribir}" actionListener="#{consultarAvaluoBean.transcribir}"
+										update="errorForm,transcribirForm" rendered="#{avaluo.aprobado and sesion.editable}" />
+									<p:menuitem styleClass="avaluos-opt-multiple" value="#{etq.ca_constructor}" actionListener="#{consultarAvaluoBean.constructor}"
+										update="errorForm,constructorForm" rendered="#{avaluo.aprobado and sesion.editable}" />
+									<p:menuitem styleClass="avaluos-opt-reversar" value="#{etq.ca_reversar}" actionListener="#{consultarAvaluoBean.reversar}" update="@form"
+										rendered="#{avaluo.puedeReversar and sesion.editable}" oncomplete="refrescarError();" />
+									<p:menuitem value="#{etq.ca_eliminar}" actionListener="#{consultarAvaluoBean.eliminar}" rendered="#{avaluo.puedeEliminar and sesion.editable}"
+										oncomplete="refrescarEliminar();" styleClass="avaluos-cta-borrar" />
+								</p:menu>
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="#{etq.impresion}" width="100" rendered="#{consultarAvaluoBean.imprimiendo}">
+							<p:commandButton styleClass="avaluos-opt-impresion" value="#{etq.ca_impresion_erronea}" actionListener="#{consultarAvaluoBean.impresionErronea}"
+								ajax="true" update="tablaAvaluos" disabled="#{not avaluo.impreso}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_consecutivo}" width="150" sortBy="#{avaluo.consecutivoBanco}">
+							<h:outputText value="#{avaluo.consecutivoBanco}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_tipo_identificacion}" width="120" sortBy="#{avaluo.idTipoIdentificacion}">
+							<h:outputText value="#{lista.descDominio('TIPOIDENTIFICACION', avaluo.idTipoIdentificacion)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_numero_identificacion}" width="120" sortBy="#{avaluo.numeroIdentificacion}">
+							<h:outputText value="#{avaluo.numeroIdentificacion}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_fecha_avaluo}" width="80" sortBy="#{avaluo.fechaAvaluo}">
+							<h:outputText value="#{avaluo.fechaAvaluo}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.ca_nombre_solicitante}" width="200" sortBy="#{avaluo.nombreSolicitante}">
+							<h:outputText value="#{avaluo.nombreSolicitante}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_departamento}" width="150" sortBy="#{avaluo.idDepartamento}">
+							<h:outputText value="#{lista.descDominio('DEPARTAMENTOS', avaluo.idDepartamento)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_ciudad}" width="150" sortBy="#{avaluo.idCiudad}">
+							<h:outputText value="#{lista.descDominio('CIUDADES',avaluo.idCiudad)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_tipo_avaluo}" width="60" sortBy="#{avaluo.codTipoAvaluo}">
+							<h:outputText value="#{lista.descDominio('TIPOAVALUO',avaluo.codTipoAvaluo)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_perito}" width="100" sortBy="#{avaluo.usuarioCreacion}">
+							<h:outputText value="#{avaluo.usuarioCreacion}">
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.ca_fecha_cargue}" width="80" sortBy="#{avaluo.fechaCreacion}">
+							<h:outputText value="#{avaluo.fechaCreacion}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.ca_nombre_edificio}" width="80" sortBy="#{avaluo.nombreConjuntoEdificio}">
+							<h:outputText value="#{avaluo.nombreConjuntoEdificio}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_direccion}" width="100" sortBy="#{avaluo.direccionInmueble}">
+							<h:outputText value="#{avaluo.direccionInmueble} #{avaluo.direccionComplementaria}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_matricula_inmobiliaria}" width="150" sortBy="#{avaluo.informacionInmueble.matriculaInmobiliariaPpal1}">
+							<h:outputText value="#{avaluo.informacionInmueble.matriculaInmobiliariaPpal1}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_tipo_vivienda}" width="100" sortBy="#{avaluo.informacionInmueble.tipoVivienda}">
+							<h:outputText value="#{lista.descDominio('TIPOVIVIENDA',avaluo.informacionInmueble.tipoVivienda)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_estado_construccion}" width="100" sortBy="#{avaluo.informacionConstruccion.estadoConstruccion}">
+							<h:outputText value="#{lista.descDominio('ESTADOCONSTRUCCION',avaluo.informacionConstruccion.estadoConstruccion)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_estrato}" width="60" sortBy="#{avaluo.informacionBarrio.estrato}">
+							<h:outputText value="#{lista.descDominio('ESTRATO',avaluo.informacionBarrio.estrato)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_estado}" width="60" sortBy="#{avaluo.estadoAvaluo}">
+							<h:outputText value="#{lista.descDominio('ESTADOAVALUO',avaluo.estadoAvaluo)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_nombre_txt}" width="200" sortBy="#{avaluo.logsGeneraArchivo.nombrePlano}">
+							<h:outputText value="#{avaluo.logsGeneraArchivo.nombrePlano}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_fecha_impresion}" width="80" sortBy="#{avaluo.fechaImpresion}">
+							<h:outputText value="#{avaluo.fechaImpresion}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.ca_valor_total}" width="80" sortBy="#{avaluo.liquidacionTotal.totalAvaluo}">
+							<h:outputText value="#{avaluo.liquidacionTotal.totalAvaluo}">
+								<f:converter converterId="moneda" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.ca_calificacion}" width="80" sortBy="#{avaluo.liquidacionTotal.calificacion}">
+							<h:outputText value="#{lista.descDominio('CALGARANTIA',avaluo.liquidacionTotal.calificacion)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_avance}" width="80" sortBy="#{avaluo.informacionConstruccion.avanceObra}">
+							<h:outputText value="#{avaluo.informacionConstruccion.avanceObra}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_vetustez}" width="80" sortBy="#{avaluo.informacionConstruccion.vetustez}">
+							<h:outputText value="#{avaluo.informacionConstruccion.vetustez}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_linea}" width="80" sortBy="#{avaluo.numLinea}">
+							<h:outputText value="#{avaluo.numLinea}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_asegurable}" width="80" rendered="#{sesion.permisosEspecificos['ALERTAASEGURA']}" sortBy="#{avaluo.asegurabilidad}">
+							<h:outputText value="#{lista.descDominio('SI_NO',avaluo.asegurabilidad)}" />
+						</p:column>
+						<p:column headerText="#{etq.ca_archivo_zip}" width="200" sortBy="#{avaluo.logsGeneraArchivo.nombreArchivo}">
+							<h:outputText value="#{avaluo.logsGeneraArchivo.nombreArchivo}" />
+						</p:column>
+					</p:dataTable>
+					<p:panelGrid styleClass="avaluos-option-bar" columns="6">
+						<p:commandButton styleClass="avaluos-option-bar" value="#{etq.ca_aprobar}" actionListener="#{consultarAvaluoBean.aprobar}" ajax="true"
+							update="contenidoActualizar,confirmacionPropiaForm,errorForm" rendered="#{sesion.permisosEspecificos['APROBADOR']}"
+							disabled="#{consultarAvaluoBean.cantidadRegistros le 0}" />
+						<p:commandButton styleClass="avaluos-imprimir" value="#{etq.ca_imprimir}" actionListener="#{consultarAvaluoBean.imprimir}" ajax="true"
+							update="errorForm,seccionInformacion" disabled="#{consultarAvaluoBean.cantidadRegistros le 0}" />
+						<p:commandButton styleClass="avaluos-replicar" value="#{etq.ca_replicar}" actionListener="#{consultarAvaluoBean.replicar}" ajax="true"
+							update="contenidoActualizar,confirmacionPropiaForm,errorForm" disabled="#{consultarAvaluoBean.cantidadRegistros le 0}" rendered="#{sesion.editable}" />
+						<p:commandButton styleClass="avaluos-copia" value="#{etq.ca_copia_seguridad}" ajax="false" update="errorForm"
+							onclick="PrimeFaces.monitorDownload(showStatus, hideStatus)" disabled="#{consultarAvaluoBean.cantidadRegistros le 0}">
+							<p:fileDownload value="#{consultarAvaluoBean.copiaSeguridad}" />
+						</p:commandButton>
+						<p:commandButton styleClass="avaluos-excel" value="#{etq.ca_exportar_excel}" ajax="false" disabled="#{consultarAvaluoBean.cantidadRegistros le 0}">
+							<p:dataExporter type="xls" target="tablaAvaluos" fileName="avaluos" pageOnly="false" />
+						</p:commandButton>
+						<p:commandButton styleClass="avaluos-pdf" value="#{etq.ca_exportar_pdf}" actionListener="#{consultarAvaluoBean.generarReporteAvaluos}" ajax="true"
+							update="errorForm,seccionInformacion" disabled="#{consultarAvaluoBean.cantidadRegistros le 0}" />
+					</p:panelGrid>
+				</h:panelGrid>
+			</p:panelGrid>
+		</h:form>
+		<script type="text/javascript">
+		  	function reLocalizarMapa(longitud, latitud,acercamiento, puntos ){
+		  		require(["esri/Map",
+					"esri/Basemap",
+					"esri/views/MapView", 
+					"esri/Graphic",
+					"esri/widgets/ScaleBar",
+					"esri/widgets/Compass",
+					"esri/widgets/BasemapGallery",
+					"esri/widgets/Expand", 
+					"esri/widgets/BasemapGallery/support/LocalBasemapsSource",
+					"esri/widgets/Fullscreen",
+					"dojo/domReady!"],
+						function(Map,Basemap, MapView, Graphic,ScaleBar,Compass,BasemapGallery,Expand, LocalBasemapsSource,Fullscreen,) {
+		  			$("#mapDiv").empty();
+				  	var mapa = new Map( {
+					        basemap: "osm",
+					    });
+				  	
+					var local=new LocalBasemapsSource({
+						basemaps:[Basemap.fromId("osm"),Basemap.fromId("streets"),Basemap.fromId("satellite"),Basemap.fromId("hybrid"),Basemap.fromId("topo"),Basemap.fromId("terrain")]
+					});
+					
+		  			var vistaMapa = new MapView({
+				        center: [longitud,latitud ],
+				        container: "mapDiv",
+				        map: mapa,
+				        zoom: acercamiento
+				 	 });
+		  			
+		  			var basemapGallery = new BasemapGallery({
+						  view: vistaMapa,
+						  source:local,
+						  container: document.createElement("div")
+						});
+		  			
+		  			var bgExpand = new Expand({
+				        view: vistaMapa,
+				        content: basemapGallery.container,
+				        expandIconClass: "esri-icon-basemap"
+				      });
+		  			
+		  			var scaleBar = new ScaleBar({
+						  view: vistaMapa,
+						  unit: "dual"
+						});
+// 		  			var fullscreen = new Fullscreen({
+// 		  			  view: vistaMapa
+// 		  			});
+					
+					var compass = new Compass({
+						  view: vistaMapa
+						});
+					
+					vistaMapa.ui.add(scaleBar, {
+						  position: "bottom-left"
+						});
+					vistaMapa.ui.add(bgExpand, "top-right");
+					vistaMapa.ui.add(compass, "top-left");
+// 					vistaMapa.ui.add(fullscreen, "top-right");
+		  			
+		  			
+		  		 	vistaMapa.when(function(){
+			      		 var avaluo;
+				       	for(var i = 0; i &lt; puntos.length; i++){
+				       		avaluo = puntos[i];
+				       		console.log(avaluo);
+				       		if(avaluo[0]==null || avaluo[1]==null){continue;}
+				            var punto = {
+							        type: "point", // autocasts as new Point()
+							        longitude: avaluo[0] ,
+							        latitude: avaluo[1]
+							      };
+						  var imagen="#{request.contextPath}/avaluos/resources/images/marcador2.png";
+						  if(avaluo[2]=="1"){
+							  imagen="#{request.contextPath}/avaluos/resources/images/marcador3.png";
+						  }
+						  if(avaluo[2]=="2"){
+							  imagen="#{request.contextPath}/avaluos/resources/images/marcador1.png";
+						  }
+						  
+				            var marca = {
+						    		 type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+						    		  url: imagen,
+						    		  width: "40px",
+						    		  height: "50px"
+						          };
+						  
+						var puntoGrafico = new Graphic({
+					        geometry: punto,
+					        symbol: marca
+					      });
+						
+						vistaMapa.graphics.add(puntoGrafico);
+				       }
+			       });
+		  	});
+		  		
+		  	}
+			</script>
+	</ui:define>
+	<ui:define name="popups">
+		<ui:include src="popup/popupperito.xhtml" />
+		<ui:include src="popuptranscribir.xhtml" />
+		<ui:include src="popupconstructor.xhtml" />
+		<ui:include src="popupeliminacion.xhtml" />
+	</ui:define>
+</ui:composition>

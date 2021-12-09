@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_informe_avaluos_sub_total" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.6963904734899393"/>
+	<property name="ireport.x" value="276"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="calificacion" class="java.lang.Long">
+		<fieldDescription><![CDATA[calificacion]]></fieldDescription>
+	</field>
+	<field name="valorAsegurable" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorAsegurable]]></fieldDescription>
+	</field>
+	<field name="valorUvrDia" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorUvrDia]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<field name="avaluoUvr" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[avaluoUvr]]></fieldDescription>
+	</field>
+	<field name="usuarioTransaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaTransaccion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="totalAvaluo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[totalAvaluo]]></fieldDescription>
+	</field>
+	<field name="numCostoTransaccion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[numCostoTransaccion]]></fieldDescription>
+	</field>
+	<field name="idLiqavaluoTotal" class="java.lang.Long">
+		<fieldDescription><![CDATA[idLiqavaluoTotal]]></fieldDescription>
+	</field>
+	<field name="calificacionDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[calificacionDescripcion]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="574" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="$ ###,###,###,##0" isBlankWhenNull="true">
+				<reportElement x="462" y="1" width="105" height="14"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalAvaluo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="138" y="2" width="86" height="16"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="1" width="114" height="15"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL AVALUO]]></text>
+			</staticText>
+			<textField pattern="#,##0.00000" isBlankWhenNull="true">
+				<reportElement x="65" y="18" width="89" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorUvrDia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0000" isBlankWhenNull="true">
+				<reportElement x="224" y="19" width="93" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{avaluoUvr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="18" width="60" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR UVR DEL DIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="19" width="65" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR AVALUO EN UVR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="17" width="114" height="13"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR ASEGURABLE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="224" y="3" width="93" height="14"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{calificacionDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###,###,##0" isBlankWhenNull="true">
+				<reportElement x="462" y="16" width="105" height="14"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorAsegurable}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

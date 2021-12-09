@@ -1,0 +1,21 @@
+<h:form id="eliminarForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:remoteCommand name="refrescarEliminar" update="eliminarForm" />
+	<p:dialog styleClass="avaluos-modal-formulario" id="eliminarPopup" header="#{etq.eli_titulo}" widgetVar="#{eliminarBean.popupId}" width="350" hideEffect=""
+		visible="#{eliminarBean.ver}" closable="true" closeOnEscape="true" appendToBody="true" modal="false" resizable="false">
+		<p:ajax event="close" update="eliminarForm" listener="#{eliminarBean.ocultar}" />
+		<p:panelGrid id="contenidoEliminar" styleClass="sinBorde" columns="1">
+			<h:outputLabel for="codigoMotivoEliminacion" value="#{etq.eli_codigoMotivoEliminacion}" />
+			<p:separator />
+			<p:selectOneRadio id="codigoMotivoEliminacion" value="#{eliminarBean.avaluo.codigoMotivoEliminacion}" columns="1" layout="grid">
+				<f:selectItems value="#{lista.cargarLista('MOTIVOELIMINACION')}" />
+			</p:selectOneRadio>
+			<p:message for="codigoMotivoEliminacion" />
+			<p:panelGrid styleClass="sinBorde" columns="2">
+				<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.aceptar}" actionListener="#{eliminarBean.eliminar}"
+					update="consultarForm:seccionInformacion,eliminarForm,errorForm" ajax="true" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.cancelar}" actionListener="#{eliminarBean.ocultar}" update="eliminarForm" ajax="true" />
+			</p:panelGrid>
+		</p:panelGrid>
+	</p:dialog>
+</h:form>

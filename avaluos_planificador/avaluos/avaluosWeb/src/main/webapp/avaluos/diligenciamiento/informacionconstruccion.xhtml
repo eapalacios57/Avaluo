@@ -1,0 +1,1154 @@
+<!-- 
+ * Representa la sección para registrar la información de la construcción asociada
+ * a un avalúo. Hace parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:43 a.m.
+ *
+ * Se elimina atributo disabled en la línea 737, para poder modificar el valor total calculado
+ * Leonardo Ramírez M. -->
+<p:outputPanel xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<h:panelGrid id="construcTab" rendered="#{not empty construccionBean.construccion.construccion}" styleClass="avaluos-table-inf-construccion">
+		<h:panelGrid columns="8" styleClass="avaluos-table-tabs-cons">
+			<p:commandButton styleClass="ui-button-left" value="#{etq.anterior_ab}" actionListener="#{construccionBean.anteriorSuperior}" update="construcTab,errorForm"
+				ajax="true" disabled="#{construccionBean.tab eq 0}" />
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 0 ? 'avaluos-button-active': 'avaluos-button-inactive'}" value="#{etq.inc_adicional}"
+					actionListener="#{construccionBean.verAdicional}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 1 ? 'avaluos-button-active': 'avaluos-button-inactive'}" value="#{etq.inc_dependencias}"
+					actionListener="#{construccionBean.verDependencias}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 2 ? 'avaluos-button-active': 'avaluos-button-inactive'}" value="#{etq.inc_salubridad}"
+					actionListener="#{construccionBean.verSalubridad}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 3 ? 'avaluos-button-active': 'avaluos-button-inactive'}" value="#{etq.inc_acabados}"
+					actionListener="#{construccionBean.verAcabados}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 4 ? 'avaluos-button-active': 'avaluos-button-inactive'}"
+					value="#{etq.inc_propiedadHorizontal}" actionListener="#{construccionBean.verHorizontal}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<h:panelGrid cellspacing="0" cellpadding="0">
+				<p:commandButton styleClass="#{construccionBean.tab eq 5 ? 'avaluos-button-active': 'avaluos-button-inactive'}"
+					value="#{etq.inc_dotacionComunal}" actionListener="#{construccionBean.verDotacion}" update="construcTab,errorForm" ajax="true" />
+			</h:panelGrid>
+			<p:commandButton styleClass="ui-button-right" value="#{etq.siguiente_ab}" actionListener="#{construccionBean.siguienteSuperior}"
+				update="construcTab,errorForm" ajax="true" disabled="#{construccionBean.tab eq 5}" />
+		</h:panelGrid>
+		<p:separator />
+		<h:panelGrid id="adicionalTab" rendered="#{construccionBean.tab eq 0}" columns="1" styleClass="avaluos-table-adicional">
+			<p:column>
+				<h:panelGrid columns="6" styleClass="avaluos-table-elements-const">
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_numeroPisos}" />
+						<p:spinner id="pisosAdicional" value="#{construccionBean.construccion.construccion.pisos}" max="99" min="0" 
+							disabled="#{construccionBean.noEditarPisos or not construccionBean.editable}" valueChangeListener="#{construccionBean.cambiarNumeroPisos}">
+							<p:ajax update="totalUnidades pisoInmuebleSeccion" event="change" />
+						</p:spinner>
+						<p:focus id="pisosAdicionalEditar" context="pisosAdicional" rendered="#{!construccionBean.noEditarPisos}" />
+						<p:message for="pisosAdicional" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_sotanos}" />
+						<p:spinner id="sotanos" value="#{construccionBean.construccion.construccion.sotanos}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+						<p:focus id="pisosAdicionalNoEditar" context="sotanos" rendered="#{construccionBean.noEditarPisos}" />
+						<p:message for="sotanos" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_vetustez}" />
+						<p:inputNumber styleClass="avaluos-input-txt" id="vetustez" value="#{construccionBean.construccion.construccion.vetustez}" maxValue="9999" minValue="0"
+							maxlength="9" disabled="#{not construccionBean.editable}" />
+						<p:message for="vetustez" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" id="pisoInmuebleSeccion">
+						<h:outputLabel value="#{etq.inc_pisoInmueble}" />
+						<p:spinner id="pisoInmueble" value="#{construccionBean.construccion.construccion.pisoInmueble}" min="0"
+							max="#{construccionBean.construccion.construccion.pisos}" disabled="#{not construccionBean.editable}" />
+						<p:message for="pisoInmueble" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ubicacionFuentesHidricas}" for="ubicacionFuentesHidricas" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="ubicacionFuentesHidricas"
+							value="#{construccionBean.construccion.construccion.ubicacionFuentesHidricas}" disabled="#{not construccionBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('AFIRMAR')}" />
+						</p:selectOneMenu>
+						<p:message for="ubicacionFuentesHidricas" />
+					</h:panelGrid>
+					<p:column>
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ubicacionNivelVia}" for="ubicacionNivelVia" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="ubicacionNivelVia" value="#{construccionBean.construccion.construccion.ubicacionNivelVia}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('NIVEL')}" />
+							</p:selectOneMenu>
+							<p:message for="ubicacionNivelVia" />
+						</h:panelGrid>
+					</p:column>
+				</h:panelGrid>
+			</p:column>
+			<p:column>
+				<h:panelGrid columns="3" id="constructoraSeccion" styleClass="avaluos-table-constructora" columnClasses="avaluos-select-constructora,avaluos-check-constructora">
+					<h:panelGrid columns="1">
+						<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_codigoNombreConstructora}" for="codigoNombreConstructora" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="codigoNombreConstructora"
+							value="#{construccionBean.construccion.construccion.codigoNombreConstructora}" valueChangeListener="#{construccionBean.cambiarConstructora}"
+							disabled="#{not construccionBean.editable}">
+							<p:ajax update="constructoraSeccion" event="change" />
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('NOMBRECONSTRUCTORA')}" />
+						</p:selectOneMenu>
+						<p:message for="codigoNombreConstructora" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" rendered="#{construccionBean.verNombreConstructora}" id="secccionNombre">
+						<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_nombreConstructora}" for="nombreConstructora" />
+						<p:inputText styleClass="avaluos-input-txt" id="nombreConstructora" value="#{construccionBean.construccion.construccion.nombreConstructora}"
+							maxlength="100" disabled="#{not construccionBean.editable}" />
+						<p:message for="nombreConstructora" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="codigoFinanciadoConstructor"
+							value="#{construccionBean.construccion.codigoFinanciadoConstructor}"
+							disabled="#{not construccionBean.habilitarProyectoConstructor or not construccionBean.editable}" />
+						<p:outputLabel value="#{etq.inc_codigoFinanciadoConstructor}" />
+						<p:outputLabel />
+						<p:message for="codigoFinanciadoConstructor" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:column>
+			<p:column>
+				<h:panelGrid columns="7" id="EstadoConstruccionSeccion" styleClass="avaluos-table-estado-const" columnClasses="avaluos-select-estado,avaluos-check-estados">
+					<h:panelGrid columns="1">
+						<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_estadoConstruccion}" for="estadoConstruccion" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoConstruccion" value="#{construccionBean.construccion.construccion.estadoConstruccion}"
+							valueChangeListener="#{construccionBean.cambiarEstadoConstruccion}" disabled="#{not construccionBean.editable}">
+							<p:ajax update="EstadoConstruccionSeccion codigoFinanciadoConstructor estadoConservacionSeccion" event="change" />
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('ESTADOCONSTRUCCION')}" />
+						</p:selectOneMenu>
+						<p:message for="estadoConstruccion" />
+					</h:panelGrid>
+					<h:panelGrid columns="2" rendered="#{construccionBean.estadoConstruccionNueva}">
+						<h:panelGrid columns="1">
+							<p:selectOneRadio id="estadoTerminadaNueva" value="#{construccionBean.construccion.estadoConstruccionNuevo}"
+								valueChangeListener="#{construccionBean.cambiarConservacionOptimo}" disabled="#{not construccionBean.editable}">
+								<p:ajax update="EstadoConstruccionSeccion estadoConservacionSeccion" event="change" />
+								<f:selectItem itemLabel="#{etq.inc_estadoTerminadaNueva}" itemValue="1" />
+								<f:selectItem itemLabel="#{etq.inc_enObra}" itemValue="2" />
+							</p:selectOneRadio>
+							<p:message for="estadoTerminadaNueva" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" rendered="#{construccionBean.construccion.enObra}">
+							<h:outputLabel value="#{etq.inc_avanceObra}" />
+							<h:panelGrid>
+								<p:spinner id="avanceObra" value="#{construccionBean.construccion.construccion.avanceObra}" max="100" min="0" suffix="%" 
+									disabled="#{not construccionBean.editable}" />
+								<p:message for="avanceObra" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid columns="2" rendered="#{construccionBean.estadoConstruccionUsada}">
+						<h:panelGrid columns="1">
+							<p:selectOneRadio id="estadoTerminadoUsado" value="#{construccionBean.construccion.estadoConstruccionUsado}"
+								disabled="#{not construccionBean.editable}">
+								<p:ajax update="EstadoConstruccionSeccion" event="change" />
+								<f:selectItem itemLabel="#{etq.inc_estadoTerminadoUsado}" itemValue="1" />
+								<f:selectItem itemLabel="#{etq.inc_sinTerminar}" itemValue="2" />
+							</p:selectOneRadio>
+							<p:message for="estadoTerminadoUsado" />
+						</h:panelGrid>
+						<h:panelGrid columns="2" rendered="#{construccionBean.construccion.terminadoUsado}">
+							<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="estadoRemodelacion" value="#{construccionBean.construccion.estadoRemodelacion}"
+								disabled="#{not construccionBean.editable}" />
+							<p:outputPanel>
+								<h:outputLabel value="#{etq.inc_estadoRemodelacion}" />
+								<p:message for="estadoRemodelacion" />
+							</p:outputPanel>
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:column>
+			<p:separator />
+			<p:column>
+				<h:panelGrid columns="3" width="100%" >
+					<p:column colspan="3">
+						<h:panelGrid columns="1" id="estadoConservacionSeccion">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_estadoConservacion}" for="estadoConservacion" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoConservacion" value="#{construccionBean.construccion.construccion.estadoConservacion}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('ESTADOCONSERVACION')}" />
+							</p:selectOneMenu>
+							<p:message for="estadoConservacion" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_parapetosCubierta}" for="parapetosCubierta" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="parapetosCubierta" value="#{construccionBean.construccion.construccion.parapetosCubierta}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('AFIRMAR')}" />
+							</p:selectOneMenu>
+							<p:message for="parapetosCubierta" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_estructura}" for="estructura" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="estructura" value="#{construccionBean.construccion.construccion.estructura}"
+								valueChangeListener="#{construccionBean.cambiarEstructura}" disabled="#{not construccionBean.editable}">
+								<p:ajax update="materialEstructura detalleMaterialSFBUA" event="change" />
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('ESTRUCTURA')}" />
+							</p:selectOneMenu>
+							<p:message for="estructura" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_estructuraReforzadaBUA}" for="estructuraReforzadaBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="estructuraReforzadaBUA" value="#{construccionBean.construccion.construccion.estructuraReforzadaBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('ESTRUCTURAREFORZADA_BUA')}" />
+							</p:selectOneMenu>
+							<p:message for="estructuraReforzadaBUA" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_materialEstructura}" for="materialEstructura" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="materialEstructura" value="#{construccionBean.construccion.construccion.materialConstruccionBUA}"
+								valueChangeListener="#{construccionBean.cambiarMaterialEstructura}" disabled="#{not construccionBean.editable}">
+								<p:ajax update="detalleMaterialSFBUA" event="change" />
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{construccionBean.materialEstructura}" />
+							</p:selectOneMenu>
+							<p:message for="materialEstructura" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_detalleMaterialSFBUA}" for="detalleMaterialSFBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="detalleMaterialSFBUA" value="#{construccionBean.construccion.construccion.detalleMaterialSFBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{construccionBean.detalleMaterial}" />
+							</p:selectOneMenu>
+							<p:message for="detalleMaterialSFBUA" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_irregularidadPlantaBUA}" for="irregularidadPlantaBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="irregularidadPlantaBUA" value="#{construccionBean.construccion.construccion.irregularidadPlantaBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('IRREGULARIDAD_BUA')}" />
+							</p:selectOneMenu>
+							<p:message for="irregularidadPlantaBUA" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_irregularidadAlturaBUA}" for="irregularidadAlturaBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="irregularidadAlturaBUA" value="#{construccionBean.construccion.construccion.irregularidadAlturaBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('IRREGULARIDAD_BUA')}" />
+							</p:selectOneMenu>
+							<p:message for="irregularidadAlturaBUA" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_fachada}" for="fachada" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="fachada" value="#{construccionBean.construccion.construccion.fachada}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('FACHADA')}" />
+							</p:selectOneMenu>
+							<p:message for="fachada" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_tipoFachada}" for="tipoFachada" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="tipoFachada" value="#{construccionBean.construccion.construccion.tipoFachada}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('TIPOFACHADA')}" />
+							</p:selectOneMenu>
+							<p:message for="tipoFachada" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_cubierta}" for="cubierta" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="cubierta" value="#{construccionBean.construccion.construccion.cubierta}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('CUBIERTA')}" />
+							</p:selectOneMenu>
+							<p:message for="cubierta" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_golpeteo}" for="golpeteo" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="golpeteo" value="#{construccionBean.construccion.construccion.golpeteo}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('GOLPETEO')}" />
+							</p:selectOneMenu>
+							<p:message for="golpeteo" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_danoPrevioBUA}" for="danoPrevioBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="danoPrevioBUA" value="#{construccionBean.construccion.construccion.danoPrevioBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('DANOSPREVIOS_BUA')}" />
+							</p:selectOneMenu>
+							<p:message for="danoPrevioBUA" />
+						</h:panelGrid>
+					</p:column>
+					<p:column colspan="3">
+						<h:panelGrid columns="1">
+							<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_reparadosBUA}" for="reparadosBUA" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" id="reparadosBUA" value="#{construccionBean.construccion.construccion.reparadosBUA}"
+								disabled="#{not construccionBean.editable}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{lista.cargarLista('REPARADOS_BUA')}" />
+							</p:selectOneMenu>
+							<p:message for="reparadosBUA" />
+						</h:panelGrid>
+					</p:column>
+				</h:panelGrid>
+			</p:column>
+		</h:panelGrid>
+		<h:panelGrid id="dependenciasTab" columns="5" rendered="#{construccionBean.tab eq 1}" styleClass="avaluos-table-dependencias">
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_sala}" />
+				<p:spinner id="sala" value="#{construccionBean.construccion.construccion.sala}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:focus id="focusDependenciasSala" context="sala" rendered="#{construccionBean.tab eq 1}" />
+				<p:message for="sala" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_banioSocial}" />
+				<p:spinner id="banioSocial" value="#{construccionBean.construccion.construccion.banioSocial}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="banioSocial" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_banioPrivado}" />
+				<p:spinner id="banioPrivado" value="#{construccionBean.construccion.construccion.banioPrivado}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="banioPrivado" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_banioServicio}" />
+				<p:spinner id="banioServicio" value="#{construccionBean.construccion.construccion.banioServicio}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="banioServicio" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_jardin}" />
+				<p:spinner id="jardin" value="#{construccionBean.construccion.construccion.jardin}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="jardin" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_comedor}" />
+				<p:spinner id="comedor" value="#{construccionBean.construccion.construccion.comedor}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="comedor" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_estarHabitacion}" />
+				<p:spinner id="estarHabitacion" value="#{construccionBean.construccion.construccion.estarHabitacion}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="estarHabitacion" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_cocina}" />
+				<p:spinner id="cocina" value="#{construccionBean.construccion.construccion.cocina}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="cocina" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_patioInterior}" />
+				<p:spinner id="patioInterior" value="#{construccionBean.construccion.construccion.patioInterior}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="patioInterior" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_balcon}" />
+				<p:spinner id="balcon" value="#{construccionBean.construccion.construccion.balcon}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="balcon" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_estudio}" />
+				<p:spinner id="estudio" value="#{construccionBean.construccion.construccion.estudio}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="estudio" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_numeroHabitaciones}" />
+				<p:spinner id="numeroHabitaciones" value="#{construccionBean.construccion.construccion.numeroHabitaciones}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="numeroHabitaciones" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_cuartoServicio}" />
+				<p:spinner id="cuartoServicio" value="#{construccionBean.construccion.construccion.cuartoServicio}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="cuartoServicio" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_terraza}" />
+				<p:spinner id="terraza" value="#{construccionBean.construccion.construccion.terraza}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="terraza" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_zonaVerdePrivada}" />
+				<p:spinner id="zonaVerdePrivada" value="#{construccionBean.construccion.construccion.zonaVerdePrivada}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="zonaVerdePrivada" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_totalGarajes}" />
+				<p:spinner id="totalGarajes" value="#{construccionBean.construccion.construccion.totalGarajes}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="totalGarajes" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_usoExclusivo}" />
+				<p:spinner id="usoExclusivo" value="#{construccionBean.construccion.construccion.usoExclusivo}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="usoExclusivo" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_sencillo}" />
+				<p:spinner id="sencillo" value="#{construccionBean.construccion.construccion.sencillo}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="sencillo" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_deposito}" />
+				<p:spinner id="deposito" value="#{construccionBean.construccion.construccion.deposito}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="deposito" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_local}" />
+				<p:spinner id="local" value="#{construccionBean.construccion.construccion.local}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="local" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_cubierto}" />
+				<p:spinner id="cubierto" value="#{construccionBean.construccion.construccion.cubierto}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="cubierto" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_privado}" />
+				<p:spinner id="privado" value="#{construccionBean.construccion.construccion.privado}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="privado" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_doble}" />
+				<p:spinner id="doble" value="#{construccionBean.construccion.construccion.doble}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="doble" />
+			</h:panelGrid>
+			<h:outputLabel />
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_bodega}" />
+				<p:spinner id="bodega" value="#{construccionBean.construccion.construccion.bodega}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="bodega" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_descubierto}" />
+				<p:spinner id="descubierto" value="#{construccionBean.construccion.construccion.descubierto}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="descubierto" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_bahiaComunal}" />
+				<p:spinner id="bahiaComunal" value="#{construccionBean.construccion.construccion.bahiaComunal}" max="99" min="0"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="bahiaComunal" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_servidumbre}" />
+				<p:spinner id="servidumbre" value="#{construccionBean.construccion.construccion.servidumbre}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="servidumbre" />
+			</h:panelGrid>
+			<h:outputLabel />
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_oficina}" />
+				<p:spinner id="oficina" value="#{construccionBean.construccion.construccion.oficina}" max="99" min="0" disabled="#{not construccionBean.editable}" />
+				<p:message for="oficina" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ventilacion}" for="ventilacion" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="ventilacion" value="#{construccionBean.construccion.construccion.ventilacion}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('MBR')}" />
+				</p:selectOneMenu>
+				<p:message for="ventilacion" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_iluminacion}" for="iluminacion" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="iluminacion" value="#{construccionBean.construccion.construccion.iluminacion}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('MBR')}" />
+				</p:selectOneMenu>
+				<p:message for="iluminacion" />
+			</h:panelGrid>
+		</h:panelGrid>
+		<h:panelGrid id="salubridadTab" columns="3" rendered="#{construccionBean.tab eq 2}" styleClass="avaluos-table-salubridad">
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_requiereCondicionesSalubridad}" for="requiereCondicionesSalubridad" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="requiereCondicionesSalubridad" value="#{construccionBean.salubridad.requiereCondicionesSalubridad}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR')}" />
+				</p:selectOneMenu>
+				<p:focus id="focusSalubridadRequiereCondiciones" context="requiereCondicionesSalubridad" rendered="#{construccionBean.tab eq 2}" />
+				<p:message for="requiereCondicionesSalubridad" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_condicionesSalubridad}" for="condicionSalubridad" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="condicionSalubridad" value="#{construccionBean.salubridad.condicionSalubridad}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('MBR')}" />
+				</p:selectOneMenu>
+				<p:message for="condicionSalubridad" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ambientalArborizacion}" for="ambientalArborizacion" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="ambientalArborizacion" value="#{construccionBean.salubridad.ambientalArborizacion}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="ambientalArborizacion" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ambientalParques}" for="ambientalParques" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="ambientalParques" value="#{construccionBean.salubridad.ambientalParques}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="ambientalParques" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ambientalZonaVerde}" for="ambientalZonaVerde" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="ambientalZonaVerde" value="#{construccionBean.salubridad.ambientalZonaVerde}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="ambientalZonaVerde" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_impactoNegativoPorAire}" for="impactoNegativoPorAire" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="impactoNegativoPorAire" value="#{construccionBean.salubridad.impactoNegativoPorAire}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="impactoNegativoPorAire" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_impactoNegativoBasura}" for="impactoNegativoBasura" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="impactoNegativoBasura" value="#{construccionBean.salubridad.impactoNegativoBasura}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="impactoNegativoBasura" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_impactoNegativoInseguridad}" for="impactoNegativoInseguridad" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="impactoNegativoInseguridad" value="#{construccionBean.salubridad.impactoNegativoInseguridad}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="impactoNegativoInseguridad" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_impactoNegativoRuido}" for="impactoNegativoRuido" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="impactoNegativoRuido" value="#{construccionBean.salubridad.impactoNegativoRuido}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="impactoNegativoRuido" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_aguasServidas}" for="aguasServidas" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="aguasServidas" value="#{construccionBean.salubridad.aguasServidas}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR2')}" />
+				</p:selectOneMenu>
+				<p:message for="aguasServidas" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_impactoNegativoOtros}" for="impactoNegativoOtros" />
+				<p:inputText styleClass="avaluos-input-txt" id="impactoNegativoOtros" value="#{construccionBean.salubridad.impactoNegativoOtros}" maxlength="100"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="impactoNegativoOtros" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.inc_ambientalOtros}" for="ambientalOtros" />
+				<p:inputText styleClass="avaluos-input-txt" id="ambientalOtros" value="#{construccionBean.salubridad.ambientalOtros}" maxlength="100"
+					disabled="#{not construccionBean.editable}" />
+				<p:message for="ambientalOtros" />
+			</h:panelGrid>
+		</h:panelGrid>
+		<h:panelGrid id="acabadosTab" columns="3" rendered="#{construccionBean.tab eq 3}" styleClass="avaluos-table-acabados">
+			<h:outputLabel />
+			<h:outputLabel value="#{etq.inc_estado}" />
+			<h:outputLabel value="#{etq.inc_calidad}" />
+			<h:outputLabel value="#{etq.inc_pisos}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoPisos" value="#{construccionBean.construccion.construccion.estadoPisos}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.	seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:focus id="focusEstadoPisos" context="estadoPisos" rendered="#{construccionBean.tab eq 3}" />
+				<p:message for="estadoPisos" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadPiso" value="#{construccionBean.construccion.construccion.calidadPiso}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.	seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadPiso" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_muros}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoMuros" value="#{construccionBean.construccion.construccion.estadoMuros}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estadoMuros" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadMuro" value="#{construccionBean.construccion.construccion.calidadMuro}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadMuro" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_techos}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estructuraTechos" value="#{construccionBean.construccion.construccion.estructuraTechos}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estructuraTechos" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadTecho" value="#{construccionBean.construccion.construccion.calidadTecho}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadTecho" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_madera}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoMadera" value="#{construccionBean.construccion.construccion.estadoMadera}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estadoMadera" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadMadera" value="#{construccionBean.construccion.construccion.calidadMadera}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadMadera" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_metal}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoMetal" value="#{construccionBean.construccion.construccion.estadoMetal}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estadoMetal" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidMetal" value="#{construccionBean.construccion.construccion.calidMetal}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidMetal" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_banios}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoBanios" value="#{construccionBean.construccion.construccion.estadoBanios}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estadoBanios" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadBanio" value="#{construccionBean.construccion.construccion.calidadBanio}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CALIDAD')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadBanio" />
+			</h:panelGrid>
+			<h:outputLabel value="#{etq.inc_cocina}:" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoCocina" value="#{construccionBean.construccion.construccion.estadoCocina}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('INFOCONSTR')}" />
+				</p:selectOneMenu>
+				<p:message for="estadoCocina" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="calidadCocina" value="#{construccionBean.construccion.construccion.calidadCocina}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('COCINA')}" />
+				</p:selectOneMenu>
+				<p:message for="calidadCocina" />
+			</h:panelGrid>
+		</h:panelGrid>
+		
+		
+		
+		<h:panelGrid id="horizontalTab" columns="5" rendered="#{construccionBean.tab eq 4}" styleClass="avaluos-table-prop-horizontal">
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_sometidoPropiedadHorizontal}" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="propiedadHorizontal" valueChangeListener="#{construccionBean.cambiarPropiedadHorizontal}"
+					value="#{construccionBean.construccion.construccion.propiedadHorizontal}" disabled="#{not construccionBean.editable}">
+					<p:ajax update="totalUnidades pisos numeroEdificios unidadPorPiso" event="change" />
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('SOMETIDOPROPIEDAD')}" />
+				</p:selectOneMenu>
+				<p:focus id="focusSometidoPropiedadHorizontal" context="propiedadHorizontal" rendered="#{construccionBean.tab eq 4}" />
+				<p:message for="propiedadHorizontal" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_numeroPisos}" />
+				<p:inputText styleClass="avaluos-input-txt" id="pisos" value="#{construccionBean.construccion.construccion.pisos}" disabled="true" />
+				<p:message for="pisos" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_tipo_administrador}" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="tipoAdministrador" 
+					value="#{construccionBean.construccion.construccion.tipoAdministrador}" disabled="#{not construccionBean.editable}">
+					<p:ajax  update="nombreAdmin" event="change" listener="#{construccionBean.cambiarLabel}"/>
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('TIPO_ADMINISTRADOR')}" />
+				</p:selectOneMenu>				
+				<p:message for="tipoAdministrador" />
+			</h:panelGrid>	
+			<p:column />
+			<p:column />		
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_conjuntoAgrupacionCerrada}" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="conjuntoAgrupacionCerrada"
+					value="#{construccionBean.construccion.construccion.conjuntoAgrupacionCerrada}" disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR')}" />
+				</p:selectOneMenu>
+				<p:message for="conjuntoAgrupacionCerrada" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_numeroEdificios}" />
+				<p:inputNumber styleClass="avaluos-input-txt" id="numeroEdificios" value="#{construccionBean.construccion.construccion.numeroEdificios}" decimalPlaces="0"
+					minValue="0" thousandSeparator="" valueChangeListener="#{construccionBean.cambiarNumeroEdificios}" maxValue="99" maxlength="2"
+					disabled="#{not construccionBean.editable}">
+					<p:ajax update="totalUnidades" event="change" />
+				</p:inputNumber>
+				<p:message for="numeroEdificios" />
+			</h:panelGrid>		
+			<h:panelGrid columns="1">
+				<p:outputLabel  id="nombreAdmin" value="#{construccionBean.label}" />
+				<p:inputText styleClass="avaluos-input-txt" id="nombreAdministrador" value="#{construccionBean.construccion.construccion.nombreAdministrador}" maxlength="50"
+					disabled="#{not construccionBean.editable}">
+				</p:inputText>
+				<p:message for="nombreAdministrador" />
+			</h:panelGrid>
+			<p:column />
+			<p:column />			
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_ubicacionInmueble}" />
+				<p:selectOneMenu styleClass="avaluos-dropdown" id="ubicacionInmueble" value="#{construccionBean.construccion.construccion.ubicacionInmueble}"
+					disabled="#{not construccionBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('UBICACION')}" />
+				</p:selectOneMenu>
+				<p:message for="ubicacionInmueble" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel  value="#{etq.inc_unidadPorPiso}" />				
+				<p:inputNumber styleClass="avaluos-input-txt" id="unidadPorPiso" value="#{construccionBean.construccion.construccion.unidadPorPiso}" decimalPlaces="0"
+					minValue="0" thousandSeparator="" valueChangeListener="#{construccionBean.cambiarUnidadesPiso}" maxValue="99" maxlength="2"
+					disabled="#{not construccionBean.editable}">
+					<p:ajax update="totalUnidades" event="change" />
+				</p:inputNumber>				
+				<p:message for="unidadPorPiso" />				
+			</h:panelGrid>	
+		<p:column>
+		    <h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="correoSolicitantee" value="#{etq.inc_correo_administrador}" />
+				<h:panelGrid columns="3">
+					<p:inputText styleClass="avaluos-input-txt" id="correoSolicitantee" value="#{construccionBean.construccion.construccion.correoAdministrador}" maxlength="60"
+							disabled="#{not avaluoBean.editable}" >
+					</p:inputText>		
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inc_agregar_correo}"  actionListener="#{construccionBean.verCorreo}" 
+									update="avaluoForm,errorForm" rendered="#{construccionBean.verCorreo lt 2}"  ajax="true" disabled="#{not construccionBean.editable}" />
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inc_quitar_correo}" actionListener="#{construccionBean.noVerCorreo}"
+						            update="avaluoForm,errorForm" rendered="#{construccionBean.verCorreo gt 0}" ajax="true" disabled="#{not construccionBean.editable}" />
+				</h:panelGrid>
+				<p:message for="correoSolicitantee" />
+			</h:panelGrid>
+		</p:column>
+		 <p:column rendered="#{construccionBean.verCorreo ge 1}">
+			<h:panelGrid columns="1" >
+				<p:outputLabel  for="correoAdministrador2" value="#{etq.inc_correo_administrador_2}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="correoAdministrador2" value="#{construccionBean.construccion.construccion.correoAdministrador2}" maxlength="60"
+					disabled="#{not construccionBean.editable}">
+				</p:inputText>
+				<p:message for="correoAdministrador2" />
+			</h:panelGrid>
+			
+		</p:column>
+		
+		<p:column rendered="#{construccionBean.verCorreo ge 2}">
+			<h:panelGrid columns="1">
+				<p:outputLabel  for="correoAdministrador3" value="#{etq.inc_correo_administrador_3}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="correoAdministrador3" value="#{construccionBean.construccion.construccion.correoAdministrador3}" maxlength="60"
+					disabled="#{not construccionBean.editable}">
+				</p:inputText>
+				<p:message for="correoAdministrador3" />
+			</h:panelGrid>
+		</p:column> 
+		<p:column></p:column>
+		<p:column></p:column>
+			<h:outputLabel />
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inc_totalUnidades}" />
+				<p:inputNumber styleClass="avaluos-input-txt" id="totalUnidades" value="#{construccionBean.construccion.construccion.totalUnidades}" decimalPlaces="0"
+					minValue="0" thousandSeparator="" maxValue="999999999" maxlength="8" />
+				<p:message for="totalUnidades" />
+			</h:panelGrid>
+		
+		<h:panelGrid columns="1" >		
+			<p:outputLabel  for="telefonoAdministrador" value="#{etq.inc_telefono_administrador}" />
+			<h:panelGrid columns="3">			
+				<p:inputNumber styleClass="avaluos-input-txt" id="telefonoAdministrador" value="#{construccionBean.construccion.construccion.telefonoAdministrador}" decimalPlaces="0" minValue="0"
+					           thousandSeparator=""  disabled="#{not construccionBean.editable}" maxlength="10"/>
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inc_agregar_telefono}"  actionListener="#{construccionBean.verTelefono}" 
+									update="avaluoForm,errorForm" rendered="#{construccionBean.verTelefono lt 2}"  ajax="true" disabled="#{not construccionBean.editable}" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inc_quitar_telefono}" actionListener="#{construccionBean.noVerTelefono}"
+						            update="avaluoForm,errorForm" rendered="#{construccionBean.verTelefono gt 0}" ajax="true" disabled="#{not construccionBean.editable}" />
+     		<p:message for="telefonoAdministrador" />
+     		</h:panelGrid>
+        </h:panelGrid>  
+              
+         <p:column rendered="#{construccionBean.verTelefono ge 1}">
+			<h:panelGrid columns="1" >
+				<p:outputLabel  for="telefonoAdministrador2" value="#{etq.inc_telefono_administrador_2}"  /> 
+				<p:inputNumber  styleClass="avaluos-input-txt" id="telefonoAdministrador2" value="#{construccionBean.construccion.construccion.telefonoAdministrador2}" maxlength="10"
+					            thousandSeparator="" disabled="#{not construccionBean.editable}" decimalPlaces="0" minValue="0">
+				</p:inputNumber>
+				<p:message for="telefonoAdministrador2" />
+			</h:panelGrid>
+		</p:column> 
+		
+		<p:column rendered="#{construccionBean.verTelefono ge 2}">
+			<h:panelGrid columns="1">
+				<p:outputLabel  for="telefonoAdministrador3" value="#{etq.inc_telefono_administrador_3}" />
+				<p:inputNumber styleClass="avaluos-input-txt" id="telefonoAdministrador3" value="#{construccionBean.construccion.construccion.telefonoAdministrador3}" maxlength="10"
+					            thousandSeparator="" disabled="#{not construccionBean.editable}" decimalPlaces="0" minValue="0">
+				</p:inputNumber>
+				<p:message for="telefonoAdministrador3" />
+			</h:panelGrid>
+		</p:column> 
+        
+        <p:column />
+        <p:column />
+       </h:panelGrid>
+		
+		<h:panelGrid id="comunalTab" rendered="#{construccionBean.tab eq 5}" styleClass="avaluos-table-dotacion-comunal">
+			<h:panelGrid columns="5" styleClass="avaluos-table-ckecks-dotacion">
+				<p:column>
+					<h:panelGrid columns="3" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="porteria" value="#{construccionBean.construccion.porteria}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_porteria}" />
+						<p:focus id="focusDotacionComunalPorteria" context="porteria" rendered="#{construccionBean.tab eq 5}" />
+						<h:outputLabel />
+						<p:message for="porteria" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="piscina" value="#{construccionBean.construccion.piscina}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_piscina}" />
+						<h:outputLabel />
+						<p:message for="piscina" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="garajeVisitante" value="#{construccionBean.construccion.garajeVisitante}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_garajeVisitante}" />
+						<h:outputLabel />
+						<p:message for="garajeVisitante" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="bombaEyectora" value="#{construccionBean.construccion.bombaEyectora}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_bombaEyectora}" />
+						<h:outputLabel />
+						<p:message for="bombaEyectora" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="zonasVerdesConstruccion" value="#{construccionBean.construccion.zonasVerdes}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_zonasVerdes}" />
+						<h:outputLabel />
+						<p:message for="zonasVerdesConstruccion" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="citofono" value="#{construccionBean.construccion.citofono}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_citofono}" />
+						<h:outputLabel />
+						<p:message for="citofono" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="tanqueAgua" value="#{construccionBean.construccion.tanqueAgua}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_tanqueAgua}" />
+						<h:outputLabel />
+						<p:message for="tanqueAgua" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="juegoNinos" value="#{construccionBean.construccion.juegoNinos}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_juegoNinos}" />
+						<h:outputLabel />
+						<p:message for="juegoNinos" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="aireAcondicionado" value="#{construccionBean.construccion.aireAcondicionado}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_aireAcondicionado}" />
+						<h:outputLabel />
+						<p:message for="aireAcondicionado" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="gimnasio" value="#{construccionBean.construccion.gimnasio}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_gimnasio}" />
+						<h:outputLabel />
+						<p:message for="gimnasio" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="bicicletero" value="#{construccionBean.construccion.bicicletero}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_bicicletero}" />
+						<h:outputLabel />
+						<p:message for="bicicletero" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="clubHouse" value="#{construccionBean.construccion.clubHouse}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_clubHouse}" />
+						<h:outputLabel />
+						<p:message for="clubHouse" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="canchaMultiple" value="#{construccionBean.construccion.canchaMultiple}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_canchaMultiple}" />
+						<h:outputLabel />
+						<p:message for="canchaMultiple" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="squash" value="#{construccionBean.construccion.squash}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_squash}" />
+						<h:outputLabel />
+						<p:message for="squash" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="golfito" value="#{construccionBean.construccion.golfito}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_golfito}" />
+						<h:outputLabel />
+						<p:message for="golfito" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="salonComunal" value="#{construccionBean.construccion.salonComunal}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_salonComunal}" />
+						<h:outputLabel />
+						<p:message for="salonComunal" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="planta" value="#{construccionBean.construccion.planta}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_planta}" />
+						<h:outputLabel />
+						<p:message for="planta" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="shutBasuras" value="#{construccionBean.construccion.shutBasuras}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_shutBasuras}" />
+						<h:outputLabel />
+						<p:message for="shutBasuras" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="presion" value="#{construccionBean.construccion.presion}"
+							disabled="#{not construccionBean.editable}" />
+						<h:outputLabel value="#{etq.inc_presion}" />
+						<h:outputLabel />
+						<p:message for="presion" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="2" columnClasses="avaluos-check-dotacion">
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="ascensor" value="#{construccionBean.construccion.ascensor}"
+							disabled="#{not construccionBean.editable}">
+							<p:ajax update="numeroAscensores" event="change" listener="#{construccionBean.cambiarAscensores}" />
+						</p:selectBooleanCheckbox>
+						<h:outputLabel value="#{etq.inc_ascensor}" />
+						<h:outputLabel />
+						<p:message for="ascensor" />
+					</h:panelGrid>
+				</p:column>
+				<p:column />
+				<p:column />
+				<p:column />
+				<p:column />
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_numeroAscensores}" />
+						<p:spinner id="numeroAscensores" value="#{construccionBean.construccion.construccion.numeroAscensores}" max="99" min="0"
+							disabled="#{not construccionBean.construccion.ascensor and not construccionBean.editable}" />
+						<p:message for="numeroAscensores" />
+					</h:panelGrid>
+				</p:column>
+			</h:panelGrid>
+			<p:separator />
+			<h:panelGrid columns="1" styleClass="avaluos-otros-dotacion">
+				<p:column colspan="5">
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_otrosDotacion}" />
+						<p:watermark styleClass="avaluos-lbl-campo" value="#{etq.inc_otrosDotacionEscribe}" for="otrosDotacion" />
+						<p:inputTextarea styleClass="avaluos-parrafo" value="#{construccionBean.construccion.construccion.otrosDotacion}" id="otrosDotacion" maxlength="250"
+							counterTemplate="{0}  #{etq.caracteres}" cols="100" rows="4" counter="displayOtrosDotacion" disabled="#{not construccionBean.editable}" />
+						<h:outputText id="displayOtrosDotacion" />
+						<p:message for="otrosDotacion" />
+					</h:panelGrid>
+				</p:column>
+			</h:panelGrid>
+		</h:panelGrid>
+		<p:separator />
+		<h:panelGrid id="seccionAuditoriaConstruccion" styleClass="avaluos-mostrar-ocultar-aud">
+			<p:panel header="#{not construccionBean.ocultarAuditoria ? etq.inc_ocultarAuditoria : etq.inc_mostrarAuditoria}" styleClass="avaluos-ver-content"
+				toggleable="true" collapsed="#{construccionBean.ocultarAuditoria}">
+				<p:ajax event="toggle" listener="#{construccionBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaConstruccion" />
+				<h:panelGrid columns="7">
+					<h:panelGrid columns="1">
+						<h:outputLabel styleClass="avaluos-input-txt"
+							value="#{construccionBean.tab eq 2 ? construccionBean.salubridad.usuarioCreacion : construccionBean.construccion.construccion.usuarioCreacion}" />
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inc_fechaCreacion}" />
+						<h:outputText value="#{construccionBean.tab eq 2 ? construccionBean.salubridad.fechaCreacion : construccionBean.construccion.construccion.fechaCreacion}">
+							<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+						</h:outputText>
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="1">
+						<h:outputLabel styleClass="avaluos-input-txt"
+							value="#{construccionBean.tab eq 2 ? construccionBean.salubridad.usuarioTransaccion: construccionBean.construccion.construccion.usuarioTransaccion}" />
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.obs_fechaTransaccion}" />
+						<h:outputText
+							value="#{construccionBean.tab eq 2 ? construccionBean.salubridad.fechaTransaccion:construccionBean.construccion.construccion.fechaTransaccion}">
+							<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+						</h:outputText>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+		</h:panelGrid>
+		<h:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+			<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{construccionBean.anterior}"
+				update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" ajax="true" oncomplete="rcActualizarMapa();"/>
+			<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{construccionBean.siguiente}"
+				update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" ajax="true" oncomplete="rcActualizarMapa();"/>
+		</h:panelGrid>
+	</h:panelGrid>
+</p:outputPanel>

@@ -1,0 +1,98 @@
+<!-- 
+ * Esta interfaz permite gestionar al usuario las horas del dia en que se debe
+ * preparar el archivo de envio de procedatos a ASOBANCARIA.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:42 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="horaForm">
+			<!-- inicio tabla de resultados -->
+			<p:panelGrid columns="1" style="width:100%">
+				<h:outputText value="#{etq.hor_titulo}" styleClass="avaluos-tittle" />
+			</p:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" id="HoraData" var="hora" value="#{horaCorteBean.listado}" reflow="true" widgetVar="horaTable" lazy="true"
+				currentPageReportTemplate="{currentPage}/{totalPages}" paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true"
+				rows="#{horaCorteBean.registroPagina}" style="margin-bottom:20px" paginatorPosition="bottom" paginatorAlwaysVisible="false" scrollable="true"
+				emptyMessage="#{etq.no_existen_registro}">
+				<f:facet name="header">
+				</f:facet>
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column />
+						<p:column headerText="#{etq.hor_hora}" sortBy="#{hora.horaCorte}"/>
+						<p:column headerText="#{etq.hor_minuto}" sortBy="#{hora.minutosCorte}"/>
+						<p:column headerText="#{etq.hor_estado}" sortBy="#{hora.estado}"/>
+					</p:row>
+					<p:row>
+						<p:column colspan="4">
+							<f:facet name="header">
+								<p:commandButton styleClass="avaluos-add-row" value="#{etq.hor_nuevo}" icon="ui-icon-star" actionListener="#{horaCorteBean.nuevo}" update="horaForm" />
+								<p:panelGrid columns="4">
+
+								</p:panelGrid>
+							</f:facet>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column />
+						<p:column>
+							<f:facet name="header">
+								<p:panelGrid columns="1" rendered="#{horaCorteBean.esEditanto}">
+									<p:inputNumber styleClass="avaluos-input-txt" id="hora" value="#{horaCorteBean.hora.horaCorte}" label="hora" decimalPlaces="0" maxValue="23"
+										minValue="0" maxlength="2" />
+									<p:message for="hora" />
+								</p:panelGrid>
+							</f:facet>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<p:panelGrid columns="1" rendered="#{horaCorteBean.esEditanto}">
+									<p:inputNumber styleClass="avaluos-input-txt" id="minuto" value="#{horaCorteBean.hora.minutosCorte}" label="minuto" decimalPlaces="0" maxValue="59"
+										minValue="0" maxlength="2" />
+									<p:message for="minuto" />
+								</p:panelGrid>
+							</f:facet>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<p:panelGrid columns="1" rendered="#{horaCorteBean.esEditanto}">
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="estado" value="#{horaCorteBean.hora.estado}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+										<f:selectItems value="#{lista.cargarLista('ESTADO_ACTIVO')}" />
+									</p:selectOneMenu>
+									<p:message for="estado" />
+								</p:panelGrid>
+							</f:facet>
+						</p:column>
+					</p:row>
+				</p:columnGroup>
+				<p:column>
+					<p:outputPanel columns="2">
+						<p:commandButton styleClass="avaluos-edit" value="#{etq.editar}" actionListener="#{horaCorteBean.editar}" update="horaForm" />
+						<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.eliminar}" actionListener="#{horaCorteBean.eliminar}" update=" horaForm">
+							<p:confirm header="#{etq.confirmar}" message="#{etq.confirmarEliminacion}" icon="ui-icon-alert" />
+						</p:commandButton>
+					</p:outputPanel>
+				</p:column>
+				<p:column>
+					<h:outputText value="#{hora.horaCorte}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{hora.minutosCorte}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{lista.descDominio('ESTADO_ACTIVO',hora.estado)}" />
+				</p:column>
+			</p:dataTable>
+			<h:panelGrid columns="2" styleClass="avaluos-button-align">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" actionListener="#{horaCorteBean.guardar}" value="#{etq.hor_guardar}" ajax="true"
+					update="horaForm,errorForm" icon="ui-icon-check" disabled="#{not horaCorteBean.esEditanto}" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" actionListener="#{horaCorteBean.cancelar}" value="#{etq.cancelar}" ajax="true" update="horaForm"
+					disabled="#{not horaCorteBean.esEditanto}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

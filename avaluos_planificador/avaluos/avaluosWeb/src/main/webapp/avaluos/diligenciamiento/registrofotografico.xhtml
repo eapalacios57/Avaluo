@@ -1,0 +1,162 @@
+<!-- 
+ * Representa la sección para la carga del registro fotografico de un avalúo. Hace
+ * parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:46 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions" id="tableroRegistroFotografico" styleClass="avaluos-fotografico">
+	<p:remoteCommand update="tableroRegistroFotografico,errorForm" name="refrescar" actionListener="#{regFotograficoBean.mensajeCargue}"/>
+	<p:remoteCommand update="contenedor" autoRun="true"/>
+<!-- 	<p:poll interval="1" update ="contenedor" process="@this" async="false" autoStart="true" ></p:poll> -->
+	<p:column styleClass="avaluos-table-reg-fotografico">
+		<p:panelGrid columns="2">
+			<p:fileUpload styleClass="avaluos-zona-cargando" id="cargarRegistros" disabled="#{not regFotograficoBean.editable}" 
+				fileLimit="#{regFotograficoBean.numeroFotografias}" fileLimitMessage="#{etq.ref_msjLimite}" invalidSizeMessage="#{etq.ref_msjSizeInvalido}"
+				invalidFileMessage="#{etq.ref_msjTipoArchivo}" sizeLimit="2102152" label="#{etq.ref_anexo}" dragDropSupport="true"
+				fileUploadListener="#{regFotograficoBean.subirArchivo}" sequential="true" multiple="true" auto="true" mode="advanced"
+				 update="contenedor"  allowTypes="/(\.|\/)(jpeg)$/">
+			</p:fileUpload>
+			<p:focus id="focusRegistroFoto" for="cargarRegistros" />
+			<p:panelGrid styleClass="avaluos-sig-atras-add" columns="2">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar"
+					value=" #{etq.limpiarFotografias}"
+					actionListener="#{regFotograficoBean.eliminarFotos}"
+					update="tableroRegistroFotografico,errorForm" ajax="true"
+					disabled="#{not regFotograficoBean.editable}" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar"
+					value="#{etq.guardarFotografias}"
+					actionListener="#{regFotograficoBean.anterior}"
+					update="errorForm,avaluoForm:errorEspecifico"
+					ajax="true" disabled="#{not regFotograficoBean.editable}" />
+			</p:panelGrid>
+		</p:panelGrid>
+		<p:message for="cargarRegistros" />
+		<h:outputLabel value="#{etq.ref_descRegistroFotografico}" />
+<!-- 		<p:panelGrid columns="5" rendered="#{not empty regFotograficoBean.fotografias}" id="contenedor"> -->
+		<p:panelGrid columns="5" rendered="true" id="contenedor" styleClass="tab-content">
+		   
+			<c:forEach items="#{regFotograficoBean.fotografias}" var="fotografia">
+				<h:panelGrid columns="1" style="border: solid;" styleClass="avaluos-img-drag" id="panel_#{fotografia.consecutivoAnexo}" cellpadding="0" cellspacing="0">
+					<h:panelGrid id="imagen_#{fotografia.consecutivoAnexo}" cellpadding="0" cellspacing="0">
+						<p:graphicImage styleClass="avaluos-img" id="foto_#{fotografia.consecutivoAnexo}" value="#{regFotograficoBean.consultarImagen(fotografia)}" stream="false"
+							width="210" height="210" ondblclick="document.getElementById('avaluoForm:edicionAvaluosTab:consultarDetalle_#{fotografia.consecutivoAnexo}').click();" />
+						<p:panel visible="false">
+							<p:commandButton id="consultarDetalle_#{fotografia.consecutivoAnexo}" action="#{regFotograficoBean.detalleFotografia(fotografia)}" ajax="true"
+								update="fotografiaPopupForm,errorForm" widgetVar="consultarDetalle_#{fotografia.consecutivoAnexo}">
+							</p:commandButton>
+						</p:panel>
+						<p:draggable for="panel_#{fotografia.consecutivoAnexo}" containment="contenedor" revert="true"
+							disabled="#{fotografia.portada or not regFotograficoBean.editable}" />
+						<p:droppable for="panel_#{fotografia.consecutivoAnexo}" tolerance="intersect" disabled="#{not regFotograficoBean.editable}">
+							<p:ajax listener="#{regFotograficoBean.arrastrar}" update="tableroRegistroFotografico" />
+						</p:droppable>
+					</h:panelGrid>
+					<p:panelGrid>
+						<p:outputLabel value="#{fotografia.consecutivoAnexo}" styleClass="avaluos-label-num-img" />
+					</p:panelGrid>
+					<p:panel style="avaluos-title-portada;height: 20px;#{fotografia.consecutivoAnexo eq 1 ? 'background-color: #f5db66;' : ''}">
+						<p:outputLabel value="#{etq.ref_fachada}" rendered="#{fotografia.consecutivoAnexo eq 1}" />
+					</p:panel>
+					<p:panelGrid columns="9" styleClass="avaluos-table-edit-img">
+						<p:commandButton styleClass="avaluos-edit-name-img" id="editarNombre_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}"
+							action="#{regFotograficoBean.editarNombre}" ajax="true" rendered="#{not fotografia.editarNombre}" update="tableroRegistroFotografico,errorForm" value=""
+							icon="ui-icon-pencil" style="height:30px; width:30px;">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<p:separator style="height:20px;" rendered="#{not fotografia.editarNombre}" />
+						<p:commandButton id="cancelarNombre_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}"
+							action="#{regFotograficoBean.cancelarNombre}" ajax="true" rendered="#{fotografia.editarNombre}" update="tableroRegistroFotografico,errorForm" value=""
+							icon="ui-icon-close" style="height:30px; width:30px;" styleClass="avaluos-btn-editar-img">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<p:tooltip for="cancelarNombre_#{fotografia.consecutivoAnexo}" value="#{etq.cancelar}" />
+						<p:panelGrid columns="1">
+							<h:outputLabel value="#{fotografia.archivo.nombreArchivo}" rendered="#{not fotografia.editarNombre}" style="width:50px; word-wrap: break-word;" />
+							<p:inputText styleClass="avaluos-input-txt" id="nombre_#{fotografia.consecutivoAnexo}" value="#{fotografia.nombreFotografia}"
+								rendered="#{fotografia.editarNombre}" maxlength="50" size="10" disabled="#{not regFotograficoBean.editable}" />
+						</p:panelGrid>
+						<p:commandButton styleClass="avaluos-save" id="guardarNombre_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}"
+							action="#{regFotograficoBean.guardarNombre}" ajax="true" rendered="#{fotografia.editarNombre}" update="tableroRegistroFotografico,errorForm" value=""
+							icon="ui-icon-disk" style="height:30px; width:30px;">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<p:tooltip for="guardarNombre_#{fotografia.consecutivoAnexo}" value="#{etq.guardar}" />
+					</p:panelGrid>
+					<p:message for="nombre_#{fotografia.consecutivoAnexo}" rendered="#{fotografia.editarNombre}" />
+					<p:panelGrid columns="6">
+					
+						<p:commandButton styleClass="avaluos-cta-title-portada" icon="#{fotografia.portada ? 'ui-icon-check':''}" action="#{regFotograficoBean.cambiarFachada}"
+							ajax="true" update="tableroRegistroFotografico errorForm" value="" style="height:30px; width:30px;"
+							disabled="#{fotografia.consecutivoAnexo eq 1 or not regFotograficoBean.editable}">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<h:outputLabel value="#{etq.ref_portada}"  styleClass="#{fotografia.portada ? 'avaluos-title-portada-fachada':''}"/>
+						
+				
+						<p:commandButton styleClass="avaluos-rotate-left" id="rotarizq_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}" value=""
+							icon="fa fa-rotate-left" action="#{regFotograficoBean.rotarIzquierda}" update="imagen_#{fotografia.consecutivoAnexo},errorForm" ajax="true"
+							style="height:30px; width:30px;">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<p:tooltip for="rotarizq_#{fotografia.consecutivoAnexo}" value="#{etq.ref_rotarIzq}" />
+						<p:commandButton styleClass="avaluos-rotate-right" id="rotarDer_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}" value=""
+							icon="fa fa-rotate-right" action="#{regFotograficoBean.rotar}" update="imagen_#{fotografia.consecutivoAnexo},errorForm" ajax="true"
+							style="height:30px; width:30px;">
+							<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+						</p:commandButton>
+						<p:tooltip for="rotarDer_#{fotografia.consecutivoAnexo}" value="#{etq.ref_rotar}" />
+					
+						<!-- 
+						<p:commandButton styleClass="avaluos-option-image" id="consultarImagen_#{fotografia.consecutivoAnexo}" value="" icon="ui-icon-arrowthickstop-1-s"
+							ajax="false" style="height:30px; width:30px;">
+							<p:fileDownload value="#{regFotograficoBean.consultarImagen(fotografia)}" />
+						</p:commandButton>
+						<p:tooltip for="consultarImagen_#{fotografia.consecutivoAnexo}" value="#{etq.ref_descargar}" />
+						 -->
+					</p:panelGrid>
+					
+					<p:commandButton styleClass="avaluos-delete-img" id="eliminarArchivo_#{fotografia.consecutivoAnexo}" disabled="#{not regFotograficoBean.editable}"
+						value="#{etq.ref_eliminar}" icon="ui-icon-trash" action="#{regFotograficoBean.eliminar}" update="tableroRegistroFotografico,errorForm" ajax="true">
+						<f:setPropertyActionListener target="#{regFotograficoBean.fotografia}" value="#{fotografia}" />
+					</p:commandButton> 
+						
+					<p:message for="imagen_#{fotografia.consecutivoAnexo}" />
+				</h:panelGrid>
+			</c:forEach>
+		</p:panelGrid>
+	</p:column>
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaFotografico" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not regFotograficoBean.ocultarAuditoria ? etq.ref_ocultarAuditoria : etq.ref_mostrarAuditoria}" styleClass="avaluos-ver-content"
+			toggleable="true" collapsed="#{regFotograficoBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{regFotograficoBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaFotografico" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{regFotograficoBean.registroFotografico.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.ref_fechaCreacion}" />
+					<h:outputText value="#{regFotograficoBean.registroFotografico.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{regFotograficoBean.registroFotografico.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.ref_fechaTransaccion}" />
+					<h:outputText value="#{regFotograficoBean.registroFotografico.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	
+</h:panelGrid>

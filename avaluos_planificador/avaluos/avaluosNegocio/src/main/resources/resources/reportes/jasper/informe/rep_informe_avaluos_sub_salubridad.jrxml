@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_informe_avaluos_sub_salubridad" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="3.000000000000003"/>
+	<property name="ireport.x" value="963"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="370"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="616"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="aguasServidas" class="java.lang.Long">
+		<fieldDescription><![CDATA[aguasServidas]]></fieldDescription>
+	</field>
+	<field name="requiereCondicionesSalubridad" class="java.lang.Long">
+		<fieldDescription><![CDATA[requiereCondicionesSalubridad]]></fieldDescription>
+	</field>
+	<field name="condicionSalubridad" class="java.lang.Long">
+		<fieldDescription><![CDATA[condicionSalubridad]]></fieldDescription>
+	</field>
+	<field name="impactoNegativoOtros" class="java.lang.String">
+		<fieldDescription><![CDATA[impactoNegativoOtros]]></fieldDescription>
+	</field>
+	<field name="ambientalParques" class="java.lang.Long">
+		<fieldDescription><![CDATA[ambientalParques]]></fieldDescription>
+	</field>
+	<field name="ambientalOtros" class="java.lang.String">
+		<fieldDescription><![CDATA[ambientalOtros]]></fieldDescription>
+	</field>
+	<field name="idCondicionSalubridad" class="java.lang.Long">
+		<fieldDescription><![CDATA[idCondicionSalubridad]]></fieldDescription>
+	</field>
+	<field name="impactoNegativoPorAire" class="java.lang.Long">
+		<fieldDescription><![CDATA[impactoNegativoPorAire]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<field name="usuarioTransaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaTransaccion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaTransaccion]]></fieldDescription>
+	</field>
+	<field name="impactoNegativoBasura" class="java.lang.Long">
+		<fieldDescription><![CDATA[impactoNegativoBasura]]></fieldDescription>
+	</field>
+	<field name="ambientalZonaVerde" class="java.lang.Long">
+		<fieldDescription><![CDATA[ambientalZonaVerde]]></fieldDescription>
+	</field>
+	<field name="idAvaluo" class="java.lang.Long">
+		<fieldDescription><![CDATA[idAvaluo]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="ambientalArborizacion" class="java.lang.Long">
+		<fieldDescription><![CDATA[ambientalArborizacion]]></fieldDescription>
+	</field>
+	<field name="impactoNegativoInseguridad" class="java.lang.Long">
+		<fieldDescription><![CDATA[impactoNegativoInseguridad]]></fieldDescription>
+	</field>
+	<field name="impactoNegativoRuido" class="java.lang.Long">
+		<fieldDescription><![CDATA[impactoNegativoRuido]]></fieldDescription>
+	</field>
+	<field name="requiereCondicionesSalubridadDescripcion" class="java.lang.String"/>
+	<field name="impactoNegativoRuidoDescripcion" class="java.lang.String"/>
+	<field name="impactoNegativoPorAireDescripcion" class="java.lang.String"/>
+	<field name="impactoNegativoInseguridadDescripcion" class="java.lang.String"/>
+	<field name="impactoNegativoBasuraDescripcion" class="java.lang.String"/>
+	<field name="ambientalZonaVerdeDescripcion" class="java.lang.String"/>
+	<field name="ambientalParquesDescripcion" class="java.lang.String"/>
+	<field name="ambientalArborizacionDescripcion" class="java.lang.String"/>
+	<field name="aguasServidasDescripcion" class="java.lang.String"/>
+	<field name="condicionesSalubridadDescripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="504" height="22"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="109" y="11" width="36" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{condicionesSalubridadDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="193" y="11" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aguasServidasDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="193" y="1" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ambientalArborizacionDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="298" y="1" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ambientalParquesDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="298" y="11" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ambientalZonaVerde}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="243" y="1" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impactoNegativoBasuraDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="1" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impactoNegativoInseguridadDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="11" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impactoNegativoPorAireDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="243" y="11" width="25" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impactoNegativoRuidoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="1" width="91" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impactoNegativoOtros}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="11" width="91" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ambientalOtros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="11" width="18" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="1" width="18" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="1" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[INSEGURIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="11" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[POR AIRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="11" width="25" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[RUIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="1" width="25" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BASURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="1" width="30" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[PARQUES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="11" width="30" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Z. VERDES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="1" width="48" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[ARBORIZACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="108" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[REQUIERE CONDICIONES DE SALUBRIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="11" width="84" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CONDICIONES DE SALUBRIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="11" width="48" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[AGUAS SERVIDAS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="109" y="1" width="36" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{requiereCondicionesSalubridadDescripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,13 @@
+<h:form id="impresionPropiaForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:dialog styleClass="modal-notificacion" id="impresionPopup" header="#{impresor.titulo}" widgetVar="#{impresor.popupId}" hideEffect=""
+		visible="#{impresor.ver}"  closable="false" closeOnEscape="false" appendToBody="true" modal="true" resizable="false">
+			<p:outputLabel value="#{impresor.descripcion}" style=" white-space: pre-wrap;"/>
+		<p:panelGrid columns="2" style="width:290; margin:0 auto; text-align:center;">
+			<p:commandButton onclick="PF('dlg_ImpresorPopup').hide()" styleClass="avaluos-cta-gen-aceptar" value="#{etq.opc_pdf}" actionListener="#{impresor.exportarPdf}" icon="ui-icon-check" ajax="false"
+				update="impresionPropiaForm" />
+			<p:commandButton onclick="PF('dlg_ImpresorPopup').hide()"  styleClass="avaluos-cta-gen-aceptar"  value="#{etq.opc_excel}" actionListener="#{impresor.exportarExcel}" 
+			update="impresionPropiaForm" icon="ui-icon-close" ajax="false"/>
+		</p:panelGrid>
+	</p:dialog>
+</h:form>

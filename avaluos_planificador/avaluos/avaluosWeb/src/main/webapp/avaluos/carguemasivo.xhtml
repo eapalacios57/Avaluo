@@ -1,0 +1,27 @@
+<!-- 
+ * Pantalla para realizar el cargue masivo de aval�os, incluidos los de tipo
+ * constructor, el usuario carga los archivos comprimidos con los aval�os a cargar
+ * al sistema, tambien debe asociar un archivo comprimido con el registro
+ * fotografico para cada archivo con la informaci�n de los aval�os.
+ * @author John Fredy Rincon
+ * @version 1.0
+ * @created 31-ago-2017 10:30:40 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="cargueForm">
+			<p:tabView id="tab">
+				<p:tab title="#{etq.car_titulo}" disabled="#{sesion.permisosEspecificos.get('ADMINISTRADOR')}">
+					<ui:include src="/avaluos/carguemasivo/cargue.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.car_res_titulo}">
+					<ui:include src="/avaluos/carguemasivo/resultados.xhtml" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+	<ui:define name="popups">
+		<ui:include src="popup/popupperito.xhtml" />
+	</ui:define>
+</ui:composition>

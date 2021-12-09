@@ -1,0 +1,8 @@
+mvn install:install-file -Dfile=SrvScnGestorFilenet.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=fineNetWebServiceClient -Dversion=1.0.0 -Dpackaging=jar 
+mvn install:install-file -Dfile=NotificacionAseguradoras.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=notificacionWebServiceClient -Dversion=1.0.0 -Dpackaging=jar 
+
+mvn install:install-file -Dfile=dosFonts.jar -DgroupId=dosFonts  -DartifactId=dosFonts -Dversion=1.0.0 -Dpackaging=jar 
+mvn install:install-file -Dfile=fontArial.jar -DgroupId=fontArial  -DartifactId=fontArial -Dversion=1.0.0 -Dpackaging=jar 
+mvn install:install-file -Dfile=FcaWebServiceCliente-1.0.0.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=FcaWebServiceCliente -Dversion=1.0.0 -Dpackaging=jar 
+
+ 

@@ -1,0 +1,16 @@
+<!-- Esta interfaz permite realizar la impresi�n de los reportes generados por el sistema, funciona a manera de componente reutilizable.  @author stilaguy  @version 1.0 @created 31-ago-2017 10:30:43 a.m.
+  -->
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" 	xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view contentType=" text/html" locale="es">
+	<h:head>
+		<title>#{etq.imprimir}</title>
+	</h:head>
+	<h:body>
+		<h:form id="imprimirForm">
+			<p:media player="pdf" value="#{impresionBean.contenido}" width="100%" height="720px"/>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

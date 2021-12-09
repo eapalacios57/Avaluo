@@ -1,0 +1,109 @@
+<!-- 
+ * Representa la sección para registrar la observaciones sobre el avalúo realizado
+ * a un inmueble. Hace parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:45 a.m.
+ -->
+<h:panelGrid id="observacionTab" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" styleClass="avaluos-table-observaciones">
+	<p:remoteCommand update="observacionesContenido" name="refrescarObservacion" />
+	<h:panelGrid columns="1" styleClass="avaluos-observaciones-contenido">
+		<h:outputLabel value="#{etq.obs_direccionAnexos}" />
+		<p:inputText styleClass="avaluos-input-txt" id="direccionAnexos" value="#{observacionBean.observacion.direccionAnexos}" maxlength="100"
+			valueChangeListener="#{observacionBean.cambiarDireccion}" disabled="#{not observacionBean.editable}">
+			<p:ajax event="change" update="direccionAnexos msjespdireccionAnexos"
+				oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:otrasDirecciones');})" />
+		</p:inputText>
+		<p:message id="msjespdireccionAnexos" for="direccionAnexos" />
+		<h:outputLabel value="#{etq.obs_otrasDirecciones}" />
+		<p:inputText styleClass="avaluos-input-txt" id="otrasDirecciones" value="#{observacionBean.observacion.otrasDirecciones}" maxlength="100"
+			valueChangeListener="#{observacionBean.cambiarDireccion}" disabled="#{not observacionBean.editable}">
+			<p:ajax event="change" update="otrasDirecciones msjespotrasDirecciones"
+				oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:observacionAvaluo');})" />
+		</p:inputText>
+		<p:message id="msjespotrasDirecciones" for="otrasDirecciones" />
+		<h:outputLabel value="#{etq.obs_observacionAvaluo}" />
+		<p:watermark for="observacionAvaluo" value="#{etq.obs_escriba_aqui}" />
+		<p:inputTextarea styleClass="avaluos-parrafo" id="observacionAvaluo" value="#{observacionBean.observacion.observacionAvaluo}"
+			counter="displayobservacionAvaluo" counterTemplate="{0}  #{etq.caracteres}" maxlength="2000" cols="80" rows="6" disabled="#{not observacionBean.editable}"
+			onkeydown="return limitLines(this, event)" />
+		<h:outputText id="displayobservacionAvaluo" styleClass="avaluos-span-observacion" />
+		<script type="text/javascript"> 
+			var keynum; 
+			function limitLines(obj, e) { 
+				
+				 if(window.event) {
+			          keynum = e.keyCode;
+			        // Netscape/Firefox/Opera
+			        } else if(e.which) {
+			          keynum = e.which;
+			        }
+			    var lines = obj.value.split('\n');
+			    if(keynum == 13){
+			    	if(lines.length>10){
+			    		return false;
+			    	}
+			    }
+			} 
+		</script> 
+		
+		<p:message for="observacionAvaluo" />
+		<h:panelGrid id="observacionesContenido" columns="1">
+			<h:outputLabel value="#{etq.obs_anexos_adicionales}" />
+			<p:fileUpload styleClass="avaluos-zona-cargando" id="anexo" fileLimit="1" disabled="#{not observacionBean.editable}" sizeLimit="1048576"
+				fileLimitMessage="#{etq.obs_msjLimite}" invalidSizeMessage="#{etq.obs_msjTamanio}" invalidFileMessage="#{etq.obs_msjTipoArchivo}"
+				allowTypes="/(\.|\/)(zip)$/" label="#{etq.obs_anexo}" value="#{observacionBean.anexo}" dragDropSupport="true" update="observacionesContenido,errorForm"
+				fileUploadListener="#{observacionBean.subirArchivo}" multiple="false" auto="true" mode="advanced" rendered="#{not observacionBean.archivoCargado}"
+				sequential="true" oncomplete="refrescarObservacion();" />
+			<p:focus id="focusObservaciones" for="anexo" />
+			<h:panelGrid columns="3" rendered="#{observacionBean.archivoCargado}">
+				<h:outputLabel value="#{observacionBean.nombreArchivo}" />
+				<p:commandButton styleClass="avaluos-cta-descargar" update="errorForm" value="" icon="ui-icon-arrowthickstop-1-s" ajax="false"
+					style="height:30px; width:30px;"
+					action="#{observacionBean.descargarArchivo}">
+<!-- 					<p:fileDownload value="#{observacionBean.descargarArchivo}" /> -->
+				</p:commandButton>
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="" icon="ui-icon-trash" ajax="true" actionListener="#{observacionBean.eliminarArchivo}"
+					style="height:30px; width:30px;" update="observacionesContenido,errorForm" disabled="#{not observacionBean.editable}" />
+			</h:panelGrid>
+			<p:message for="anexo" />
+		</h:panelGrid>
+	</h:panelGrid>
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaObservaciones" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not observacionBean.ocultarAuditoria ? etq.obs_ocultarAuditoria : etq.obs_mostrarAuditoria}" styleClass="avaluos-ver-content"
+			toggleable="true" collapsed="#{observacionBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{observacionBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaObservaciones" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{observacionBean.observacion.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.obs_fechaCreacion}" />
+					<h:outputText value="#{observacionBean.observacion.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{observacionBean.observacion.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.obs_fechaTransaccion}" />
+					<h:outputText value="#{observacionBean.observacion.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	<h:panelGrid styleClass="avaluos-sig-atras-add" columns="2">
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{observacionBean.anterior}"
+			update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" ajax="true" />
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{observacionBean.siguiente}"
+			update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" ajax="true" />
+	</h:panelGrid>
+</h:panelGrid>

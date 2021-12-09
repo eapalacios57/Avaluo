@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType=" text/html" locale="es">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="IE=9" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+			<title>#{msgpl['header.title']}</title>
+		</f:facet>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>AVALUOS</title>
+		
+<h:outputScript target="head">
+  (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+  n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+
+  ineum('reportingUrl', 'https://eum-orange-saas.instana.io');
+  ineum('key', 'rKFurmn0TReBfGPYealUrg');
+  ineum('trackSessions');
+</h:outputScript>
+<script  defer="defer" crossorigin="anonymous" src="https://eum.instana.io/eum.min.js"></script>
+
+		<ui:debug />
+		<f:metadata>
+			<ui:insert name="metadata" />
+		</f:metadata>
+	</h:head>
+	<h:body>
+		<ui:insert name="content"></ui:insert>
+<!-- 		<div class="ui-grid ui-grid-responsive"> -->
+<!-- 			<div class="ui-grid-row"> -->
+<!-- 				<div class="ui-grid-col-12"></div> -->
+<!-- 			</div> -->
+<!-- 			<div class="ui-grid-row"> -->
+<!-- 				<div class="ui-grid-col-12"> -->
+<!-- 					<div class="ui-grid ui-grid-responsive"> -->
+<!-- 						<div class="ui-grid-row"> -->
+<!-- 							<p:panel id="pnl-contenido-principal" styleClass="ui-widget-content2"> -->
+<!-- 							<p:panel id="pnl-contenido-principal"> -->
+<!-- 								<div class="ui-grid ui-grid-responsive"> -->
+<!-- 									<ui:insert name="content"></ui:insert> -->
+<!-- 								</div> -->
+<!-- 							</p:panel> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" /> -->
+<!-- 		<p:dialog styleClass="avaluos-modal-formulario" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false"> -->
+<!-- 			<p:graphicImage value="#{resource['images/ajax-processing.gif']}" /> -->
+<!-- 		</p:dialog> -->
+<!-- 		<ui:insert name="dialogs" /> -->
+<!-- 		<p:growl id="mensajes" sticky="true" autoUpdate="true" globalOnly="true" life="5000" showDetail="true" showSummary="true" closable="true" /> -->
+	</h:body>
+</f:view>
+</html>

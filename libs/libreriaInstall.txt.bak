@@ -1,0 +1,18 @@
+Primero Compilar:
+C:\Users\UserQV\Downloads\CO_909_AVALUOS_Desarrollo\CO_909_AVALUOS\avaluos_planificador\asesoftwareUtil
+C:\Users\UserQV\Downloads\CO_909_AVALUOS_Desarrollo\CO_909_AVALUOS\avaluos_planificador\ClienteS3\serviciosAmazonWS
+
+Segundo Compilar:
+mvn install:install-file -Dfile=SrvScnGestorFilenet.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=fineNetWebServiceClient -Dversion=1.0.0 -Dpackaging=jar   (NECESARIO)
+mvn install:install-file -Dfile=NotificacionAseguradoras.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=notificacionWebServiceClient -Dversion=1.0.0 -Dpackaging=jar (NECESARIO)
+mvn install:install-file -Dfile=FcaWebServiceCliente-1.0.0.jar -DgroupId=com.bolivar.avaluos.clientes  -DartifactId=FcaWebServiceCliente -Dversion=1.0.0 -Dpackaging=jar (NECESARIO)
+mvn install:install-file -Dfile=dosFonts.jar -DgroupId=dosFonts  -DartifactId=dosFonts -Dversion=1.0.0 -Dpackaging=jar (NECESARIO)
+mvn install:install-file -Dfile=fontArial.jar -DgroupId=fontArial  -DartifactId=fontArial -Dversion=1.0.0 -Dpackaging=jar (NECESARIO)
+
+Nota: Estas librerias son necesarias para compilar el directorio avaluos.
+
+Tercero Compilar:
+C:\Users\UserQV\Downloads\CO_909_AVALUOS_Desarrollo\CO_909_AVALUOS\avaluos_planificador\avaluos
+
+Cuarto Directorio EAR
+C:\Users\UserQV\Downloads\CO_909_AVALUOS_Desarrollo\CO_909_AVALUOS\avaluos_planificador\avaluos\avaluosEar\target

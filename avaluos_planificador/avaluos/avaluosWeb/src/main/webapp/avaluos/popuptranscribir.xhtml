@@ -1,0 +1,132 @@
+<h:form id="transcribirForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:dialog styleClass="avaluos-modal-formulario" id="transcribirPopup" header="#{etq.tra_titulo}" widgetVar="#{transcribirBean.popupId}" width="650"
+		hideEffect="" visible="#{transcribirBean.ver}" closable="true" closeOnEscape="true" appendToBody="true" modal="false" resizable="false">
+		<p:ajax event="close" update="transcribirForm" listener="#{transcribirBean.ocultar}" />
+		<p:message for="errorEspecifico" id="errorEspecifico" />
+		<p:panelGrid id="contenidoTranscribir" styleClass="sinBorde">
+			<p:row>
+				<p:column>
+<!-- 					<p:watermark for="nombreSolicitante" value="#{etq.tra_nombreSolicitante}" /> -->
+					<p:outputLabel value="#{etq.tra_nombreSolicitante}" />
+					<p:inputText styleClass="avaluos-input-txt" id="nombreSolicitante" value="#{transcribirBean.copia.nombreSolicitante}" maxlength="60" />
+					<p:message for="nombreSolicitante" />
+				</p:column>
+				<p:column>
+<!-- 					<p:watermark for="idTipoIdentificacion" value="#{etq.tra_tipoDocumento}" /> -->
+					<p:outputLabel value="#{etq.tra_tipoDocumento}" />
+					<p:selectOneMenu styleClass="avaluos-dropdown" id="idTipoIdentificacion" value="#{transcribirBean.copia.idTipoIdentificacion}">
+						<f:selectItem itemLabel="#{etq.tra_tipoDocumento}" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+					</p:selectOneMenu>
+					<p:message for="idTipoIdentificacion" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+<!-- 					<p:watermark for="numeroIdentificacion" value="#{etq.tra_numeroIdentificacion}" /> -->
+					<p:outputLabel value="#{etq.tra_numeroIdentificacion}" />
+					<p:inputNumber styleClass="avaluos-input-txt" id="numeroIdentificacion" value="#{transcribirBean.copia.numeroIdentificacion}" decimalPlaces="0"
+						minValue="0" maxValue="9999999999" />
+					<p:message for="numeroIdentificacion" />
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.tra_fechaCargue}" />
+						<p:calendar styleClass="avaluos-calendar" id="fechaAvaluo" value="#{transcribirBean.copia.fechaAvaluo}" pattern="#{etq.formatoFecha}" mask="true"
+							showOn="both" />
+					</h:panelGrid>
+<!-- 					<p:watermark for="fechaAvaluo" value="#{etq.formatoFecha}" /> -->
+					<p:message for="fechaAvaluo" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+<!-- 					<p:watermark for="idDepartamento" value="#{etq.tra_idDepartamento}" /> -->
+					<p:outputLabel value="#{etq.tra_idDepartamento}" />
+					<h:panelGrid columns="2">
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="idDepartamento" value="#{transcribirBean.copia.idDepartamento}"
+							valueChangeListener="#{transcribirBean.cambiarDepartamento}">
+							<p:ajax update="idCiudad codigoDaneDepartamento" event="change" oncomplete="$(function(){PrimeFaces.focus('transcribirForm:idCiudad');})" />
+							<f:selectItem itemLabel="#{etq.tra_idDepartamento}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+						</p:selectOneMenu>
+						<p:inputText styleClass="avaluos-input-txt" id="codigoDaneDepartamento" size="1" readonly="true" value="#{transcribirBean.copia.codigoDaneDepartamento}" />
+					</h:panelGrid>
+					<p:message for="idDepartamento" />
+				</p:column>
+				<p:column>
+<!-- 					<p:watermark for="idCiudad" value="#{etq.tra_idCiudad}" /> -->
+					<p:outputLabel value="#{etq.tra_idCiudad}" />
+					<h:panelGrid columns="2">
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="idCiudad" value="#{transcribirBean.copia.idCiudad}"
+							valueChangeListener="#{transcribirBean.cambiarCiudad}">
+							<p:ajax update="codigoDaneCiudad" event="change" oncomplete="$(function(){PrimeFaces.focus('transcribirForm:direccionInmueble');})" />
+							<f:selectItem itemLabel="#{etq.tra_idCiudad}" itemValue="" />
+							<f:selectItems value="#{transcribirBean.ciudades}" />
+						</p:selectOneMenu>
+						<p:inputText styleClass="avaluos-input-txt" size="1" id="codigoDaneCiudad" readonly="true" value="#{transcribirBean.copia.codigoDaneCiudad}" />
+					</h:panelGrid>
+					<p:message for="idCiudad" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+<!-- 					<p:watermark for="direccionInmueble" value="#{etq.tra_direccionInmueble}" /> -->
+					<p:outputLabel value="#{etq.tra_direccionInmueble}" />
+					<p:inputText styleClass="avaluos-input-txt" id="direccionInmueble" value="#{transcribirBean.copia.direccionInmueble}" maxlength="100"
+						         >
+						<p:ajax event="blur" update="direccionInmueble direccionimu direccionComplementaria" 
+						        listener="#{transcribirBean.cambiarDireccion}"
+							     />
+					</p:inputText>
+					<p:message id="direccionimu" for="direccionInmueble" />
+				</p:column>
+				<p:column>
+<!-- 					<p:watermark for="direccionComplementaria" value="#{etq.tra_direccionComplementaria}" /> -->
+					<p:outputLabel value="#{etq.tra_direccionComplementaria}" />
+					<p:inputText styleClass="avaluos-input-txt" id="direccionComplementaria" 
+					             value="#{transcribirBean.copia.direccionComplementaria}" maxlength="100"
+						         valueChangeListener="#{transcribirBean.cambiarDireccionComplementaria}">
+						     <p:ajax event="blur" update="direccionComplementaria" 
+						             oncomplete="$(function(){PrimeFaces.focus('transcribirForm:barrio');})" />
+					</p:inputText>
+					<p:message for="direccionComplementaria" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+<!-- 					<p:watermark for="barrio" value="#{etq.tra_barrio}" /> -->
+					<p:outputLabel value="#{etq.tra_barrio}" />
+					<p:inputText styleClass="avaluos-input-txt" id="barrio" value="#{transcribirBean.copia.barrio}" maxlength="30" />
+					<p:message for="barrio" />
+				</p:column>
+				<p:column>
+<!-- 					<p:watermark for="matricula" value="#{etq.tra_matricula}" /> -->
+					<p:outputLabel value="#{etq.tra_matricula}" />
+					<p:inputText styleClass="avaluos-input-txt" id="matricula" value="#{transcribirBean.copia.matriculaInmobiliariaPpal1}" maxlength="20" />
+					<p:message for="matricula" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="constructor" value="#{transcribirBean.copia.constructor}">
+						<p:ajax update="transcribirForm:errorEspecifico" listener="#{transcribirBean.cambiarConstructor}" />
+					</p:selectBooleanCheckbox>
+					<h:outputLabel value="#{etq.ina_constructor}" />
+					<p:message for="constructor" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.aceptar}" actionListener="#{transcribirBean.guardar}" update="transcribirForm,errorForm"
+						ajax="true" />
+				</p:column>
+				<p:column>
+					<p:commandButton styleClass="avaluos-cta-cancelar " value="#{etq.cancelar}" actionListener="#{transcribirBean.ocultar}" update="transcribirForm"
+						ajax="true" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</p:dialog>
+</h:form>

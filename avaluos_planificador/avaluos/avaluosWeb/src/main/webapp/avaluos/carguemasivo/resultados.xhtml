@@ -1,0 +1,141 @@
+<!-- 
+ * Esta pantalla permite consultar los resultados de la operaci�n de cargue masivo.
+ * 
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:46 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" width="100%">
+	<h:panelGrid columns="1">
+		<h:panelGrid columns="6">
+			<p:outputLabel for="numeroBatch" value="#{etq.car_noBatch_f}" />
+			<p:outputLabel for="numeroReferencia" value="#{etq.car_noReferencia_f}" />
+			<p:outputLabel for="nombreTxt" value="#{etq.car_nombreTxt}" />
+			<h:outputText value="#{etq.car_fechaCargue}" />
+			<p:outputLabel for="peritoConsultar" value="#{etq.car_nombrePerito}" />
+			<h:outputText />
+			<p:inputText styleClass="avaluos-input-txt" id="numeroBatch" size="20" value="#{resultadosCargueMasivoBean.consulta.numeroBatch}" maxlength="20" />
+			<p:inputText styleClass="avaluos-input-txt" id="numeroReferencia" size="20" value="#{resultadosCargueMasivoBean.consulta.numeroReferencia}" maxlength="20" />
+			<p:inputText styleClass="avaluos-input-txt" id="nombreTxt" size="20" value="#{resultadosCargueMasivoBean.consulta.nombreTxt}" maxlength="80" />
+			<h:panelGrid columns="2" id="fechaCargue">
+				<p:calendar styleClass="avaluos-calendario-add" id="fechaCargueDesde" value="#{resultadosCargueMasivoBean.consulta.fechaCargueDesde}" mask="true"
+					showOn="both" pattern="dd/MM/yy" size="8" />
+				<p:calendar styleClass="avaluos-calendario-add" id="fechaCargueHasta" value="#{resultadosCargueMasivoBean.consulta.fechaCargueHasta}" mask="true"
+					showOn="both" pattern="dd/MM/yy" size="8" />
+			</h:panelGrid>
+			<h:panelGrid columns="3">
+				<p:inputText styleClass="avaluos-input-txt" id="peritoResultado" value="#{resultadosCargueMasivoBean.consulta.numeroIdPerito}" disabled="true" size="25" />
+				<p:commandButton id="peritoConsultar" styleClass="avaluos-cta-gen-aceptar" icon="ui-icon-extlink" update="peritoConsultaForm" ajax="true"
+					actionListener="#{resultadosCargueMasivoBean.consultarPerito}" />
+				<p:commandButton id="peritoLimpiar" styleClass="avaluos-limpiar-popup" icon="ui-icon-cancel" update="peritoResultado" ajax="true"
+					actionListener="#{resultadosCargueMasivoBean.limpiarPerito}" />
+			</h:panelGrid>
+			<p:commandButton styleClass="avaluos-cta-consulta" id="consultarCargueBtn" value="#{etq.car_consultar}"
+				actionListener="#{resultadosCargueMasivoBean.consultar}" ajax="true" update="cargueForm,errorForm" style="margin:0 auto" />
+			<p:defaultCommand target="consultarCargueBtn" />
+			<p:message for="numeroBatch" />
+			<p:message for="numeroReferencia" />
+			<p:message for="fechaCargue" />
+			<p:message for="peritoResultado" />
+		</h:panelGrid>
+		<h:panelGrid rendered="#{not resultadosCargueMasivoBean.verFiltros}">
+			<h:outputLabel value="#{etq.car_resultado_cargue}" styleClass="avaluos-tittle" />
+			<p:separator />
+		</h:panelGrid>
+		<p:dataTable styleClass="avaluos-gen-table" id="resultadosData" var="resultado" selectionMode="single" selection="#{resultadosCargueMasivoBean.seleccionado}"
+			scrollable="true" value="#{resultadosCargueMasivoBean.listado}" widgetVar="resultadosTable" lazy="true" emptyMessage="#{etq.ca_no_existen_registro}"
+			scrollHeight="200" rendered="#{not resultadosCargueMasivoBean.verFiltros}" currentPageReportTemplate="{currentPage}/{totalPages}"
+			paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" rows="#{resultadosCargueMasivoBean.registroPagina}"
+			paginatorPosition="top" paginatorAlwaysVisible="false">
+			<p:ajax event="rowSelect" listener="#{resultadosCargueMasivoBean.consultarDetalle}" update="cargueForm:tab:detallePanel,cargueForm:tab:panelExporter" />
+			<p:column headerText="#{etq.car_noBatch}" sortBy="#{resultado.consecutivoBatch}">
+				<h:outputText value="#{resultado.consecutivoBatch}" />
+			</p:column>
+			<p:column headerText="#{etq.car_noReferencia}" sortBy="#{resultado.numeroRefCargue}">
+				<h:outputText value="#{resultado.numeroRefCargue}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_nombreArchivo}" sortBy="#{resultado.nombreArchivo}">
+				<h:outputText value="#{resultado.nombreArchivo}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_fecha}" sortBy="#{resultado.fechaTransaccion}">
+				<h:outputText value="#{resultado.fechaTransaccion}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_hora}" >
+				<h:outputText value="#{resultado.horaTransaccion}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_tipo}" sortBy="#{resultado.tipoCargue}">
+				<h:outputText value="#{resultado.tipoCargue}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_total}" sortBy="#{resultado.total}">
+				<h:outputText value="#{resultado.total}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_rechazados}" sortBy="#{resultado.rechazados}">
+				<h:outputText value="#{resultado.rechazados}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_sinEstado}" sortBy="#{resultado.sinEstado}">
+				<h:outputText value="#{resultado.sinEstado}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_aplicados}" sortBy="#{resultado.aplicados}">
+				<h:outputText value="#{resultado.aplicados}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_usuario}" sortBy="#{resultado.usuarioTransaccion}">
+				<h:outputText value="#{resultado.usuarioTransaccion}" />
+			</p:column>
+			<p:column headerText="#{etq.car_data_empresa}" sortBy="#{resultado.empresaAvaluos}">
+				<h:outputText value="#{resultado.empresaAvaluos}" />
+			</p:column>
+		</p:dataTable>
+		<p:panel id="detallePanel" rendered="#{not resultadosCargueMasivoBean.verFiltros}" toggleable="true">
+			<f:facet name="header">
+				<h:panelGrid columns="4">
+					<h:outputText value="#{etq.car_detal_titulo}" />
+					<h:panelGrid columns="1">
+						<p:inputNumber id="filtroLineaDetalle" decimalPlaces="0" maxValue="1000" minValue="0" value="#{resultadosCargueMasivoBean.consultaDetalle.lineaPlano}" />
+						<p:watermark value="#{etq.car_detal_noLinea}" for="filtroLineaDetalle" />
+						<p:message for="filtroLineaDetalle" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<p:selectOneMenu id="filtroEstadoCargueDetalle" styleClass="avaluos-dropdown" value="#{resultadosCargueMasivoBean.consultaDetalle.estadoCargue}">
+							<p:watermark value="#{etq.car_detal_estado}" for="filtroEstadoCargueDetalle" />
+							<f:selectItem itemLabel="#{etq.car_detail_opcSeleccion}" noSelectionOption="true" />
+							<f:selectItems value="#{resultadosCargueMasivoBean.estados}" />
+						</p:selectOneMenu>
+						<p:message for="filtroEstadoCargueDetalle" />
+					</h:panelGrid>
+					<p:commandButton styleClass="avaluos-cta-consulta" id="filtrarCmd" value="#{etq.car_filtrar}" actionListener="#{resultadosCargueMasivoBean.filtrarDetalle}"
+						ajax="true" update="detallePanel,panelExporter,errorForm" />
+				</h:panelGrid>
+			</f:facet>
+			<p:dataTable styleClass="avaluos-gen-table" id="detalleData" var="detalle" rendered="#{not empty resultadosCargueMasivoBean.detalle}"
+				value="#{resultadosCargueMasivoBean.detalle}" scrollable="true" widgetVar="detalleWidget" lazy="true" emptyMessage="#{etq.ca_no_existen_registro}"
+				scrollHeight="100" currentPageReportTemplate="{currentPage}/{totalPages}" paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}"
+				paginator="true" rows="#{resultadosCargueMasivoBean.registroPagina}" paginatorPosition="top" paginatorAlwaysVisible="false">
+				<p:column headerText="#{etq.car_detal_noLinea}" sortBy="#{detalle.lineaPlano}">
+					<h:outputText value="#{detalle.lineaPlano}" />
+				</p:column>
+				<p:column headerText="#{etq.car_detal_estado}" sortBy="#{detalle.estadoCargue}">
+					<h:outputText value="#{detalle.estadoCargue}" />
+				</p:column>
+				<p:column headerText="#{etq.car_detail_linea}" >
+					<h:outputText value="#{detalle.contenidoLineaPlano}" />
+				</p:column>
+				<p:column headerText="#{etq.car_detail_mensaje}" sortBy="#{detalle.mensajeError}">
+					<h:outputText value="#{detalle.mensajeError}" />
+				</p:column>
+				<p:column headerText="#{etq.car_detail_fechaCreacion}" sortBy="#{detalle.fechaTransaccion}">
+					<h:outputText value="#{detalle.fechaTransaccion}" />
+				</p:column>
+			</p:dataTable>
+
+			<p:separator rendered="#{not empty resultadosCargueMasivoBean.detalle}" />
+			<h:panelGrid id="panelExporter" columns="3" rendered="#{not empty resultadosCargueMasivoBean.detalle}" styleClass="avaluos-exportar-xls">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.car_detail_exportarXls}" ajax="false">
+					<p:dataExporter type="xls" target="detalleData" fileName="detalle" pageOnly="true" />
+				</p:commandButton>
+				<p:outputLabel value="#{etq.car_total}" />
+				<h:outputText id="total" value="#{resultadosCargueMasivoBean.totalDetalle}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+</h:panelGrid>

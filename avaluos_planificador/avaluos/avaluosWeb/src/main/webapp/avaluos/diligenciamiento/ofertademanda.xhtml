@@ -1,0 +1,62 @@
+<!-- 
+ * Representa la sección para la oferta y la demanda, en esta el perito detalla su
+ * criterio en cuanto a este concepto para el avalúo en estudio. Hace parte de la
+ * pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:45 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" styleClass="avaluos-table-oferta-demanda">
+	<h:outputLabel value="#{etq.ofe_tiempoComercializacion}" />
+	<p:inputNumber styleClass="avaluos-texto" id="tipoComercializacion" value="#{ofertaBean.ofertaDemanda.tipoComercializacion}" decimalPlaces="0" minValue="0"
+		thousandSeparator="" maxlength="5" maxValue="99999" disabled="#{not ofertaBean.editable}" />
+	<p:focus id="focusTipoComercializacion" for="tipoComercializacion" />
+	<p:message for="tipoComercializacion" />
+	<p:outputLabel styleClass="avaluos-lbl-campo" for="actualidadEdificadora" value="#{etq.ofe_actualidadEdificadora}" />
+	<p:inputTextarea styleClass="avaluos-parrafo" id="actualidadEdificadora" value="#{ofertaBean.ofertaDemanda.actualidadEdificadora}"
+		counter="displayActualidadEdificadora" counterTemplate="{0}  #{etq.caracteres}" maxlength="500" cols="80" rows="6" disabled="#{not ofertaBean.editable}" />
+	<h:outputText id="displayActualidadEdificadora" styleClass="avaluos-span-oferta" />
+	<p:message for="actualidadEdificadora" />
+	<p:outputLabel styleClass="avaluos-lbl-campo" for="comportamiento" value="#{etq.ofe_comportamiento}" />
+	<p:inputTextarea styleClass="avaluos-parrafo" id="comportamiento" value="#{ofertaBean.ofertaDemanda.comportamiento}" counter="displayComportamiento"
+		counterTemplate="{0}  #{etq.caracteres}" maxlength="500" cols="80" rows="6" disabled="#{not ofertaBean.editable}" />
+	<h:outputText id="displayComportamiento" styleClass="avaluos-span-oferta"/>
+	<p:message for="comportamiento" />
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaOferta" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not ofertaBean.ocultarAuditoria ? etq.ofe_ocultarAuditoria : etq.ofe_mostrarAuditoria}" styleClass="avaluos-ver-content" toggleable="true"
+			collapsed="#{ofertaBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{ofertaBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaOferta" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{ofertaBean.ofertaDemanda.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.ofe_fechaCreacion}" />
+					<h:outputText value="#{ofertaBean.ofertaDemanda.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{ofertaBean.ofertaDemanda.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.ofe_fechaTransaccion}" />
+					<h:outputText value="#{ofertaBean.ofertaDemanda.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	<h:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{ofertaBean.anterior}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" />
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{ofertaBean.siguiente}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" />
+	</h:panelGrid>
+</h:panelGrid>

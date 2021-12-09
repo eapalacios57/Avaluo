@@ -1,0 +1,39 @@
+<!-- 
+ * Componente grafico para la consulta de un perito, permite realizar la busqueda
+ * de un perito y asociarlo a un proceso dentro de otra pantalla.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:46 a.m.
+ -->
+<h:form id="peritoConsultaForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:dialog styleClass="avaluos-modal-formulario" id="peritoPopup" header="#{etq.ppe_consultarPeritos}" widgetVar="#{peritoPopup.popupId}"
+		visible="#{peritoPopup.ver}" closable="true" closeOnEscape="true" modal="true" resizable="false" draggable="true">
+		<p:ajax event="close" update="peritoConsultaForm" listener="#{peritoPopup.ocultar}" />
+		<h:panelGrid columns="1">
+			<h:panelGrid columns="7">
+				<p:watermark for="numeroDocumento" value="#{etq.ppe_numeroDocumento}" />
+				<p:inputNumber styleClass="avaluos-input-txt" id="numeroDocumento" value="#{peritoPopup.consulta.numeroDocumento}" thousandSeparator="" decimalPlaces="0"
+					minValue="0" maxValue="9999999999999" maxlength="13" />
+				<p:message for="numeroDocumento" />
+				<p:watermark for="nombrePerito" value="#{etq.ppe_nombrePerito}" />
+				<p:inputText styleClass="avaluos-input-txt" id="nombrePerito" value="#{peritoPopup.consulta.nombrePerito}" maxlength="60" />
+				<p:message for="nombrePerito" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" icon="ui-icon-search" actionListener="#{peritoPopup.consultar}" update="peritoConsultaForm" />
+			</h:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" var="perito" value="#{peritoPopup.listado}" widgetVar="peritoTabla" rows="#{peritoPopup.registroPagina}"
+				paginator="true" rendered="#{not empty peritoPopup.listado}" lazy="true" currentPageReportTemplate="{currentPage}/{totalPages}"
+				paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginatorPosition="bottom" paginatorAlwaysVisible="false" tableStyle="width:auto">
+				<p:column headerText="#{etq.ppe_numeroDocumento}" sortBy="#{perito.numeroDocumento}">
+					<h:outputText value="#{perito.numeroDocumento}" />
+				</p:column>
+				<p:column headerText="#{etq.ppe_nombrePerito}" sortBy="#{perito.nombrePerito}">
+					<h:outputText value="#{perito.nombrePerito}" />
+				</p:column>
+				<p:column>
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" icon="ui-icon-search" actionListener="#{peritoPopup.seleccionar}" update="peritoConsultaForm" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</p:dialog>
+</h:form>

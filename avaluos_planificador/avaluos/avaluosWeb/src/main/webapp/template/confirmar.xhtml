@@ -1,0 +1,14 @@
+<h:form id="confirmacionPropiaForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:dialog styleClass="modal-notificacion" id="confirmarPopup" header="#{confirmar.titulo}" widgetVar="#{confirmar.popupId}" hideEffect=""
+		visible="#{confirmar.ver}" closable="true" closeOnEscape="true" appendToBody="true" modal="true" resizable="false">
+		<!-- 		<p:ajax event="close" update="confirmacionPropiaForm" listener="#{confirmar.cancelar}" /> -->
+			<p:outputLabel value="#{confirmar.descripcion}" style=" white-space: pre-wrap;"/>
+		<p:panelGrid columns="2" style="width:290; margin:0 auto; text-align:center;">
+			<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.si}" action="#{confirmar.aceptar}" icon="ui-icon-check" ajax="true"
+				update="errorForm,confirmacionPropiaForm,#{not empty confirmar.actualizar ? confirmar.actualizar:''}" />
+			<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.no}" action="#{confirmar.cancelar}" icon="ui-icon-close" ajax="true"
+				update="errorForm,confirmacionPropiaForm,#{not empty confirmar.actualizar ? confirmar.actualizar:''}" />
+		</p:panelGrid>
+	</p:dialog>
+</h:form>

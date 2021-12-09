@@ -1,0 +1,4211 @@
+/**************** Styles ***************************/
+/*Fuentes*/
+@import
+	url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700')
+	;
+
+/**********************************/
+#indiceConsultarForm th, #indiceConsultarForm th td {
+	background: #f3f3f3;
+	color: #007f3e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: none !important;
+	border: none;
+	border-right: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	font-size: 16px;
+	padding: 5px 0;
+	height: 51px;
+	width: 153px !important;
+}
+
+#indiceConsultarForm .avaluos-texto {
+	border: 1px solid #e6e6e6;
+	width: 80%;
+	color: #008c44;
+	height: 25px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#indiceConsultarForm th:last-child {
+	border-right: none;
+}
+
+#indiceConsultarForm td {
+	text-align: center;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px !important;
+	color: #888888;
+	border-bottom: 1px dashed #e5e5e5 !important;
+	height: 78px;
+	box-sizing: border-box;
+	padding: 0px;
+	border: none !important;
+	text-transform: lowercase;
+	width: 153px !important;
+}
+
+.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 92.5%;
+	height: 40px;
+	display: inline-block;
+	background-color: #008c44;
+	color: #ffffff;
+	font-size: 20px !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: lighter;
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span, .ui-dialog .ui-dialog-titlebar-minimize span,
+	.ui-dialog .ui-dialog-titlebar-maximize span {
+	/* background: #ffffff !important; */
+	width: 60px;
+	height: 58px;
+	display: inline-block;
+	background: #f5db66 url(/avaluos/avaluos/resources/images/cerrar.png)
+		no-repeat center center !important;
+	cursor: pointer;
+	top: 0px !important;
+	right: -14px;
+	position: absolute;
+}
+
+.ui-dialog.ui-widget-content {
+	background-color: #ffffff;
+	border: 1px solid #999;
+	border: none;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 0px !important;
+	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+}
+/**********************************/
+/**************** Styles Tunja***************************/
+
+/*General*/
+body {
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Roboto Condensed', sans-serif !important;
+	outline: none;
+}
+
+* {
+	outline: none !important;
+	-moz-outline-style: none !important;
+}
+/*Fin General*/
+
+/*header*/
+.titulo-menu, .titulo-cabezote, .titulo-sesion {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.titulo-cabezote img {
+	margin-left: 65px;
+}
+
+#j_idt7 {
+	width: 100% !important;
+	height: 93px !important;
+	background: #f6f6f6;
+	background: -moz-linear-gradient(top, #f6f6f6 0%, #e3e3e3 100%);
+	background: -webkit-linear-gradient(top, #f6f6f6 0%, #e3e3e3 100%);
+	background: linear-gradient(to bottom, #f6f6f6 0%, #e3e3e3 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6',
+		endColorstr='#e3e3e3', GradientType=0);
+	position: initial !important;
+	padding: 0;
+	margin: 0 !important;
+}
+
+#j_idt7.ui-layout-unit .ui-layout-unit-content {
+	width: 1224px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	background: transparent;
+	padding: 0;
+}
+
+#j_idt7.ui-layout-unit .ui-layout-unit-content table, #j_idt7.ui-layout-unit .ui-layout-unit-content table tr,
+	#j_idt7.ui-layout-unit .ui-layout-unit-content table tr td {
+	height: 100%;
+	padding: 0;
+}
+
+#j_idt7.ui-layout-unit .ui-layout-unit-content table tr td tr:last-child
+	{
+	display: block;
+}
+
+#j_idt7.ui-layout-unit .ui-layout-unit-content table tr:last-child {
+	display: none;
+}
+
+#j_idt11 .avaluos-menu {
+	background: #008c44;
+	width: 89px;
+	height: 100%;
+	position: relative;
+}
+
+#j_idt11 .avaluos-menu::before {
+	content: '';
+	position: absolute;
+	background: url("/avaluos/avaluos/resources/images/menu.png") no-repeat
+		center center;
+	width: 37px;
+	height: 23px;
+	top: 0;
+	left: 0;
+}
+
+#j_idt11 .avaluos-menu .fa-align-justify::before {
+	display: none;
+}
+
+#menuForm .avaluos-menu {
+	background: url('/avaluos/avaluos/resources/images/menu.png') no-repeat;
+	border: none;
+	border-color: transparent;
+	text-shadow: none;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border-radius: 0;
+	background-position: center 52px;
+}
+
+#menuForm .avaluos-menu:after {
+	content: 'MENU';
+	position: absolute;
+	top: 27.2%;
+	left: 28.5%;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+}
+
+#menuForm .avaluos-menu .ui-button-icon-left {
+	display: none;
+}
+
+#encabezadoForm button.avaluos-cta-consulta, #encabezadoForm button.avaluos-cta-nuevo,
+	#encabezadoForm button.avaluos-rayo-activo, #encabezadoForm button.avaluos-cta-rayo-inactivo
+	{
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+#encabezadoForm button.avaluos-rayo-activo, #encabezadoForm button.avaluos-cta-rayo-inactivo
+	{
+	background: url(/avaluos/avaluos/resources/images/rayo_home.png) center
+		no-repeat;
+	width: 54px;
+	height: 54px;
+	text-indent: -666em;
+	border: none;
+}
+
+#encabezadoForm button.avaluos-cta-consulta:hover {
+	background:
+		url(/avaluos/avaluos/resources/images/carga_masiva_hover.png) center
+		no-repeat;
+}
+
+#encabezadoForm button.avaluos-cta-nuevo:hover {
+	background: url(/avaluos/avaluos/resources/images/nuevo_home_hover.png)
+		center no-repeat;
+}
+
+#encabezadoForm button.avaluos-rayo-activo:hover {
+	background: url(/avaluos/avaluos/resources/images/rayo_home_hover.png)
+		center no-repeat;
+}
+
+#j_idt18 .avaluos-menu-salir {
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: bold;
+	font-size: 18px;
+	background: transparent;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	border-bottom: 3px solid transparent;
+}
+
+#j_idt18 .avaluos-menu-salir:hover {
+	border-bottom: 3px solid #008c44;
+	border-radius: initial;
+}
+
+#j_idt7 .ui-layout-unit-content td:nth-child(5) {
+	width: 30%;
+}
+
+#j_idt18 .avaluos-perfil-user {
+	background: none;
+	border: none;
+	position: relative;
+}
+
+#j_idt18 .avaluos-perfil-user .ui-button-text {
+	display: none;
+}
+
+#j_idt18 .avaluos-perfil-user:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	border-width: 5px 5px 0;
+	border-style: solid;
+	border-color: #6f6f6f transparent transparent;
+}
+
+.ui-menu-dynamic.ui-menu-toggleable.avaluos-menu-salir {
+	width: 245px;
+	height: 82px;
+}
+
+#j_idt7 .ui-layout-unit-content table #encabezadoForm td {
+	width: 25%;
+}
+/*Fin header*/
+
+/*MenÃº*/
+.ui-menu-dynamic.ui-menu-toggleable {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #5e5e5e;
+	text-transform: uppercase;
+	width: 403px;
+	background: #ebebeb;
+	position: absolute;
+	text-align: left;
+	z-index: 999;
+	height: 490px;
+	overflow-y: scroll;
+}
+
+.ui-menu-dynamic.ui-menu-toggleable::-webkit-scrollbar-thumb {
+	box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.4);
+	background: #ebebeb;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.ui-menu-dynamic.ui-menu-toggleable::-webkit-scrollbar {
+	width: 12px;
+}
+
+.ui-menu-dynamic.ui-menu-toggleable::-webkit-scrollbar-track {
+	background: none;
+}
+
+.ui-menu-dynamic .ui-menu-list .ui-widget-header {
+	background: transparent;
+	border-bottom: 1px solid #4e8b4a;
+	text-transform: uppercase;
+	padding: 25px 0 25px 0px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.ui-menu-dynamic .ui-menu-list .ui-menuitem {
+	font-size: 14px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.ui-menu-dynamic .ui-menu-list .ui-menuitem a.ui-state-hover {
+	background-color: #dbdbdb;
+	border-left: 5px solid #008c44;
+	background-image: none;
+	background-position: initial;
+	background-repeat: no-repeat;
+	color: #4d4d4d;
+	box-sizing: border-box;
+}
+
+.ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
+	padding: 20px 0 20px 40px;
+}
+
+.ui-menu .ui-menuitem-link {
+	border: none;
+}
+
+#encabezadoForm table {
+	width: 100%;
+}
+
+#encabezadoForm table td {
+	text-align: right;
+}
+
+#encabezadoForm table td:last-child {
+	padding-right: 45px;
+}
+
+#encabezadoForm button.avaluos-cta-consulta {
+	background: url("/avaluos/avaluos/resources/images/carga_masiva.png")
+		center no-repeat;
+	width: 54px;
+	height: 54px;
+	text-indent: -666em;
+	border: none;
+}
+
+#encabezadoForm button.avaluos-cta-nuevo {
+	background: url("/avaluos/avaluos/resources/images/nuevo_home.png")
+		center no-repeat;
+	width: 54px;
+	height: 54px;
+	text-indent: -666em;
+	border: none;
+}
+
+#contenidocentral.ui-layout-pane-center {
+	position: initial !important;
+}
+
+.titulo-sesion {
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	display: inline-block;
+	margin-top: 6px;
+	margin-right: 20px;
+}
+
+.titulo-sesion label:first-child {
+	font-weight: bold;
+}
+
+#menuForm {
+	background: #008c44;
+	display: inline-block;
+	width: 89px;
+	height: 117%;
+	text-align: center;
+	position: relative;
+	top: -2px;
+}
+/*Fin Menu*/
+/*Pagina Home*/
+#contenidocentral.ui-layout-pane-center {
+	padding: 0;
+	border: none;
+	height: 100% !important;
+}
+
+#contenidocentral .ui-layout-unit-content {
+	padding: 0;
+}
+
+#j_idt20 {
+	display: none !important;
+}
+
+.avaluos-content-fondo img {
+	width: 100%;
+	height: calc(100vh - 102px);
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo td
+	{
+	padding: 0;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(2)
+	{
+	background: rgba(0, 140, 68, 0.75);
+	position: absolute;
+	bottom: 135px;
+	width: 100%;
+	height: 120px;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3)
+	{
+	background: rgba(0, 140, 68, 0.75);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 135px;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) #homeSubtitle .ui-widget-content
+	{
+	background: transparent;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(2) .ui-panelgrid-cell,
+	.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) .ui-panelgrid-cell
+	{
+	width: 900px;
+	margin: 0 auto;
+	display: block;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(2) label
+	{
+	color: #ffdc5d;
+	font-size: 29px;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 4;
+	font-family: 'Roboto Condensed', sans-serif;
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(2) label:after
+	{
+	content: '';
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 2px;
+	background: #ffdc5d;
+	bottom: 30px;
+	left: 0;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) label
+	{
+	color: #ffffff;
+	font-size: 22px;
+	text-transform: uppercase;
+	font-weight: 400;
+	margin-top: 0;
+	width: 100%;
+	display: inline-block;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) #homeSubtitle .ui-widget-content .ui-panelgrid-cell:first-child
+	{
+	width: 80%;
+	display: inline-block;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) #homeSubtitle .ui-widget-content .ui-panelgrid-cell:last-child
+	{
+	text-align: right;
+	width: 19%;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 15px;
+}
+
+.ui-layout-unit-content .avaluos-content-fondo table.avaluos-content-fondo .ui-widget-content:nth-child(3) .footer-logo
+	{
+	display: inline-block;
+	background: url(/avaluos/avaluos/resources/images/Davivienda.png) center
+		no-repeat;
+	background-size: contain;
+	width: 155px;
+	height: 54px;
+	vertical-align: top;
+}
+
+/*Fin Pagina Home*/
+
+/*Pagina PARAMETRIZAR Ã�NDICE ACUMULADO*/
+
+/*Boton*/
+.ui-datatable-header.ui-widget-header.ui-corner-top {
+	background-color: #FFFFFF;
+}
+
+.ui-button.avaluos-add-row {
+	display: block;
+	width: 165px;
+	margin-top: 40px;
+	margin-bottom: 15px;
+	background: #ffffff;
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: left;
+	border-radius: 25px;
+	text-transform: uppercase;
+	border: 1px solid #008c44;
+	position: relative;
+}
+
+#indiceConsultarForm .ui-datatable-scrollable-theadclone {
+	display: none;
+}
+
+.ui-button.avaluos-add-row::after {
+	position: absolute;
+	content: '';
+	width: 24px;
+	height: 24px;
+	background: url("/avaluos/avaluos/resources/images/arrow_yellow.png");
+	display: inline-block;
+	vertical-align: bottom;
+	right: 40px;
+	top: 4px;
+}
+
+.ui-button-icon-left.ui-icon-star {
+	display: none;
+}
+
+.ui-button.avaluos-add-row:hover {
+	background: #008c44;
+	color: #ffdc5d;
+	border: none;
+	text-shadow: none;
+	border: 1px solid #008c44;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.ui-button.avaluos-add-row:hover::after {
+	background: url("/avaluos/avaluos/resources/images/arrow_hover.png");
+}
+/*Fin Boton*/
+
+/*tabla*/
+#indiceConsultarForm .avaluos-tittle {
+	margin-top: 60px;
+	display: block;
+	border-bottom: 1px solid;
+	width: 40%;
+	padding-bottom: 30px;
+}
+
+#indiceConsultarForm .ui-separator {
+	display: none;
+}
+
+#indiceConsultarForm {
+	width: 1224px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	color: #008c44;
+	font-size: 25px;
+	border-bottom: 1px solid #000000;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#indiceConsultarForm th:first-child {
+	text-align: center;
+	width: 240px;
+}
+
+#indiceConsultarForm td:first-child {
+	text-align: center;
+	border-right: none;
+}
+
+#indiceConsultarForm th:last-child {
+	text-align: center;
+	border-right: none;
+}
+
+#indiceConsultarForm td::first-letter {
+	text-transform: uppercase;
+}
+
+#indiceConsultarForm .ui-widget-content {
+	border: none;
+	border-bottom: 1px dashed #e5e5e5;
+}
+
+#indiceConsultarForm td:nth-child(3n) {
+	color: #008c44;
+	font-weight: bold;
+}
+
+#indiceConsultarForm .avaluos-edit {
+	background: transparent;
+	background-image: url("/avaluos/avaluos/resources/images/editar.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#indiceConsultarForm .avaluos-edit:hover {
+	background-image:
+		url("/avaluos/avaluos/resources/images/editar_hover.png");
+}
+
+#indiceConsultarForm .avaluos-cta-borrar {
+	background: transparent;
+	background-image: url("/avaluos/avaluos/resources/images/eliminar.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#indiceConsultarForm .avaluos-cta-borrar:hover {
+	background-image:
+		url("/avaluos/avaluos/resources/images/eliminar_hover.png");
+}
+
+#indiceConsultarForm .ui-paginator-bottom {
+	background: #FFFFFF;
+	border: none;
+	margin-top: 40px;
+}
+
+#indiceConsultarForm .ui-paginator-bottom .ui-paginator-prev,
+	#indiceConsultarForm .ui-paginator-bottom .ui-paginator-next {
+	background: #008c44;
+	width: 17px;
+	height: 25px;
+	opacity: 1;
+	position: relative;
+	border: none;
+	left: 0;
+	top: 12px;
+	border-radius: 0;
+}
+
+#indiceConsultarForm .ui-paginator-bottom .ui-paginator-prev .ui-icon-seek-prev,
+	#indiceConsultarForm .ui-paginator-bottom .ui-paginator-next .ui-icon-seek-next
+	{
+	display: none;
+}
+
+#indiceConsultarForm .ui-paginator-bottom .ui-paginator-prev:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent #ffffff transparent transparent;
+	right: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#indiceConsultarForm .ui-paginator-bottom .ui-paginator-next:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent transparent transparent #ffffff;
+	left: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#indiceConsultarForm .ui-paginator-bottom .ui-paginator-current {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #888888;
+	font-size: 18px;
+}
+/*Fin tabla*/
+
+/*Modal 1Â°*/
+#indiceForm .ui-dialog-title {
+	color: #ffffff;
+	font-size: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+	display: block;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span.ui-icon-closethick {
+	width: 60px;
+	height: 58px;
+	display: inline-block;
+	background: #f5db66 url("/avaluos/avaluos/resources/images/cerrar.png")
+		no-repeat center center !important;
+	cursor: pointer;
+}
+
+.ui-dialog  .ui-dialog-content td label {
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	display: inline-block;
+	margin-bottom: 10px;
+	width: auto;
+}
+
+.ui-dialog-content .avaluos-cta-gen-aceptar, .ui-dialog-content .avaluos-cta-gen-cancelar
+	{
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 95%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.ui-dialog-content .avaluos-cta-gen-cancelar {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44 !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border: none;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	outline: none;
+	padding: 0 40px;
+}
+
+.ui-dialog-content .avaluos-cta-gen-aceptar .ui-icon-check {
+	display: none;
+}
+
+.ui-dialog-content .avaluos-cta-gen-aceptar .ui-button-text,
+	.ui-dialog-content .avaluos-cta-gen-cancelar .ui-button-text {
+	padding: 0;
+}
+
+.ui-dialog-content .ui-state-default.avaluos-dropdown {
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	border-radius: 0;
+	width: 200px;
+	min-width: 200px !important;
+	margin-right: 20px;
+}
+
+.ui-dialog-content .ui-state-default.avaluos-dropdown label.ui-selectonemenu-label
+	{
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	margin-bottom: 0px;
+	width: auto;
+	padding-left: 12px;
+	border: none;
+	box-shadow: initial;
+	text-transform: lowercase;
+}
+
+.ui-dialog-content .ui-state-default.avaluos-dropdown label.ui-selectonemenu-label:first-letter
+	{
+	text-transform: uppercase;
+}
+
+.ui-dialog-content .ui-state-default.avaluos-dropdown .ui-corner-right {
+	background: #e8e8e8;
+	border: none;
+	border-radius: 0;
+	padding: 0px 15px;
+}
+
+.ui-dialog-content .ui-state-default.avaluos-dropdown .ui-corner-right .ui-icon
+	{
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	left: 18px;
+	top: 7px;
+	border: 2px solid #018c45;
+	border-top: none;
+	border-right: none;
+	background: transparent;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	z-index: 1;
+}
+
+.ui-dialog-content .ui-inputtext {
+	border: 1px solid #e6e6e6;
+	color: #008c44;
+	height: 30px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+/*Modal Eliminar*/
+.ui-confirm-dialog.ui-dialog.ui-widget-content .ui-dialog-content {
+	color: #888888;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 16px;
+	padding: 15px 50px;
+	text-align: center;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: center;
+	padding: 10px;
+}
+
+.ui-confirm-dialog.ui-dialog.ui-widget-content .ui-dialog-content .ui-icon
+	{
+	display: none;
+}
+
+.ui-dialog-buttonpane {
+	border: none;
+}
+
+.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-yes,
+	.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-no {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 44%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-yes .ui-icon-check,
+	.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-no .ui-icon-close
+	{
+	display: none;
+}
+
+.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-yes .ui-button-text,
+	.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-no  .ui-button-text
+	{
+	padding: 0;
+}
+
+.ui-confirm-dialog .ui-dialog-buttonpane button.ui-confirmdialog-no {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44;
+	margin: 0;
+}
+
+.ui-confirm-dialog.ui-dialog .ui-dialog-titlebar-close span.ui-icon-closethick
+	{
+	right: 9px;
+}
+
+/*Modal Exito*/
+#errorForm .avaluos-notificacion .ui-dialog-titlebar {
+	background-color: #FFFFFF;
+	border: none;
+}
+
+#errorForm .avaluos-notificacion .ui-dialog-content tr:first-child td {
+	border-bottom: 1px solid #929292;
+}
+
+#errorForm .avaluos-notificacion .ui-dialog-content td {
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	padding: 0 11px 10px 11px;
+}
+
+#errorForm .avaluos-notificacion .ui-dialog-content td button {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	border-radius: 25px;
+	text-transform: uppercase;
+	font-size: 18px;
+	border: 1px solid #008c44;
+	width: 60%;
+	padding: 2px 0px;
+	margin: 0px 0 30px 0px;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+/*Desplegar el drowndown*/
+.ui-selectonemenu-panel .ui-selectonemenu-list {
+	padding: 0;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list-item {
+	font-family: 'Roboto Condensed', sans-serif;
+	white-space: normal;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 10px 5px 10px 15px;
+	font-size: 15px;
+	color: #6b6b6b;
+	text-transform: lowercase;
+	margin: 0;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list-item:first-letter {
+	text-transform: uppercase;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list-item.ui-state-highlight {
+	background: #f6f6f6;
+	font-weight: bold;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list-item.ui-state-hover {
+	background: #f6f6f6;
+}
+
+/* Opacidad de las modales */
+.ui-layout-container .ui-widget-overlay.ui-dialog-mask {
+	background: #000000;
+	opacity: 0.5 !important;
+}
+
+/*Mensaje de error*/
+.ui-messages-info, .ui-message-info {
+	color: #bc4859;
+	font-family: 'Roboto Condensed', sans-serif;
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ui-messages-info .ui-message-info-icon, .ui-message-info .ui-message-info-icon
+	{
+	display: none;
+}
+
+.ui-messages-info .ui-message-info-detail, .ui-message-info .ui-message-info-detail
+	{
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+/*DATOS VARIABLES DEL SISTEMA*/
+#dominioForm .ui-panelgrid .ui-widget-content:last-child {
+	display: none;
+}
+
+#dominioForm .ui-panelgrid .ui-widget-content .avaluos-tittle {
+	color: #008c44;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-bottom: 11px;
+	border-bottom: 1px solid;
+	display: inline-block;
+	line-height: 1;
+	float: left;
+	margin: 55px 0;
+}
+
+#dominioForm .ui-datatable-scrollable-theadclone tr {
+	display: none;
+}
+/*fin DATOS VARIABLES DEL SISTEMA*/
+/*Modal Rayo validador*/
+.avaluos-rayo-val .ui-dialog-titlebar {
+	width: 100%;
+	height: 60px;
+	display: inline-block;
+	background-color: #008c44;
+	vertical-align: top;
+	padding-left: 20px color: #ffffff;
+	font-size: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+	display: block;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	height: 40px;
+	text-align: center;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle::after
+	{
+	content: url("/avaluos/avaluos/resources/images/rayo.png");
+	top: -25px;
+	left: 15px;
+	visibility: visible;
+	width: auto;
+	height: auto;
+	position: absolute;
+}
+
+.avaluos-rayo-val .ui-dialog-title {
+	padding-left: 75px;
+}
+
+.avaluos-rayo-val .ui-panelgrid-cell span {
+	color: #008c44;
+	font-size: 20px;
+	padding-bottom: 10px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.avaluos-rayo-val .ui-dialog-title {
+	float: none;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar .ui-dialog-title {
+	padding: 0;
+	top: 0;
+	position: absolute;
+	margin: 0;
+	left: 25%;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar .ui-dialog-title .ui-widget-content:first-child
+	{
+	color: #ffffff;
+	font-size: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+	display: block;
+	background: transparent;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar .ui-dialog-title .ui-widget-content:last-child
+	{
+	color: #f5db66;
+	font-size: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+	display: block;
+	background: transparent;
+	font-weight: bold;
+}
+
+.avaluos-rayo-val .ui-dialog-titlebar .ui-dialog-title .ui-widget-content .ui-panelgrid-cell
+	{
+	padding: 0
+}
+
+.avaluos-rayo-val .ui-datalist-content .ui-datalist-item {
+	padding-bottom: 5px;
+	text-align: left;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 15px;
+	color: #707070;
+}
+
+.avaluos-rayo-val .ui-button {
+	background: #008c44;
+	border-radius: 25px;
+	border: 1px solid #008c44;
+}
+
+.avaluos-rayo-val .ui-button span {
+	color: #ffffff;
+	font-size: 18px;
+	text-align: center;
+	text-shadow: initial;
+	padding: 8px 20px;
+}
+
+.avaluos-rayo-val .ui-widget-content {
+	border: none;
+}
+
+.avaluos-rayo-val .ui-scrollpanel.ui-widget-content {
+	border: none;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.avaluos-rayo-val .ui-separator {
+	border: 1px solid #80c5a1;
+}
+
+.avaluos-rayo-val.ui-dialog.ui-widget-content {
+	width: 580px !important;
+	overflow: visible;
+}
+/*Fin Modal Rayo validador*/
+
+/*Ajustes Paquete 1 Valor Dominio*/
+#valorDominioForm .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 92%;
+}
+
+#valorDominioForm .ui-dialog.ui-widget-content .ui-dialog-content table tbody tr:first-child tr td:nth-child(2),
+	#valorDominioForm .ui-dialog.ui-widget-content .ui-dialog-content table tbody tr:first-child tr td:nth-child(3)
+	{
+	display: block;
+}
+
+#valorDominioForm .ui-dialog.ui-widget-content .ui-dialog-content table tbody tr:last-child table
+	{
+	text-align: center;
+	width: 100%;
+}
+
+#valorDominioForm .ui-dialog-content table:last-child td {
+	vertical-align: bottom;
+}
+/*fin ajustes*/
+/*Horas*/
+#horaForm .ui-widget-content {
+	border: none;
+	border-bottom: 1px dashed #e5e5e5;
+}
+
+#horaForm .ui-widget-content .avaluos-tittle {
+	color: #008c44;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-bottom: 11px;
+	border-bottom: 1px solid;
+	display: inline-block;
+	line-height: 1;
+	float: left;
+	margin-bottom: 55px;
+}
+
+#horaForm tbody.ui-datatable-data.ui-widget-content td:first-letter {
+	text-transform: uppercase;
+}
+
+#horaForm .ui-datatable-scrollable-body .ui-datatable-scrollable-theadclone
+	{
+	display: none;
+}
+
+#horaForm .avaluos-button-align {
+	width: 35%;
+	margin: 0 auto 20px;
+}
+
+#horaForm .avaluos-button-align td:first-child {
+	padding-right: 15px;
+}
+
+#horaForm .avaluos-button-align td:last-child {
+	padding-left: 15px;
+}
+/*Fin Horas*/
+/*Calendario*/
+#calendarioConsultarForm .avaluos-title-button .ui-panelgrid-cell {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+}
+
+#calendarioConsultarForm .avaluos-cta-gen-aceptar {
+	width: 100% !important;
+}
+
+#calendarioConsultarForm .avaluos-filtros {
+	width: 60% !important;
+	margin: 0 auto;
+}
+
+#calendarioConsultarForm .avaluos-filtros td {
+	vertical-align: top;
+}
+
+#calendarioConsultarForm .ui-datatable-scrollable-body .ui-datatable-scrollable-theadclone
+	{
+	display: none;
+}
+
+.avaluos-calendar .hasDatepicker {
+	margin-right: 40px;
+}
+
+#calendarioConsultarForm .ui-widget-content {
+	border: none;
+	border-bottom: 1px dashed #e5e5e5;
+}
+
+#calendarioConsultarForm .ui-widget-content .avaluos-tittle {
+	color: #008c44;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-bottom: 11px;
+	border-bottom: 1px solid;
+	display: inline-block;
+	line-height: 1;
+	float: left;
+	margin-bottom: 55px;
+}
+
+#calendarioConsultarForm .avaluos-cta-borrar {
+	background: transparent;
+	background-image: url("/avaluos/avaluos/resources/images/eliminar.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#calendarioConsultarForm .avaluos-cta-borrar:hover {
+	background-image:
+		url("/avaluos/avaluos/resources/images/eliminar_hover.png");
+}
+
+#calendarioForm .avaluos-gen-table .ui-datatable-scrollable-header-box {
+	display: none;
+}
+
+#calendarioForm .avaluos-gen-table .ui-datatable-scrollable-body {
+	overflow: hidden;
+}
+
+#calendarioForm .ui-datepicker-header {
+	background: #FFFFFF;
+	border: none;
+}
+
+#calendarioForm .avaluos-calendar  .ui-datepicker-inline {
+	padding: 0;
+}
+
+#calendarioForm .avaluos-calendar .ui-datepicker-title {
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif !important;
+	font-size: 15px;
+	text-transform: uppercase;
+	background: #ffffff;
+}
+
+#calendarioForm .ui-datepicker-calendar th span {
+	color: #585858;
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: bold;
+	text-align: center;
+	background: #ffffff;
+	border-bottom: none;
+}
+
+#calendarioForm .ui-datepicker-calendar .ui-datepicker-week-end span {
+	color: #66ba8f;
+	border: none;
+}
+
+#calendarioForm .ui-state-default {
+	cursor: pointer;
+	display: block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	border: 0;
+	margin: 0;
+	width: 100%;
+	padding: 5px;
+	color: #585858;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: center;
+	background: transparent;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#calendarioConsultarForm .ui-datatable.ui-widget.avaluos-gen-table td:nth-child(2)
+	{
+	color: #007f3e;
+	font-weight: bold;
+}
+
+#calendarioForm .ui-datepicker-prev .ui-icon {
+	background: url(../images/prev.png) no-repeat center center;
+}
+
+#calendarioForm .ui-datepicker-next .ui-icon {
+	background: url(../images/next.png) no-repeat center center;
+}
+
+#calendarioForm .ui-state-hover, #calendarioForm .ui-widget-content .ui-state-hover,
+	#calendarioForm .ui-widget-header .ui-state-hover {
+	color: #333333;
+	text-decoration: none;
+	background-color: transparent;
+	background-position: 0 0px;
+	-webkit-transition: background-position 0.1s linear;
+	-moz-transition: background-position 0.1s linear;
+	-ms-transition: background-position 0.1s linear;
+	-o-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
+}
+
+#calendarioForm .ui-state-default.ui-state-active {
+	background: #008c44;
+	border-radius: 90px;
+	color: #FFFFFF;
+	text-shadow: initial;
+}
+
+#calendarioForm .ui-datepicker-calendar {
+	margin: 0;
+}
+
+#calendarioForm .ui-datepicker-calendar th {
+	padding: 0;
+	background: #FFFFFF;
+}
+
+#calendarioForm .ui-datepicker-calendar tr {
+	padding: 0;
+	background: #ededed;
+}
+
+#calendarioForm  .ui-datatable-header {
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif !important;
+	font-size: 15px;
+	text-transform: uppercase;
+	background: #ffffff;
+}
+
+#calendarioForm .avaluos-gen-table table .ui-datatable-scrollable-theadclone
+	{
+	display: none;
+}
+
+#calendarioForm .ui-datatable-tablewrapper table {
+	overflow: hidden;
+}
+
+#calendarioForm .ui-datatable-empty-message {
+	background: #ededed;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 12px;
+}
+
+#calendarioForm .ui-datatable-data .ui-datatable-even td,
+	#calendarioForm .ui-datatable-data .ui-datatable-odd td {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #585858;
+	background-color: #e6e6e6;
+}
+
+#calendarioForm .ui-datatable-data .ui-datatable-even td:first-letter {
+	text-transform: uppercase;
+}
+
+#calendarioForm .ui-datatable-data .ui-datatable-even td button.avaluos-cta-borrar,
+	#calendarioForm .ui-datatable-odd td button.avaluos-cta-borrar {
+	background: none;
+	background-image:
+		url(/avaluos/avaluos/resources/images/icon-error-active.png);
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#calendarioForm .ui-datatable-data .ui-datatable-even td button.avaluos-cta-borrar:hover,
+	#calendarioForm .ui-datatable-odd td button.avaluos-cta-borrar:hover {
+	background-image:
+		url(/avaluos/avaluos/resources/images/icon-error-hover.png);
+}
+
+#calendarioForm .ui-state-default.avaluos-cta-gen-aceptar {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 35PX;
+}
+
+#calendarioForm .ui-state-default.avaluos-cta-gen-cancelar {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44;
+	margin-left: 15px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 25px;
+}
+
+#calendarioForm .avaluos-modal-formulario .avaluos-calendario-button {
+	margin: 0 auto;
+}
+
+#calendarioConsultarForm .ui-paginator {
+	background: #FFFFFF;
+	border: none;
+}
+
+#calendarioConsultarForm .ui-paginator-current {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #888888;
+	font-size: 18px;
+	width: 50px;
+}
+
+#calendarioConsultarForm .ui-paginator-bottom .ui-paginator-prev,
+	#calendarioConsultarForm .ui-paginator-bottom .ui-paginator-next {
+	background: #008c44;
+	width: 17px;
+	height: 25px;
+	opacity: 1;
+	position: relative;
+	border: none;
+	left: 4px;
+	top: 8px;
+	border-radius: 0;
+}
+
+#calendarioConsultarForm  .ui-paginator-bottom .ui-paginator-prev .ui-icon-seek-prev,
+	#calendarioConsultarForm  .ui-paginator-bottom .ui-paginator-next .ui-icon-seek-next
+	{
+	display: none;
+}
+
+#calendarioConsultarForm  .ui-paginator-bottom .ui-paginator-prev::after
+	{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent #ffffff transparent transparent;
+	right: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#calendarioConsultarForm  .ui-paginator-bottom .ui-paginator-next::after
+	{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent transparent transparent #ffffff;
+	left: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+/*Fin Calendario*/
+
+/***** informe avaluo comercial ****/
+#consultarForm {
+	width: 1224px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	font-size: 25px;
+	border-bottom: 1px solid #fff;
+	margin-top: 30px;
+}
+
+#consultarForm td {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	color: #7f7f7f;
+	margin-top: 22px;
+}
+
+#consultarForm .ui-state-default.avaluos-dropdown {
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	border-radius: 0;
+	width: 225px;
+	min-width: 225px !important;
+	margin-right: 20px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#consultarForm .ui-state-default.avaluos-dropdown label.ui-selectonemenu-label
+	{
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	margin-bottom: 0px;
+	width: auto;
+	padding-left: 12px;
+	border: none;
+	box-shadow: initial;
+	text-transform: lowercase;
+	height: 29px;
+	line-height: 25px;
+}
+
+#consultarForm .ui-state-default.avaluos-dropdown .ui-corner-right {
+	background: #e8e8e8;
+	border: none;
+	border-radius: 0;
+	padding: 0px 15px;
+}
+
+#consultarForm .ui-state-default.avaluos-dropdown .ui-corner-right .ui-icon
+	{
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	left: 18px;
+	top: 8px;
+	border: 2px solid #018c45;
+	border-top: none;
+	border-right: none;
+	background: transparent;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	z-index: 1;
+}
+
+#consultarForm .ui-inputtext {
+	border: 1px solid #e6e6e6;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 225px;
+	margin-right: 20px;
+}
+
+#consultarForm .avaluos-calendar .hasDatepicker {
+	margin-right: 0px;
+}
+
+#consultarForm .ui-inputtext {
+	width: 83%;
+	margin-right: 0px;
+	height: 29px;
+}
+
+#consultarForm .ui-widget-content .ui-panelgrid-cell .avaluos-tittle {
+	color: #008c44;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-bottom: 11px;
+	border-bottom: 1px solid;
+	display: inline-block;
+	line-height: 1;
+	float: left;
+	margin-bottom: 30px;
+}
+
+#consultarForm .ui-widget-content .ui-panelgrid-cell .avaluos-subtittle
+	{
+	font-size: 18px;
+	color: #7f7f7f;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-bottom: 11px;
+	display: inline-block;
+	line-height: 1;
+	float: left;
+	margin-bottom: 30px;
+}
+
+#consultarForm .ui-widget-content .ui-panelgrid-cell {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #7f7f7f;
+	margin-top: 22px;
+	padding: 0;
+}
+
+#consultarForm .ui-separator {
+	border-top-color: #008c44;
+	border-bottom: none;
+}
+
+#consultarForm .ui-widget-content table td {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	color: #7f7f7f;
+	margin-top: 22px;
+	vertical-align: top;
+}
+
+#consultarForm .ui-datatable-header table td {
+	position: relative;
+	width: 9%;
+	text-align: left;
+	padding: 15px 0;
+	font-size: 16px;
+}
+
+#consultarForm .ui-datatable-header table td.avaluos-informe-ancho {
+	width: 50%;
+	padding-left: 22px;
+}
+
+#consultarForm .ui-datatable-header table td .avaluos-favorable,
+	#consultarForm .ui-datatable-header table td .avaluos-desfavorable,
+	#consultarForm .ui-datatable-header table td .avaluos-sin-calificar {
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	right: 15px;
+	border-radius: 2px;
+}
+
+#consultarForm .ui-datatable-header table td .avaluos-favorable:after,
+	#consultarForm .ui-datatable-header table td .avaluos-desfavorable:after,
+	#consultarForm .ui-datatable-header table td .avaluos-sin-calificar:after
+	{
+	content: "";
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	border: 1px solid #7c7c7c;
+	border-radius: 2px;
+}
+
+#consultarForm .ui-datatable-header table td .avaluos-favorable {
+	background: #008c44;
+}
+
+#consultarForm .ui-datatable-header table td .avaluos-desfavorable {
+	background: #ffdc5d;
+}
+
+#consultarForm .ui-datatable-header table td .avaluos-sin-calificar {
+	background: #808080;
+}
+
+#consultarForm .ui-datatable-header.ui-widget-header.ui-corner-top {
+	width: 100% !important;
+	padding: 0;
+	border: none;
+}
+
+#consultarForm .ui-datatable-header.ui-widget-header.ui-corner-top .esri-basemap-gallery__item img
+	{
+	width: auto;
+	height: auto;
+}
+
+#consultarForm img {
+	display: block;
+}
+
+#consultarForm .ui-datatable-header.ui-widget-header.ui-corner-top label
+	{
+	font-weight: normal;
+}
+
+#consultarForm .ui-chkbox.avaluos-checkbox {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#consultarForm  .ui-button.avaluos-add-row {
+	display: block;
+	width: 170px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	background: #ffffff;
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: left;
+	border-radius: 25px;
+	text-transform: uppercase;
+	border: 1px solid #008c44;
+	position: relative;
+	left: 110%;
+}
+
+#consultarForm .ui-button.avaluos-add-row.ui-state-hover {
+	color: #ffffff;
+	background-color: #008c44;
+}
+
+#consultarForm  .ui-button.avaluos-add-row::after {
+	display: none;
+}
+
+#consultarForm span.ui-spinner a.ui-spinner-up span.ui-icon.ui-icon-triangle-1-n
+	{
+	background-image: none;
+	border-top: 2px solid #008c44;
+	border-right: 2px solid #008c44;
+	width: 10px;
+	height: 10px;
+	left: 8px;
+	top: 18px;
+	transform: rotate(-45deg);
+}
+
+#consultarForm .avaluos-input-txt input.ui-state-default {
+	border: 1px solid #e6e6e6;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	height: 29px;
+}
+
+#consultarForm .avaluos-valor-signo {
+	vertical-align: middle;
+	margin-top: 8px;
+	display: block;
+}
+
+#consultarForm span.ui-spinner a.ui-spinner-down span.ui-icon.ui-icon-triangle-1-s
+	{
+	background-image: none;
+	border-bottom: 2px solid #008c44;
+	border-right: 2px solid #008c44;
+	width: 10px;
+	height: 10px;
+	left: 8px;
+	top: 8px;
+	transform: rotate(45deg);
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-consultar::before
+	{
+	content: '';
+	background: url('/avaluos/avaluos/resources/images/consultar.png')
+		center no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 7%;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-consultar:hover::before
+	{
+	background: url('/avaluos/avaluos/resources/images/consultar-hover.png')
+		center no-repeat;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-reversar::before
+	{
+	content: '';
+	background: url('/avaluos/avaluos/resources/images/reversar.png') center
+		no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 7%;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-reversar:hover::before
+	{
+	background: url('/avaluos/avaluos/resources/images/reversar-hover.png')
+		center no-repeat;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-multiple::before
+	{
+	content: '';
+	background:
+		url('/avaluos/avaluos/resources/images/multiple-constructor.png')
+		center no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 7%;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-multiple:hover::before
+	{
+	background:
+		url('/avaluos/avaluos/resources/images/multiple-constructor-hover.png')
+		center no-repeat;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-transcribir::before
+	{
+	content: '';
+	background: url('/avaluos/avaluos/resources/images/transcribir.png')
+		center no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 7%;
+}
+
+.avaluos-ver-opt .ui-menu-list .ui-menuitem-link.avaluos-opt-transcribir:hover::before
+	{
+	background:
+		url('/avaluos/avaluos/resources/images/transcribir-hover.png') center
+		no-repeat;
+}
+
+#consultarForm .ui-datatable-scrollable-body button.avaluos-opt-impresion
+	{
+	background: url("/avaluos/avaluos/resources/images/opc2.png") center
+		no-repeat;
+	width: 54px;
+	height: 54px;
+	text-indent: -666em;
+	border: none;
+}
+
+#consultarForm .ui-state-highlight .ui-state-default.avaluos-opt-impresion
+	{
+	background: url("/avaluos/avaluos/resources/images/opc2-hover.png")
+		center no-repeat;
+	opacity: 1;
+}
+
+#ui-datepicker-div {
+	padding: 0;
+}
+
+#ui-datepicker-div .ui-datepicker-title {
+	color: #008c44;
+	font-family: 'Roboto Condensed', sans-serif !important;
+	font-size: 15px;
+	text-transform: uppercase;
+	background: #ffffff;
+}
+
+#ui-datepicker-div.ui-datepicker td {
+	padding: 5px;
+}
+
+#ui-datepicker-div  .ui-datepicker-calendar {
+	margin: 0;
+	padding: 0;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar th span {
+	color: #585858;
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: bold;
+	text-align: center;
+	background: #ffffff;
+}
+
+#ui-datepicker-div  .ui-datepicker-calendar .ui-datepicker-week-end span
+	{
+	color: #66ba8f;
+}
+
+#ui-datepicker-div  .ui-state-default {
+	cursor: pointer;
+	display: block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	border: 0;
+	margin: 0;
+	width: 90%;
+	padding: 5px;
+	color: #585858;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: center;
+	background: transparent;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#ui-datepicker-div  .ui-datepicker-prev .ui-icon {
+	background: url(../images/prev.png) no-repeat center center;
+}
+
+#ui-datepicker-div  .ui-datepicker-next .ui-icon {
+	background: url(../images/next.png) no-repeat center center;
+}
+
+#ui-datepicker-div .ui-datepicker-header {
+	background: #FFFFFF;
+	border: none;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar th {
+	padding: 0;
+	background: #FFFFFF;
+	padding-bottom: 10px;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar tr {
+	padding: 0;
+	background: #ededed;
+}
+
+#ui-datepicker-div .ui-state-default.ui-state-active {
+	background: #008c44;
+	border-radius: 20px;
+	color: #FFFFFF;
+	text-shadow: initial;
+}
+
+#ui-datepicker-div  .ui-state-hover, #ui-datepicker-div  .ui-widget-content .ui-state-hover,
+	#ui-datepicker-div  .ui-widget-header .ui-state-hover {
+	color: #333333;
+	text-decoration: none;
+	background-color: transparent;
+	background-position: 0 0px;
+	-webkit-transition: background-position 0.1s linear;
+	-moz-transition: background-position 0.1s linear;
+	-ms-transition: background-position 0.1s linear;
+	-o-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
+}
+
+#consultarForm .avaluos-calendario-add .ui-datepicker-trigger.ui-button
+	{
+	background: #f0f0f0;
+	border-color: transparent;
+	border-radius: 0;
+	height: 39px;
+	border: 1px solid #e6e6e6;
+}
+
+#consultarForm .avaluos-calendario-add .ui-datepicker-trigger.ui-button .ui-icon-calendar
+	{
+	background-image:
+		url('/avaluos/avaluos/resources/images/calendar-icon.png');
+	background-position: center;
+	width: 25px;
+	height: 25px;
+	left: 40%;
+	top: 35%;
+}
+
+#consultarForm .avaluos-calendario-add .ui-inputfield {
+	border: 1px solid #e6e6e6;
+	color: #008c44;
+	height: 29px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 16px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-right: 0;
+	width: 66px;
+}
+
+#consultarForm .ui-chkbox.avaluos-checkbox .ui-chkbox-box {
+	background: none;
+	border: 1px solid #BBBBBB;
+	vertical-align: top;
+}
+
+#consultarForm .ui-chkbox.avaluos-checkbox .ui-state-active .ui-icon {
+	background-image: url('/avaluos/avaluos/resources/images/checked.png');
+	background-position: center;
+}
+
+#consultarForm .ui-widget-content  .ui-button-icon-only.avaluos-cta-gen-aceptar
+	{
+	background: transparent;
+	background-image:
+		url("/avaluos/avaluos/resources/images/agregar-hover.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 28px;
+	height: 27px;
+	border-radius: 0px;
+	top: 5px;
+}
+
+#consultarForm .ui-widget-content .ui-icon-extlink {
+	display: none;
+}
+
+#consultarForm  .avaluos-cta-informe {
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#consultarForm .avaluos-cta-informe {
+	width: auto !important;
+}
+
+#consultarForm  .avaluos-cta-informe button {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	margin-right: 20px;
+	margin-left: 30px;
+}
+
+#peritoConsultaForm .avaluos-gen-table {
+	margin-top: 10px;
+}
+
+#peritoConsultaForm .ui-state-default {
+	background: #f3f3f3;
+	color: #007f3e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: none;
+	border: none;
+	border-right: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	font-size: 16px;
+	padding: 5px 0;
+	height: 51px;
+	padding: 0px 15px;
+}
+
+#peritoConsultaForm .ui-dialog-content .ui-inputtext {
+	border: 1px solid #e6e6e6;
+	color: #888888;
+	height: 30px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: normal;
+	text-transform: capitalize;
+	font-size: 15px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#peritoConsultaForm  .avaluos-cta-gen-aceptar {
+	background: transparent;
+	background-image:
+		url("/avaluos/avaluos/resources/images/buscar-perito.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 28px;
+	height: 27px;
+	border-radius: 0px;
+}
+
+#peritoConsultaForm .avaluos-modal-formulario .ui-datatable-data .ui-datatable-empty-message
+	{
+	width: 330px !important;
+	display: block;
+	border: none;
+}
+
+#peritoConsultaForm .avaluos-modal-formulario .ui-datatable-data .ui-datatable-empty-message td
+	{
+	border: none;
+}
+
+#peritoConsultaForm  .avaluos-cta-gen-aceptar:hover {
+	background-image:
+		url("/avaluos/avaluos/resources/images/buscar-perito-hover.png");
+}
+
+#peritoConsultaForm  .avaluos-cta-gen-aceptar .ui-icon-search {
+	display: none;
+}
+
+#peritoConsultaForm  .ui-datatable-data .ui-widget-content td {
+	text-align: center;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 15px !important;
+	color: #888888;
+	height: 35px;
+	text-transform: lowercase;
+}
+
+#peritoConsultaForm  .ui-datatable-data .ui-widget-content td:first-letter
+	{
+	text-transform: uppercase;
+}
+
+#peritoConsultaForm .ui-paginator {
+	margin-top: 30px;
+	background: #FFFFFF;
+	border: none;
+}
+
+#peritoConsultaForm .ui-paginator-bottom .ui-paginator-prev,
+	#peritoConsultaForm .ui-paginator-bottom .ui-paginator-next {
+	background: #008c44;
+	width: 17px;
+	height: 25px;
+	opacity: 1;
+	position: relative;
+	border: none;
+	left: 0;
+	top: 5px;
+	border-radius: 0;
+}
+
+#peritoConsultaForm .ui-paginator-bottom .ui-paginator-current {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #888888;
+	font-size: 18px;
+}
+
+#peritoConsultaForm .ui-paginator-bottom .ui-paginator-prev::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent #ffffff transparent transparent;
+	right: 13px;
+	top: 5px;
+	opacity: 0.5;
+}
+
+#peritoConsultaForm .ui-paginator-bottom .ui-paginator-next::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent transparent transparent #ffffff;
+	left: 13px;
+	top: 5px;
+	opacity: 0.5;
+}
+
+#peritoConsultaForm .ui-paginator-bottom .ui-paginator-prev .ui-icon-seek-prev,
+	#peritoConsultaForm .ui-paginator-bottom .ui-paginator-next .ui-icon-seek-next
+	{
+	display: none;
+}
+
+#consultarForm .avaluos-gen-table table:first-child {
+	/*background: #f4f5f6;*/
+	height: 64px;
+	border-bottom: 4px solid #ffffff;
+	border-top: 6px solid #ffffff;
+	padding-top: 19px;
+}
+
+#consultarForm .ui-panelgrid-cell .ui-panelgrid button.ui-button-text-only.avaluos-cta-gen-aceptar
+	{
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	margin-right: 20px;
+	margin-left: 30px;
+	padding: 0 10px;
+	left: 180px;
+}
+
+#consultarForm table .ui-widget-content table.ui-panelgrid .ui-widget-content td.ui-panelgrid-cell:last-child
+	{
+	text-align: center;
+}
+
+#consultarForm  .avaluos-gen-table .ui-datatable-header {
+	padding: 0;
+}
+
+#consultarForm .ui-paginator, #consultarForm .ui-datatable-scrollable-header,
+	#consultarForm .ui-datatable-scrollable-body, #consultarForm .ui-datatable-scrollable-footer
+	{
+	width: 1224px !important;
+}
+
+#consultarForm .ui-widget-content {
+	border: none;
+}
+
+#consultarForm .ui-datatable-scrollable-header-box th {
+	background: #f3f3f3;
+	color: #007f3e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: none !important;
+	border: none;
+	border-right: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	font-size: 16px;
+	padding: 5px 0;
+	height: 51px;
+	border-radius: 0px;
+	width: 165px !important;
+}
+
+#consultarForm .ui-datatable-scrollable-header-box table td,
+	#consultarForm .ui-datatable-scrollable-header-box table th,
+	#consultarForm .ui-datatable-scrollable-body table td, #consultarForm .ui-datatable-scrollable-body table th
+	{
+	width: 180px !important;
+	padding: 10px !important;
+	text-align: center;
+	box-sizing: border-box;
+	overflow-wrap: break-word;
+	height: 66px !important;
+}
+
+#consultarForm .ui-datatable-scrollable-header-box table td:first-child,
+	#consultarForm .ui-datatable-scrollable-header-box table th:first-child,
+	#consultarForm .ui-datatable-scrollable-body table td:first-child,
+	#consultarForm .ui-datatable-scrollable-body table th:first-child {
+	width: 60px !important;
+}
+
+#consultarForm .ui-datatable-scrollable-header-box table td:nth-child(2),
+	#consultarForm .ui-datatable-scrollable-header-box table th:nth-child(2),
+	#consultarForm .ui-datatable-scrollable-body table td:nth-child(2),
+	#consultarForm .ui-datatable-scrollable-body table th:nth-child(2) {
+	width: 65px !important;
+}
+
+#consultarForm .ui-datatable-scrollable-body table td {
+	text-transform: lowercase;
+	vertical-align: middle;
+}
+
+#consultarForm .ui-datatable-scrollable-body table td:first-letter {
+	text-transform: uppercase;
+}
+
+#consultarForm  .ui-datatable-scrollable-theadclone {
+	display: none;
+}
+
+#consultarForm  .ui-datatable-scrollable-body .avaluos-ver-opt {
+	background: url(/avaluos/avaluos/resources/images/option.png) center
+		center no-repeat;
+	width: 100%;
+	text-indent: -666em;
+	border: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#consultarForm .ui-datatable-scrollable-footer {
+	display: none;
+}
+
+#consultarForm  .ui-datatable-scrollable-body .avaluos-ver-opt.ui-state-hover
+	{
+	background: url(/avaluos/avaluos/resources/images/option-hover.png)
+		center center no-repeat;
+}
+
+#consultarForm  .ui-datatable-scrollable-body .ui-icon-gear {
+	display: none;
+}
+
+#consultarForm  .ui-state-highlight, .ui-widget-content .ui-state-highlight
+	{
+	background-color: #F4DA68;
+	background-image: -moz-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F4DA68),
+		to(#F4DA68));
+	background-image: -webkit-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: -o-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: linear-gradient(to bottom, #F4DA68, #F4DA68);
+}
+
+#consultarForm .ui-chkbox .ui-chkbox-box {
+	background: none;
+	border: 1px solid #BBBBBB;
+	vertical-align: top;
+}
+
+#consultarForm .ui-state-highlight .ui-state-default.avaluos-ver-opt {
+	background: url(/avaluos/avaluos/resources/images/option-hover.png)
+		center center no-repeat;
+}
+
+#consultarForm .ui-state-active .ui-icon {
+	background-image: url('/avaluos/avaluos/resources/images/checked.png');
+	background-position: left;
+}
+
+#consultarForm button.avaluos-btn-mostrar-filtro {
+	display: block;
+	width: 175px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: left;
+	border-radius: 25px;
+	text-transform: uppercase;
+	border: 1px solid #008c44;
+	position: relative;
+	left: 107%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#consultarForm button.avaluos-btn-mostrar-filtro.ui-state-hover {
+	color: #008c44;
+	background: #ffffff;
+}
+
+#consultarForm button.avaluos-cta-mapa {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	margin-top: 30px;
+}
+
+#consultarForm .avaluos-option-bar {
+	width: 100%;
+	background: red;
+	height: 82px;
+	background-color: #f4f5f6;
+	border-top: 1px solid #dbdbdb;
+}
+
+#consultarForm .avaluos-option-bar tr td:first-child::after {
+	background: transparent;
+}
+
+#consultarForm .avaluos-option-bar tr {
+	background-color: #f4f5f6;
+}
+
+#consultarForm .avaluos-option-bar td {
+	text-align: center;
+	position: relative;
+	padding-top: 10px !important;
+}
+
+#consultarForm .avaluos-option-bar td:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	background: #dbdbdb;
+	left: 0px;
+	width: 1px;
+	height: 65px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-option-bar, #consultarForm button.avaluos-imprimir,
+	#consultarForm button.avaluos-replicar, #consultarForm button.avaluos-copia,
+	#consultarForm button.avaluos-excel, #consultarForm button.avaluos-pdf
+	{
+	color: #797979;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	border: none;
+	background: transparent;
+	position: relative;
+	padding-top: 40px;
+}
+
+#consultarForm button.avaluos-option-bar:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc1.png) center
+		no-repeat;
+	left: 67px;
+	width: 27px;
+	height: 27px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-imprimir:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc2.png) center
+		no-repeat;
+	left: 35px;
+	width: 32px;
+	height: 30px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-replicar:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc3.png) center
+		no-repeat;
+	left: 43px;
+	width: 31px;
+	height: 34px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-copia:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc4.png) center
+		no-repeat;
+	left: 70px;
+	width: 30px;
+	height: 30px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-excel:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc5.png) center
+		no-repeat;
+	left: 65px;
+	width: 24px;
+	height: 30px;
+	background-size: contain;
+}
+
+#consultarForm button.avaluos-pdf:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	background: url(/avaluos/avaluos/resources/images/opc6.png) center
+		no-repeat;
+	left: 55px;
+	width: 23px;
+	height: 30px;
+	background-size: contain;
+}
+
+#consultarForm .ui-paginator {
+	background: #FFFFFF;
+	border: none;
+	margin-top: 40px;
+}
+
+#consultarForm .ui-paginator .ui-paginator-prev, #consultarForm .ui-paginator .ui-paginator-next
+	{
+	background: #008c44;
+	width: 17px;
+	height: 25px;
+	opacity: 1;
+	position: relative;
+	border: none;
+	left: -1px;
+	top: 8px;
+	border-radius: 0;
+}
+
+#consultarForm .ui-paginator .ui-paginator-prev .ui-icon-seek-prev,
+	#consultarForm .ui-paginator .ui-paginator-next .ui-icon-seek-next {
+	display: none;
+}
+
+#consultarForm .ui-paginator .ui-paginator-current {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #888888;
+	font-size: 18px;
+}
+
+#consultarForm .ui-paginator .ui-paginator-prev::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent #ffffff transparent transparent;
+	right: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#consultarForm .ui-paginator .ui-paginator-next::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent transparent transparent #ffffff;
+	left: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#consultarForm .ui-spinner.avaluos-input-txt {
+	width: 128px;
+}
+
+#transcribirForm .avaluos-modal-formulario .ui-widget.sinBorde .ui-panelgrid-cell td .avaluos-input-txt
+	{
+	width: 50px;
+	min-width: 50px;
+}
+
+#transcribirForm .ui-panelgrid-even:first-child td:last-child .avaluos-dropdown
+	{
+	width: 257px;
+	min-width: 257px !important;
+	margin: 0;
+}
+
+#transcribirForm .avaluos-modal-formulario .ui-dialog-content .ui-state-default.avaluos-dropdown
+	{
+	width: 160px;
+	min-width: 160px !important;
+}
+
+#transcribirForm .avaluos-modal-formulario .avaluos-calendar .ui-inputfield
+	{
+	border: 1px solid #e6e6e6;
+	color: #008c44;
+	height: 30px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 230px;
+	margin: 0;
+}
+
+#transcribirForm .ui-datepicker-trigger.ui-button {
+	background: #f0f0f0;
+	border-color: transparent;
+	border-radius: 0;
+	height: 39px;
+	border: 1px solid #e6e6e6;
+}
+
+#transcribirForm  .ui-datepicker-trigger.ui-button .ui-icon-calendar {
+	background-image:
+		url('/avaluos/avaluos/resources/images/calendar-icon.png');
+	background-position: center;
+	width: 25px;
+	height: 25px;
+	left: 36%;
+	top: 35%;
+}
+
+#transcribirForm .avaluos-modal-formulario .ui-dialog-content .ui-inputtext
+	{
+	width: 268px;
+}
+
+#transcribirForm .avaluos-modal-formulario .avaluos-cta-gen-aceptar,
+	#transcribirForm .avaluos-modal-formulario .avaluos-cta-cancelar {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 60%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#transcribirForm .avaluos-modal-formulario .avaluos-cta-cancelar {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44;
+}
+
+#transcribirForm .avaluos-modal-formulario  .ui-panelgrid-even:last-child
+	{
+	text-align: center;
+}
+
+#transcribirForm .avaluos-modal-formulario .avaluos-checkbox .ui-chkbox-box
+	{
+	background: none;
+	border: 1px solid #BBBBBB;
+	vertical-align: top;
+	margin-right: 15px;
+}
+
+#transcribirForm .avaluos-modal-formulario .avaluos-checkbox .ui-state-active .ui-icon
+	{
+	background-image: url('/avaluos/avaluos/resources/images/checked.png');
+	background-position: center;
+}
+
+#transcribirForm .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 93.5%;
+}
+
+#eliminarForm .avaluos-modal-formulario {
+	width: 570px !important;
+}
+
+#eliminarForm  .ui-panelgrid {
+	width: 100%;
+}
+
+#eliminarForm .ui-panelgrid-cell .ui-separator {
+	border-color: #008c44;
+	margin-bottom: 30px;
+	border: 1px solid #008c44;
+}
+
+#eliminarForm  .ui-selectoneradio .ui-radiobutton .ui-radiobutton-box {
+	background: none;
+	border: 1px solid #BBBBBB;
+	vertical-align: top;
+	border-radius: 0px;
+	padding: 1px;
+}
+
+#eliminarForm .ui-selectoneradio .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-radiobutton-icon
+	{
+	background-image: url('/avaluos/avaluos/resources/images/checked.png');
+	background-position: center;
+}
+
+#eliminarForm .ui-widget-content label {
+	margin: 0;
+}
+
+#eliminarForm .ui-selectoneradio td {
+	padding-bottom: 15px;
+}
+
+#eliminarForm .ui-radiobutton {
+	margin-right: 20px;
+}
+
+#eliminarForm .ui-dialog-content .avaluos-cta-gen-aceptar, #eliminarForm .ui-dialog-content .avaluos-cta-borrar
+	{
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 80%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#eliminarForm .ui-dialog-content .avaluos-cta-gen-aceptar {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44;
+	width: 95%;
+}
+
+#constructorForm .ui-dialog-content {
+	padding: 25px;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 95.6%;
+}
+
+#constructorForm .ui-dialog-content tr:first-child {
+	display: inline-block;
+}
+
+#constructorForm .avaluos-gen-table .ui-datatable-scrollable-header th {
+	width: auto !important;
+	padding: 0px !important;
+	text-align: center;
+	box-sizing: border-box;
+	overflow-wrap: break-word;
+	background: #f3f3f3;
+	color: #007f3e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-bottom: none !important;
+	border: none;
+	border-right: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	border-radius: 0px;
+	box-sizing: border-box;
+	height: 50px;
+}
+
+#constructorForm .avaluos-gen-table .ui-datatable-scrollable-header th span
+	{
+	width: 200px;
+	display: block;
+}
+
+#constructorForm .avaluos-gen-table .ui-datatable-scrollable-theadclone
+	{
+	display: none;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-datatable-data tr,
+	#constructorForm .avaluos-modal-formulario .ui-dialog-content tr:first-child
+	{
+	display: block;
+	border: none;
+	overflow-wrap: break-word;
+}
+
+#constructorForm .ui-datatable-empty-message td .avaluos-textoInicial-constructor
+	{
+	font-size: 16px;
+	margin-left: 20px;
+}
+
+#constructorForm .ui-datatable-data td {
+	width: 201px !important;
+	max-width: 201px;
+	border: none;
+	box-sizing: border-box;
+	padding: 0;
+	overflow-wrap: break-word;
+}
+
+#constructorForm .ui-datatable-empty-message td {
+	width: 100% !important;
+	max-width: 100%;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-dialog-content .ui-inputtext
+	{
+	width: 183px;
+}
+
+#constructorForm .ui-dialog-content tr.avaluos-tittle-multiple:first-child
+	{
+	border: 2px dashed #d7d7d7;
+	height: 45px;
+	background-color: #f1f1f1;
+	border-radius: 10px;
+	width: 55%;
+	margin-right: 19px;
+	padding: 10px 27px;
+	color: #008c44;
+	font-size: 25px;
+	font-family: 'Roboto Condensed', sans-serif;
+	margin-bottom: 30px;
+}
+
+#constructorForm .ui-dialog-content .avaluos-cta-gen-aceptar {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 20px;
+	margin: 20px 0;
+	left: 0%;
+}
+
+#constructorForm .ui-button.avaluos-add-row {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 20px;
+	margin: 0;
+	left: 60%;
+	margin: 20px 0;
+}
+
+#constructorForm .ui-button.avaluos-cta-cancelar {
+	background: #ffffff;
+	color: #008c44;
+	border: 1px solid #008c44;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	left: 100%;
+	margin: 20px 0;
+}
+
+#constructorForm .ui-button.avaluos-add-row:after {
+	display: none;
+}
+
+.modal-notificacion .ui-dialog-content .ui-outputlabel {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 15px;
+	color: #7f7f7f;
+	margin-top: 22px;
+	vertical-align: top;
+	line-height: 2;
+}
+
+.modal-notificacion .ui-dialog-content .avaluos-cta-gen-aceptar {
+	width: 125px;
+	margin-top: 30px;
+}
+
+.modal-notificacion .ui-dialog-content .avaluos-cta-gen-aceptar .ui-button-icon-left
+	{
+	display: none;
+}
+
+.modal-notificacion .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 93.5%;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-datatable table {
+	width: 280%;
+}
+
+#constructorForm .avaluos-modal-constructora  .avaluos-texto {
+	background: transparent;
+	border: 1px solid #cccccc;
+	left: 20%;
+	height: 40px;
+}
+
+#constructorForm .avaluos-modal-constructora  .avaluos-texto .ui-selectonemenu-trigger
+	{
+	background: #e8e8e8;
+	border: none;
+	border-radius: 0;
+	padding: 0px 15px;
+}
+
+#constructorForm .avaluos-modal-constructora  .avaluos-texto .ui-selectonemenu-trigger span.ui-icon
+	{
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	left: 18px;
+	top: 8px;
+	border: 2px solid #018c45;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: rgb(1, 140, 69);
+	border-right-color: rgb(1, 140, 69);
+	border-top: none;
+	border-right: none;
+	background: transparent;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	z-index: 1;
+}
+
+#constructorForm .avaluos-modal-constructora .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 89%;
+}
+
+#constructorForm .avaluos-modal-constructora ..ui-dialog .ui-dialog-content td label
+	{
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 15px;
+	display: inline-block;
+	margin: 0;
+	width: auto;
+	padding: 10px 5px;
+}
+
+#constructorForm .avaluos-modal-formulario  .ui-widget-content.ui-datatable-empty-message
+	{
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	color: #7f7f7f;
+	vertical-align: top;
+	margin: 30px 0;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-dialog-content .ui-state-default.avaluos-dropdown
+	{
+	box-sizing: border-box;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-datatable-scrollable-body .ui-selectonemenu-label
+	{
+	margin: 0;
+	padding: 9px 6px;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 12px;
+	width: 153px;
+	box-sizing: border-box;
+	|
+}
+
+#constructorForm .avaluos-modal-formulario .ui-datatable-scrollable-body button.avaluos-cta-borrar
+	{
+	background: transparent;
+	background-image: url("/avaluos/avaluos/resources/images/eliminar.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 28px;
+	height: 27px;
+	border-radius: 0px;
+}
+
+#constructorForm .avaluos-modal-formulario .ui-datatable-scrollable-body button.avaluos-cta-borrar.ui-state-hover
+	{
+	background-image:
+		url("/avaluos/avaluos/resources/images/eliminar_hover.png");
+}
+
+#errorForm .avaluos-notificacion .ui-widget-content .ui-scrollpanel {
+	display: block;
+	max-height: 110px !important;
+	font-size: 18px;
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #7f7f7f;
+	padding: 25px 0px 0px 0px !important;
+	border: none;
+}
+/*fin informe avaluo comercial*/
+
+/*Consulta de cargue masivo*/
+#cargueForm label.avaluos-texto-aclaratorio {
+	margin: 44px 0;
+	display: block;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+}
+
+#cargueForm .ui-corner-bottom tr .avaluos-subir-archivo {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#cargueForm .ui-panelgrid td {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	color: #6b6b6b;
+}
+
+#cargueForm .avaluos-input-txt {
+	border: 1px solid #e6e6e6;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 100px;
+	margin-right: 20px;
+	height: 29px;
+}
+
+#cargueForm .ui-button-icon-only.avaluos-cta-gen-aceptar {
+	background: transparent;
+	background-image:
+		url("/avaluos/avaluos/resources/images/agregar-hover.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 28px;
+	height: 27px;
+	border-radius: 0px;
+	margin-left: -15px;
+}
+
+#cargueForm .ui-button-icon-only.avaluos-limpiar-popup {
+	background: transparent;
+	background-image: url("/avaluos/avaluos/resources/images/eliminar.png");
+	text-indent: -999px;
+	background-repeat: no-repeat;
+	border: none;
+	background-position: center center;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 28px;
+	height: 27px;
+	border-radius: 0px;
+	margin-left: 0px;
+}
+
+#cargueForm .ui-button-icon-only.avaluos-limpiar-popup.ui-state-hover {
+	background-image:
+		url("/avaluos/avaluos/resources/images/eliminar_hover.png");
+}
+
+#cargueForm .ui-button-icon-only.avaluos-cta-gen-aceptar .ui-icon-extlink,
+	#cargueForm .ui-button-icon-only.avaluos-limpiar-popup .ui-icon {
+	display: none;
+}
+
+#cargueForm .avaluos-calendario-add {
+	margin-right: 20px;
+}
+
+#cargueForm .avaluos-calendario-add .hasDatepicker {
+	border: 1px solid #e6e6e6;
+	color: #008c44;
+	height: 29px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 16px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-right: 0;
+}
+
+#cargueForm .avaluos-calendario-add .ui-datepicker-trigger.ui-button {
+	background: #f0f0f0;
+	border-color: transparent;
+	border-radius: 0;
+	height: 39px;
+	border: 1px solid #e6e6e6;
+}
+
+#cargueForm .avaluos-calendario-add .ui-datepicker-trigger.ui-button .ui-icon-calendar
+	{
+	background-image:
+		url('/avaluos/avaluos/resources/images/calendar-icon.png');
+	background-position: center;
+	width: 25px;
+	height: 25px;
+	left: 40%;
+	top: 35%;
+}
+
+#cargueForm .ui-button-text-only.avaluos-cta-consulta {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 5px;
+	margin-left: 20px !important;
+}
+
+#cargueForm .ui-panel .ui-panel-content {
+	padding: 0;
+}
+
+#cargueForm  .ui-datatable-scrollable.avaluos-gen-table, #cargueForm .ui-panel.ui-widget-content
+	{
+	width: 1195px;
+	border: none;
+}
+
+#cargueForm th {
+	background: #f3f3f3;
+	color: #007f3e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: none !important;
+	border: none;
+	border-right: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	font-size: 16px;
+	padding: 5px 0;
+	height: 51px;
+	border-radius: 0px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	width: 200px !important;
+}
+
+#cargueForm .ui-datatable-selectable td, #cargueForm .ui-datatable-selectable th
+	{
+	width: 200px !important;
+}
+
+#cargueForm .ui-panelgrid-cell td {
+	text-align: left;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px !important;
+	color: #888888;
+	border-bottom: 1px dashed #e5e5e5 !important;
+	box-sizing: border-box;
+	padding: 0px;
+	border: none !important;
+	text-transform: lowercase;
+}
+
+#cargueForm td:first-letter {
+	text-transform: uppercase;
+}
+
+#cargueForm .ui-datatable-selectable td {
+	text-align: center;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px !important;
+	color: #888888;
+	border-bottom: 1px dashed #e5e5e5 !important;
+	box-sizing: border-box;
+	padding: 0px;
+	border: none !important;
+	text-transform: lowercase;
+	height: 60px;
+}
+
+#cargueForm .ui-datatable-selectable td:nth-child(3) {
+	color: #008c44;
+}
+
+#cargueForm .ui-datatable-scrollable-theadclone {
+	display: none;
+}
+
+#cargueForm  .ui-panel {
+	padding: 0;
+}
+
+#cargueForm .ui-helper-clearfix {
+	background: #008c44;
+	margin-top: 80px;
+	border-radius: initial;
+	position: relative;
+	padding: 15px 60px;
+}
+
+#cargueForm .ui-panel .ui-panel-title {
+	margin: 0px;
+}
+
+#cargueForm .ui-helper-clearfix .ui-panel-titlebar-icon {
+	border: 1px solid transparent;
+	position: absolute;
+	top: 35px;
+	left: 20px;
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 12px solid #FFFFFF;
+	background: transparent;
+}
+
+#cargueForm .ui-icon-minusthick {
+	display: none;
+}
+
+#cargueForm .ui-helper-clearfix .ui-panel-title td {
+	color: #ffffff;
+	font-size: 18px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+#cargueForm .ui-inputnumber .ui-inputfield {
+	border: 1px solid #e6e6e6;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: #FFFFFF;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 120px;
+	margin-right: 20px;
+	height: 29px;
+	margin-left: 40px;
+}
+
+#cargueForm  .avaluos-dropdown {
+	border: 1px solid #e6e6e6;
+	color: #6b6b6b;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	padding-left: 12px;
+	vertical-align: top;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: #FFFFFF;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	width: 125px;
+	margin-right: 20px;
+	height: 37px;
+}
+
+#cargueForm  .ui-state-default.ui-corner-right {
+	background: #e8e8e8;
+	border: none;
+	border-radius: 0;
+	padding: 0px 15px;
+}
+
+#cargueForm  .ui-state-default.ui-corner-right .ui-icon {
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	left: 18px;
+	top: 8px;
+	border: 2px solid #018c45;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: rgb(1, 140, 69);
+	border-right-color: rgb(1, 140, 69);
+	border-top: none;
+	border-right: none;
+	background: transparent;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	z-index: 1;
+}
+
+#cargueForm  .avaluos-dropdown label {
+	margin-top: 5px;
+	border: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#cargueForm .ui-panel-titlebar .avaluos-cta-consulta {
+	background: #ffffff;
+	color: #008c44;
+	border-radius: 25px;
+	padding: 0 20px;
+}
+
+#cargueForm .ui-panel-titlebar .avaluos-cta-consulta:hover {
+	background-color: #008c44;
+	color: #ffffff;
+	border: 1px solid #ffffff;
+}
+
+#cargueForm .ui-state-highlight {
+	background-color: #F4DA68;
+	background-image: -moz-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F4DA68),
+		to(#F4DA68));
+	background-image: -webkit-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: -o-linear-gradient(top, #F4DA68, #F4DA68);
+	background-image: linear-gradient(to bottom, #F4DA68, #F4DA68);
+}
+
+#cargueForm .ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.avaluos-cta-gen-aceptar
+	{
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 40px;
+	border: 1px solid transparent;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	padding: 0 25px;
+}
+
+#cargueForm .ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.avaluos-cta-gen-aceptar span
+	{
+	margin: 0;
+}
+
+#cargueForm .avaluos-exportar-xls {
+	border-top: 1px solid #4e8b4a;
+	display: block;
+	padding: 27px 0 27px 63px;
+	background: #f3f3f3;
+}
+
+#cargueForm .ui-panel.ui-widget-content .ui-panel-content td {
+	vertical-align: top;
+	padding: 15px 0;
+}
+
+#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table th:nth-child(1),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table th:nth-child(2),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table th:nth-child(5),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table td:nth-child(1),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table td:nth-child(2),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table td:nth-child(5)
+	{
+	width: 80px !important;
+	box-sizing: border-box;
+}
+
+#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table th:nth-child(3),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table th:nth-child(4),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table td:nth-child(3),
+	#cargueForm .ui-panel.ui-widget-content .ui-panel-content .avaluos-gen-table td:nth-child(4)
+	{
+	width: 920px !important;
+	box-sizing: border-box;
+}
+
+#cargueForm ul.ui-tabs-nav {
+	padding: 0 12%;
+	height: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #4e8b4a;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-state-default {
+	width: 49%;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 25px;
+	text-transform: uppercase;
+	text-align: center;
+	border: none;
+	padding: 45px 0px;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-state-default a {
+	width: 90%;
+	color: #727272;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-state-default:hover {
+	background-color: transparent;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-state-default:first-child:after {
+	content: "";
+	width: 1px;
+	height: 90%;
+	background-color: #b7b7b7;
+	position: absolute;
+	top: 5%;
+	right: -1px;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-tabs-selected.ui-state-active a {
+	font-weight: bold;
+}
+
+#cargueForm ul.ui-tabs-nav .ui-tabs-selected.ui-state-active a:before {
+	content: "";
+	bottom: -4px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	position: absolute;
+	width: 175px;
+	border: 4px solid #008c44;
+	border-radius: 4px;
+}
+
+#cargueForm .ui-paginator {
+	background: #FFFFFF;
+	border: none;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: left;
+}
+
+#cargueForm .ui-paginator .ui-paginator-prev, #cargueForm .ui-paginator .ui-paginator-next
+	{
+	background: #008c44;
+	width: 17px;
+	height: 25px;
+	opacity: 1;
+	position: relative;
+	border: none;
+	left: 0;
+	top: 7px;
+	border-radius: 0;
+}
+
+#cargueForm .ui-paginator .ui-paginator-prev .ui-icon-seek-prev,
+	#cargueForm .ui-paginator .ui-paginator-next .ui-icon-seek-next {
+	display: none;
+}
+
+#cargueForm .ui-paginator .ui-paginator-prev:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent #ffffff transparent transparent;
+	right: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#cargueForm .ui-paginator .ui-paginator-next:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: transparent transparent transparent #ffffff;
+	left: 10px;
+	top: 6px;
+	opacity: 0.5;
+}
+
+#cargueForm .ui-paginator .ui-paginator-current {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #888888;
+	font-size: 18px;
+}
+
+#cargueForm td {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #7f7f7f;
+	margin-top: 22px;
+	padding: 0;
+	text-align: left;
+}
+
+#cargueForm .avaluos-exportar-xls label {
+	margin-left: 80px;
+	font-weight: bold;
+	margin-top: 10px;
+	vertical-align: middle;
+	display: block;
+}
+
+#cargueForm .avaluos-exportar-xls span {
+	margin-left: 20px;
+	margin-top: 10px;
+	vertical-align: middle;
+	display: block;
+}
+
+#cargueForm .ui-datatable-scrollable-body {
+	height: 400px !important;
+}
+
+#cargueForm .avaluos-gen-table  .ui-datatable-scrollable-body {
+	height: 500px !important;
+	background: #f3f3f3;
+}
+
+#cargueForm .avaluos-zona-cargando table:before {
+	content: '';
+	position: absolute;
+	top: 35%;
+	background: url(/avaluos/avaluos/resources/images/upload-icon.png)
+		center no-repeat;
+	left: 0;
+	width: 30%;
+	height: 30%;
+}
+
+#cargueForm  .avaluos-zona-cargando .ui-messages-error {
+	width: 260px;
+	position: relative;
+	left: 130px;
+	font-size: 15px;
+	line-height: 1;
+}
+/*Fin de cargue*/
+
+/* Empresas avaluadoras form  */
+#empresaForm button.avaluos-eliminar-carga {
+	height: auto !important;
+	width: auto !important;
+	border: 1px solid #D94659 !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 25px;
+	height: 40px !important;
+	padding: 0 40px;
+	background-color: transparent;
+	color: #D94659;
+	margin-top: 30px;
+}
+
+#empresaForm button.avaluos-eliminar-carga::after {
+	content: 'Eliminar';
+}
+
+#empresaForm button.avaluos-eliminar-carga:hover {
+	cursor: pointer;
+}
+
+#empresaForm button.avaluos-eliminar-carga span {
+	display: none;
+}
+
+#empresaForm .avaluos-label-carga {
+	text-indent: -999px;
+}
+/* Fin empresas avaluadoras */
+/* Empresas avaluadoras */
+#procedatosForm .avaluos-campos-consulta-procedato .ui-message-info {
+	font-size: 16px;
+	width: 100px;
+}
+
+#procedatosForm .avaluos-campos-consulta-procedato .ui-message-info:first-letter
+	{
+	text-transform: uppercase;
+}
+
+#procedatosForm th:last-child {
+	border: none;
+}
+
+#procedatosForm .ui-state-active .ui-icon {
+	background-image: url('/avaluos/avaluos/resources/images/checked.png');
+	background-position: center;
+}
+
+#procedatosForm.ui-chkbox .ui-chkbox-box {
+	background: none;
+	border: 1px solid #BBBBBB;
+	vertical-align: top;
+}
+
+#logProcedatoForm .avaluos-modal-formulario .ui-dialog-titlebar {
+	background-color: #008c44;
+	color: #ffffff;
+	font-size: 20px !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: lighter;
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	width: 91.1%;
+}
+
+#logProcedatoForm .avaluos-modal-formulario .ui-icon-closethick {
+	height: 56px;
+	right: -15px;
+}
+
+#logProcedatoForm .avaluos-modal-formulario .ui-dialog-content {
+	font-size: 20px !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #6b6b6b;
+}
+
+#logProcedatoForm .avaluos-modal-formulario .ui-separator {
+	background-color: #008c44;
+	border-bottom: none;
+}
+
+#logProcedatoForm .avaluos-modal-formulario .ui-widget-content {
+	font-size: 20px !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #6b6b6b;
+	text-align: left !important;
+	border: none;
+	padding: 20px 25px 20px 25px;
+}
+
+#logProcedatoForm  .ui-dialog-content .avaluos-cta-gen-aceptar {
+	width: 140px;
+	left: 35%;
+}
+
+#complementoForm .avaluos-zona-cargando {
+	background: #F4F4F4;
+	border-radius: 20px;
+	border: 2px dashed #e5e5e5;
+	position: relative;
+	padding: 25px 0px 0px 0px;
+}
+
+#complementoForm .avaluos-zona-cargando table.ui-widget .ui-widget-content
+	{
+	background: transparent;
+}
+
+#complementoForm  .avaluos-zona-cargando .ui-widget tr:first-child td {
+	font-size: 25px !important;
+	color: #008c44 !important;
+	border: none;
+}
+
+#complementoForm  .avaluos-zona-cargando .ui-fileupload-buttonbar,
+	#complementoForm  .avaluos-zona-cargando .ui-widget tr td {
+	border: none !important;
+	font-size: 25px;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-align: center;
+}
+
+#complementoForm  .avaluos-zona-cargando .ui-icon {
+	display: none;
+}
+
+#complementoForm  .avaluos-zona-cargando .ui-button-text-icon-left .ui-button-text
+	{
+	padding: 5px 0;
+}
+
+#complementoForm  .ui-fileupload-buttonbar {
+	position: relative;
+	background: none;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-bottom: none;
+	position: absolute;
+	bottom: -18px;
+	left: 30%;
+}
+
+#complementoForm .avaluos-zona-cargando table::before {
+	content: '';
+	position: absolute;
+	top: 24%;
+	background: url(/avaluos/avaluos/resources/images/upload-icon.png)
+		center no-repeat;
+	left: 0;
+	width: 30%;
+	height: 40%;
+}
+
+#complementoForm .avaluos-zona-cargando .ui-fileupload-cancel {
+	background: url(/avaluos/avaluos/resources/images/eliminar.png) center
+		no-repeat;
+	width: 40%;
+	text-indent: -666em;
+	border: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#complementoForm .avaluos-archivo-titulo {
+	position: absolute;
+	margin-top: 20px;
+}
+
+#complementoForm .ui-message-info {
+	position: absolute;
+	margin-top: 40px;
+}
+
+#complementoForm .avaluos-zona-cargando .ui-fileupload-content {
+	margin-top: 20px;
+	padding: 0;
+}
+
+#complementoForm .avaluos-zona-cargando .ui-progressbar .ui-progressbar-value.ui-widget-header
+	{
+	background-color: #008c44;
+	background-image: -moz-linear-gradient(top, #008c44, #008c44);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#008c44),
+		to(#008c44));
+	background-image: -webkit-linear-gradient(top, #008c44, #008c44);
+	background-image: -o-linear-gradient(top, #008c44, #008c44);
+	background-image: linear-gradient(top, #008c44, #008c44);
+	background-image: -ms-linear-gradient(top, #008c44, #008c44);
+}
+
+#complementoForm .ui-fileupload-buttonbar .ui-fileupload-choose {
+	background: #008c44;
+	color: #ffffff;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 25px;
+	text-transform: uppercase;
+	height: 30px;
+	border: 1px solid transparent;
+	text-shadow: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	-moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+	width: 190px;
+	font-weight: normal;
+}
+/* Fin empresas avaluadoras */
+
+/* Hack for ui-spinner up & down */
+#consultarForm a.ui-spinner-button {
+	background-color: #e8e8e8 !important;
+	border-radius: 0 !important;
+}
+
+#consultarForm span.ui-spinner a.ui-spinner-button {
+	background: #e8e8e8 !important;
+	border: none;
+	background-image: none;
+	box-shadow: none;
+	border-radius: 0;
+	width: 28px;
+}
+
+#consultarForm a.ui-spinner-button span.ui-button-text {
+	background-color: #e8e8e8 !important;
+}
+
+#confirmarForm\:j_idt51 .ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ui-draggable-handle
+	{
+	width: 96%;
+}
+
+#confirmarForm\:j_idt51 span.ui-icon-closethick {
+	right: 4px;
+}
+
+#confirmarForm\:j_idt51 .ui-confirmdialog-yes, #confirmarForm\:j_idt51 .ui-confirmdialog-no
+	{
+	width: 30%;
+}
+
+/* End hack */
+/***********************************/
+.ui-inputfield.ui-state-focus, .ui-widget-content .ui-inputfield.ui-state-focus,
+	.ui-widget-header .ui-inputfield.ui-state-focus, .ui-selectonemenu.ui-state-focus,
+	.ui-chkbox-box.ui-state-focus, .ui-radiobutton-box.ui-state-focus {
+	-moz-box-shadow: 0 0 10px #008c44 !important;
+	-webkit-box-shadow: 0 0 10px #008c44 !important;
+	box-shadow: 0 0 10px #008c44 !important;
+}
+
+#avaluoForm .ui-chkbox .ui-chkbox-box.ui-state-focus {
+	-moz-box-shadow: 0 0 10px #008c44;
+	-webkit-box-shadow: 0 0 10px #008c44;
+	box-shadow: 0 0 10px #008c44;
+}
+
+#avaluoForm .avaluos-table-inf-barrio .ui-inputtext.ui-state-focus,
+	#avaluoForm .avaluos-table-inf-barrio .ui-state-default.avaluos-dropdown.ui-state-focus,
+	#avaluoForm .avaluos-parrafo.ui-state-focus {
+	-moz-box-shadow: 0 0 10px #008c44;
+	-webkit-box-shadow: 0 0 10px #008c44;
+	box-shadow: 0 0 10px #008c44;
+}
+
+#encabezadoForm button.avaluos-cta-consulta:hover:after, #encabezadoForm button.avaluos-cta-nuevo:hover:after,
+	#encabezadoForm button.avaluos-rayo-activo:hover:after {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #008c44;
+	font-size: 15px;
+	text-indent: initial;
+	width: 100px;
+	position: absolute;
+	line-height: 1px;
+	height: 10px;
+	top: 60px;
+	left: -20px;
+}
+
+#encabezadoForm button.avaluos-cta-consulta:hover:after {
+	content: "Consultar";
+}
+
+#encabezadoForm button.avaluos-cta-nuevo:hover:after {
+	content: "Crear Avaluos";
+}
+
+#encabezadoForm button.avaluos-rayo-activo:hover:after {
+	content: "Validar";
+}
+
+.ui-layout-resizer-south-open {
+	z-index: -1 !important;
+}
+
+.avaluos-table-constructora .avaluos-select-constructora {
+	width: 25.5%;
+}
+
+.avaluos-table-constructora .avaluos-check-constructora {
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	padding-top: 37px;
+}
+
+.avaluos-table-estado-const .avaluos-select-estado {
+	width: 25%;
+}
+
+.avaluos-table-estado-const .avaluos-check-estados {
+	margin: 0;
+	padding: 0;
+	vertical-align: middle !important;
+	padding-top: 20px;
+}
+
+.avaluos-table-constructora .avaluos-check-constructora tr:first-child td:first-child,
+	.avaluos-table-estado-const .avaluos-check-estados tr:first-child td:first-child,
+	.avaluos-table-estado-const .avaluos-check-estados tr:first-child td:nth-child(3)
+	{
+	width: 30px;
+}
+
+.avaluos-table-estado-const .avaluos-check-estados .ui-selectoneradio tr:first-child td:nth-child(2)
+	{
+	width: 100px;
+}
+
+#consultarForm .avaluos-gen-table table:first-child tr:first-child table
+	{
+	background: #f4f5f6;
+}
+
+#consultarForm .avaluos-gen-table table:first-child tr:nth-child(3) td {
+	text-align: center;
+}
+
+#ui-datepicker-div .ui-state-default.ui-state-highlight {
+	background: #ffdd51;
+	border-radius: 20px;
+	color: #000000;
+	text-shadow: initial;
+	font-weight: bold;
+}
+
+#ui-datepicker-div .ui-state-default.ui-state-highlight.ui-state-active
+	{
+	background: #008c44;
+	border-radius: 20px;
+	color: #FFFFFF;
+	text-shadow: initial;
+}
+
+.avaluos-table-estado-const .avaluos-check-estados tr:first-child td:nth-child(2)
+	{
+	width: 645px;
+	vertical-align: middle !important;
+}
+
+.avaluos-table-estado-const .avaluos-check-estados tr:first-child td:last-child label
+	{
+	width: 80px;
+	margin-left: 5px;
+}
+
+.avaluos-table-estado-const .avaluos-check-estados tr:first-child td:nth-child(2) td:first-child
+	{
+	width: 24px;
+}
+
+#errorForm .avaluos-notificacion .ui-widget-content .ui-scrollpanel .ui-scrollpanel-content
+	{
+	padding: 0px !important;
+}
+
+#errorForm .avaluos-notificacion .ui-widget-content .ui-scrollpanel .ui-scrollpanel-content .ui-widget-content
+	{
+	border: none;
+	font-size: 18px;
+	color: #7f7f7f;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-align: left;
+}
+
+#avaluoForm .ui-state-focus .ui-icon {
+	background-image: url(/avaluos/avaluos/resources/images/checked.png);
+	background-position: center;
+}
+
+#avaluoForm .avaluos-table-dotacion-comunal .ui-spinner input {
+	width: 90px;
+}
+
+#constructorForm .avaluos-modal-constructora .ui-dialog-content .ui-selectonemenu
+	{
+	min-width: 280px !important;
+	left: 5%;
+}
+
+#constructorForm .avaluos-modal-constructora .ui-dialog-content .ui-selectonemenu .ui-selectonemenu-label
+	{
+	margin-bottom: 0;
+	padding: 0 0 0 5%;
+	height: 40px;
+	line-height: 40px;
+}
+
+#constructorForm .avaluos-modal-constructora .ui-dialog-content .avaluos-cta-gen-aceptar
+	{
+	margin: 20px 12px;
+}
+
+div#constructorForm\:codigoNombreConstructora_panel .ui-selectonemenu-items-wrapper
+	{
+	width: 307px !important;
+}
+
+#avaluoForm .avaluos-from-error .ui-inputtext {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .ui-selectonemenu.avaluos-texto.avaluos-from-error {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm span.avaluos-from-error.ui-spinner {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .avaluos-from-error.ui-chkbox-box {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .ui-radiobutton.ui-widget .avaluos-from-error.ui-radiobutton-box
+	{
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .avaluos-from-error.avaluos-dropdown {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm span.avaluos-from-error {
+	border: 0;
+}
+
+#avaluoForm .avaluos-from-error {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .avaluos-texto.avaluos-from-error {
+	border: 1px solid #bc4859;
+}
+
+#avaluoForm .avaluos-input-txt.avaluos-from-error {
+	border: 1px solid #bc4859;
+}
+/*********Fin************/

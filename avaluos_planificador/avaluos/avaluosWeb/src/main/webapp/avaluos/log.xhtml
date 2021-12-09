@@ -1,0 +1,43 @@
+<!-- 
+ * Pantalla para realizar el cargue masivo de aval�os, incluidos los de tipo
+ * constructor, el usuario carga los archivos comprimidos con los avaluos a cargar
+ * al sistema, tambien debe asociar un archivo comprimido con el registro
+ * fotografico para cada archivo con la informacin de los aval�os.
+ * @author Luis Contreras
+ * @version 1.0
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<script type="text/javascript">
+			function showStatus() {
+				PF('statusDialog').show();
+			}
+			function hideStatus() {
+				PF('statusDialog').hide();
+				confirmarDescarga();
+			}
+		</script>
+		<h:form id="logAvaluoForm">
+			<p:remoteCommand name="confirmarDescarga" update="errorForm" actionListener="#{logBean.confirmarDescarga}" />
+			<h:panelGrid>
+				<h:outputText value="#{etq.log_titulo}" styleClass="avaluos-tittle" />
+				<p:separator />
+				<p:dataTable value="#{logBean.logs}" styleClass="avaluos-gen-table" rowStyleClass="table-row-clear,table-row-dark" var="log" rows="1" scrollable="true">
+					<p:column headerText="#{etq.log_descargar}">
+						<p:commandButton styleClass="avaluos-cta-descargar" value="#{etq.log_descargar}" ajax="false" onclick="PrimeFaces.monitorDownload(showStatus, hideStatus)"
+							icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{logBean.file}" />
+						</p:commandButton>
+					</p:column>
+					<p:column headerText="#{etq.log_nombre}">
+						<h:outputText value="#{etq.log_log}" />
+					</p:column>
+					<p:column headerText="#{etq.log_descripcion}">
+						<h:outputText value="#{etq.log_descripcion_f}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

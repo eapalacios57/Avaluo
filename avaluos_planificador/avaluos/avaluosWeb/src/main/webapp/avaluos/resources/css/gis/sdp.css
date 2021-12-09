@@ -1,0 +1,408 @@
+/* Estilos personalizados SDP*/
+/*The image specified for the body is used to apply the gradient background to the entire page*/
+body {
+/*  background:url(../images/gray/body_bg.png) repeat-x #666;*/
+}
+#leftPane {
+  background-color:#EEE;
+}
+/*override claro background and other props*/
+#toolbarContainer .dijitToolbar {
+  background:url(../images/sdp/toolbar_bg.png) repeat-x #545454;
+}
+/*Measure toggle button*/
+.claro .dijitToolbar .dijitButtonNode:hover {
+  background:url(../images/sdp/sidebar_header_active_bg.png) repeat-x #CEE1EC;
+}
+/*Attribute Inspector button styling (delete buttons)*/
+.esriAttributeInspector div.atiButtons span.dijit span.dijitReset{
+  background:url(../images/sdp/toolbar_bg.png) repeat #545454;
+  color:#fff;
+  border: none;
+}
+.esriAttributeInspector div.atiButtons span.dijit span.dijitReset:hover{
+  background:url(../images/sdp/sidebar_header_active_bg.png) repeat-x #CEE1EC;
+  color:#000;
+}
+
+.claro .dijitToolbar .dijitToggleButtonChecked .dijitButtonNode {
+  background:url(../images/sdp/sidebar_header_active_bg.png) repeat-x #CEE1EC;
+}
+.dojoxFloatingPaneTitle{
+  background:url(../images/sdp/toolbar_bg.png) repeat-x #545454;
+  height: 26px;
+}
+
+.dojoxFloatingPane {
+background-color: #fff;
+position: relative;
+border: 1px solid #4D4D4D;
+overflow: hidden;
+-webkit-box-shadow: 0px 5px 10px #adadad;
+}
+
+
+/*slider background*/
+/*.esriSimpleSliderVertical .esriSimpleSliderIncrementButton ,.esriSimpleSliderVertical .esriSimpleSliderDecrementButton  {
+  background:url(../images/sdp/toolbar_bg.png) repeat-x #545454;
+  border:solid 1px #545454;
+}*/
+/*Identity Manager Dialog*/
+.claro .dijitDialogTitleBar {
+  background:url(../images/sdp/toolbar_bg.png) repeat-x #545454;
+  color:#fff;
+  border: solid 1px #545454;
+}
+.claro .dijitDialog {
+    border: 1px solid #808080;
+}
+
+.claro .dijitDialogPaneActionBar .dijitButtonNode{
+  background-image:none;
+  background:url(../images/sdp/sidebar_header_active_bg.png) repeat-x #CEE1EC;
+}
+
+.esriPopup .pointer.top {
+  background-position: 0 -580px;
+}
+.esriPopup .pointer.topLeft {
+  left: 0px; top: -43px; background-position: 0 -470px; width: 51px; height: 43px;
+}
+
+.esriPopup .pointer.topRight {
+  right: 0px; top: -43px; background-position: 0 -652px; width: 51px; height: 43px;
+}
+.esriBookmarkItem:hover{
+  background-color:#CEE1EC;
+}
+/*servicios*/
+.subitems {
+    color: #5B5B5F;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    text-decoration: none;
+}
+.list_sinu li {
+    list-style-image: url("../images/sdp/list_icon_01.png");
+    margin: 0;
+    padding: 0 0 5px;
+}
+
+
+a:link, a:visited {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+    color: #0087A7;
+}
+a:hover, a:active {
+    color: #5F9E28;
+}
+
+
+/*botones*/
+.btnSubmit {
+    outline:none;
+    background: #0ab4dc;
+    /* for IE */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#CEE3F6' , endColorstr='#0087a7');
+    /* for webkit browsers*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#CEE3F6), to(#0087a7));
+    /* for firefox 3.6+ */
+    background: -moz-linear-gradient(top, #CEE3F6, #0087a7);
+    padding:3px 10px 3px 10px;
+    color:#5B5B5F;
+    font-size:14px;
+    text-shadow: 0px -1px 0 #004151; 
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    box-shadow: inset 2px 2px 3px 0 #b4e7f3;
+    -moz-box-shadow: inset 2px 2px 3px 0 #b4e7f3;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #b4e7f3;
+    -o-box-shadow: inset 2px 2px 3px 0 #b4e7f3;
+    border:1px solid #004b5d; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.btnSubmit:hover, .btnSubmit:focus {
+    background: #BBD89A;
+    /* for IE */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E0FCC3' , endColorstr='#7EB24D');
+    /* for webkit browsers*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#E0FCC3), to(#7EB24D));
+    /* for firefox 3.6+ */
+    background: -moz-linear-gradient(top, #E0FCC3, #7EB24D);
+    color: #32540E; 
+    text-shadow: 0px 1px 0 #FFF;
+    box-shadow:  inset 2px 2px 3px 0 #86AD4D;
+    -moz-box-shadow: inset 2px 2px 3px 0 #86AD4D;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #86AD4D;
+    -o-box-shadow: inset 2px 2px 3px 0 #86AD4D;
+    border:1px solid #2a4d0c; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+/*Combos*/
+
+.cajas, select {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    width:150px;
+    text-decoration: none;
+    background:#FFF; color:#0087a7;
+    border: 1px solid #921F43;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    padding:3px;
+    box-shadow:  inset 2px 2px 3px 0 #d295a0; /*SOMBRA SELECT FORMS*/
+    -moz-box-shadow: inset 2px 2px 3px 0 #d295a0;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #d295a0;
+    -o-box-shadow: inset 2px 2px 3px 0 #d295a0;
+}
+
+.cajas:hover, select:hover {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    background:#EADADF; 
+    border: 1px solid #921F43;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    padding:3px;
+    box-shadow:  inset 2px 2px 3px 0 #C2707E; /*SOMBRA SELECT FORMS*/
+    -moz-box-shadow: inset 2px 2px 3px 0 #C2707E;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #C2707E;
+    -o-box-shadow: inset 2px 2px 3px 0 #C2707E;
+}
+
+select { width:200px;z-index: 100;}
+
+.dijitToolbar .dijitButtonContents {
+    padding: 0px 0px;
+}
+
+.cajasdisabled {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #3c3c3c;
+    text-decoration: none;
+    background-color: #dac5d2;
+    border: 1px solid #665860;
+}
+
+.claro .dijitContentPane {
+    padding: 0px;
+    border-radius: 7px;
+}
+.dojoxDockNode {
+    color:#000000;
+}
+
+
+/*Escala y Coordenadas*/
+/*#infoleft {*/
+.infoleft {
+    position: relative;
+    float: left;
+    width: 10px;
+    height:22px;
+    background-image:url(../images/sdp/bg-escala-coord-left-30.png);
+    background-size: auto 15px;
+    background-repeat:no-repeat;
+    z-index: 2;
+    
+  }
+
+/*  #infocenter {*/
+.infocenter{
+    position: relative;
+    overflow: auto;
+    background-image:url(../images/sdp/bg-escala-coord-center-30.png);
+    background-size: auto 15px;
+    background-repeat:repeat-x;
+    height:22px;
+    z-index: 2;
+    width: 138px;
+  }
+
+/*  #inforight {*/
+.inforight {
+    position: relative;
+    float: right;
+    width: 11px;
+    background-image:url(../images/sdp/bg-escala-coord-right-30.png);
+    background-size: auto 15px;
+    background-repeat:no-repeat;
+    height:22px;
+    z-index: 2;
+  }
+  
+/*botones javascipt*/
+.claro .dijitButton .dijitButtonNode{
+    display: inline-block;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 0.98em;
+    font-weight: normal;
+    background: -moz-linear-gradient(center top , #EAF9D9, #AED188) repeat scroll 0 0 transparent;
+    background: -webkit-gradient(linear, center top, center bottom, from(#EAF9D9), to(#AED188));
+    /*background: #AED188;*/
+    background: none transparent;
+    color: #32540E;
+    cursor:pointer;
+    border: 1px solid #5F9E28;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 2px 2px 3px 0 #F2F2F2 inset;
+    outline: medium none;
+    /*outline:none;*/
+    overflow: visible;
+    text-align: center;
+    text-decoration: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    margin-right: 0.1em;
+    /*padding: 2px 2px 2px 2px;*/
+    padding: 6px;
+    position: relative;
+}
+.claro .dijitButton .dijitButtonNode,
+.claro .dijitDropDownButton .dijitButtonNode,
+.claro .dijitComboButton .dijitButtonNode,
+.claro .dijitToggleButton .dijitButtonNode::-moz-focus-inner {
+    display: inline-block;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 0.98em;
+    font-weight: normal;
+    /*background: -moz-linear-gradient(center top , #EAF9D9, #AED188) repeat scroll 0 0 transparent;
+    background: -webkit-gradient(linear, center top, center bottom, from(#EAF9D9), to(#AED188));*/
+    /*background: #AED188;*/
+    background: none transparent;
+    color: #32540E;
+    cursor:pointer;
+    border: 1px solid #5F9E28;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 2px 2px 3px 0 #F2F2F2 inset;
+    outline: medium none;
+    /*outline:none;*/
+    overflow: visible;
+    text-align: center;
+    text-decoration: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    margin-right: 0.1em;
+    /*padding: 2px 2px 2px 2px;*/
+    padding: 6px;
+    position: relative;
+}
+
+.dj_gecko .claro .dijitTextBox .dijitInputInner, .dj_webkit .claro .dijitTextBox .dijitInputInner{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 2px 2px 3px 0 #D2E5BA inset;
+    color: #0087A7;
+    text-decoration: none;
+}
+
+.claro .dijitTextBoxHover {
+    text-decoration: none;
+    background:#D2E5BA; 
+    border: 1px solid #32540E;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow:  inset 2px 2px 3px 0 #97B26D; /*SOMBRA SELECT FORMS*/
+    -moz-box-shadow: inset 2px 2px 3px 0 #97B26D;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #97B26D;
+    -o-box-shadow: inset 2px 2px 3px 0 #97B26D;
+}
+
+.dj_a11y .dijitTextBoxReadOnly .dijitInputField, .dj_a11y .dijitTextBoxReadOnly .dijitButtonNode {
+    border-color: #999999 !important;
+    border-style: outset !important;
+    border-width: medium !important;
+    color: #999999 !important;
+}
+
+
+
+.claro .dijitButtonHover .dijitButtonNode, 
+.claro .dijitDropDownButtonHover .dijitButtonNode, 
+.claro .dijitComboButton .dijitButtonNodeHover, 
+.claro .dijitComboButton .dijitDownArrowButtonHover, 
+.claro .dijitToggleButtonHover .dijitButtonNode {
+     text-decoration: none;
+    background:#D2E5BA; 
+    border: 1px solid #32540E;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow:  inset 2px 2px 3px 0 #97B26D; /*SOMBRA SELECT FORMS*/
+    -moz-box-shadow: inset 2px 2px 3px 0 #97B26D;
+    -webkit-box-shadow: inset 2px 2px 3px 0 #97B26D;
+    -o-box-shadow: inset 2px 2px 3px 0 #97B26D;
+    
+} 
+
+.esriPopup .contentPane {
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #5B5B5F;
+}
+
+.esriPopup .titleButton.close {
+    background-position: 0 0;
+    height: 20px;
+    right: 3px;
+    width: 20px;
+}
+.esriPopup .titleButton {
+    background: url("../images/close.png");
+}
+.esriPopup .titlePane {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: url("../images/sdp/toolbar_bg.png") repeat-x scroll 0 0 #545454;
+    /*background-color: #444444;*/
+    border-color: #666666 #666666 -moz-use-text-color;
+    border-image: none;
+    border-radius: 5px 5px 0 0;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    color: #000000;
+    cursor: default;
+    line-height: 20px;
+    padding-left: 6px;
+    font-family: "Lucida Sans Unicode","Lucida Grande",sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    text-align: left;
+    text-shadow: 0 1px 0 #FFFFFF;
+    
+}
+
+.claro .dijitSliderProgressBarH .dijitSliderThumbHover{
+ background-position:-78px 0;
+ }
+ .claro .dijitSliderHover .dijitSliderRemainingBarH, .claro .dijitSliderHover .dijitSliderRightBumper{
+ background-position:-78px 0;
+ }
+ .claro .dijitSliderHover .dijitSliderBar{
+ background-position:-78px 0;
+ }
+.claro .dijitSliderHover .dijitSliderImageHandleH{
+  background-position:-78px 0;
+ }
+.claro .dijitSliderFocused .dijitSliderImageHandleH{
+	background-position:-78px 0;
+ }

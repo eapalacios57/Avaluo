@@ -1,0 +1,180 @@
+<!-- 
+ * Interfaz para la gestión y consulta de los avalúos registrados en el sistema.
+ * Desde esta pantalla el usuario puede realizar las principales funciones y
+ * operaciones que aplican a un avalúo.
+ * 
+ * La pantalla permite la visualización de la ubicación de los avalúos, una vez se
+ * realiza la consulta.
+ * @author ldcontreras
+ * @version 1.0
+ * @created 12-dec-2017 14:18:41 p.m.
+  -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml" xmlns:gis="http://gisfaces.com">
+	<ui:define name="content">
+		<h:form id="procedatosForm">
+			<p:panelGrid columns="1">
+				<p:panelGrid columns="1">
+					<h:outputText value="#{etq.gpd_titulo}" styleClass="avaluos-tittle" />
+					<p:separator />
+				</p:panelGrid>
+				<h:panelGrid id="consultaTabla" columns="4" styleClass="avaluos-campos-consulta-procedato">
+					<h:outputText value="#{etq.gpd_fecha_cargue}" />
+					<h:outputText />
+					<h:outputText value="#{etq.gpd_estado}*" />
+					<h:outputText />
+					<p:calendar styleClass="avaluos-calendar" id="fechaArchivoDesde" value="#{procedatosBean.consulta.fechaInicioCreacion}" showOn="both" size="6" lang="es"
+						pattern="#{etq.formatoFecha}" />
+					<p:calendar styleClass="avaluos-calendar" id="fechaArchivoHasta" value="#{procedatosBean.consulta.fechaFinCreacion}" showOn="both" size="6" lang="es"
+						pattern="#{etq.formatoFecha}" />
+					<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="consultaEstado"
+						value="#{procedatosBean.consulta.estado}">
+						<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+						<f:selectItems value="#{lista.cargarLista('ESTADOARCHIVO')}" />
+					</p:selectOneMenu>
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" id="consultarButton" value="#{etq.consultar}" actionListener="#{procedatosBean.consultar}"
+						ajax="true" update="procedatosForm errorForm" />
+					<h:outputText value="#{etq.gpd_fechaArchivoDesde}" />
+					<h:outputText value="#{etq.gpd_fechaArchivoHasta}" />
+					<h:outputText />
+					<h:outputText />
+					<p:message for="fechaArchivoDesde" />
+					<p:message for="fechaArchivoHasta" />
+					<p:message for="consultaEstado" />
+				</h:panelGrid>
+				<p:panelGrid columns="3" styleClass="avaluos-table-btns-procedato">
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" id="reversarButton" value="#{etq.gpd_reversar}" actionListener="#{procedatosBean.reversar}"
+						ajax="true" update="procedatosTable,errorForm" disabled="#{not procedatosBean.verConsulta}" />
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" id="cambiarEstadoButton" value="#{etq.gpd_enviado}" actionListener="#{procedatosBean.cambiarEstado}"
+						ajax="true" update="procedatosTable,errorForm" disabled="#{not procedatosBean.verConsulta}" />
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.gpd_registroLogArchivo}" actionListener="#{procedatosBean.verHistorico}" ajax="true"
+						update="historicoProcedatoForm,errorForm" disabled="#{not procedatosBean.verConsulta}" />
+				</p:panelGrid>
+				<h:panelGrid styleClass="avaluos-table-resultado-procedato-contenedor" rendered="#{procedatosBean.verConsulta}">
+					<p:dataTable styleClass="avaluos-table-resultado-procedato" id="procedatosTable" var="procedato" value="#{procedatosBean.listado}"
+						selection="#{procedatosBean.procedatosSeleccionados}" rowKey="#{procedato.idLogArchivos}" rows="#{procedatosBean.registroPagina}" lazy="true"
+						rendered="#{procedatosBean.verConsulta}" currentPageReportTemplate="{currentPage}/{totalPages}" scrollable="true"
+						paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+						emptyMessage="#{etq.ca_no_existen_registro}">
+						<p:column selectionMode="multiple" style="width:16px;text-align:center" />
+						<p:column headerText="#{etq.gpd_id}" sortBy="#{procedato.idLogArchivos}">
+							<h:outputText value="#{procedato.idLogArchivos}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_nombreArchivo}" sortBy="#{procedato.nombreArchivo}">
+							<h:outputText value="#{procedato.nombreArchivo}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_estado}" sortBy="#{procedato.estado}">
+							<h:outputText value="#{lista.descDominio('ESTADOARCHIVO',procedato.estado)}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_inicioGeneracion}" sortBy="#{procedato.fechaInicioCreacion}">
+							<h:outputText value="#{procedato.fechaInicioCreacion}">
+								<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_finGeneracion}" sortBy="#{procedato.fechaFinCreacion}">
+							<h:outputText value="#{procedato.fechaFinCreacion}">
+								<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_logError}">
+							<!-- 							<h:outputText value="#{procedato.descripcionError}" style="width:50px; heigth:10px;" /> -->
+							<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.gpd_ver}" actionListener="#{procedatosBean.verLog}" ajax="true"
+								update="logProcedatoForm" rendered="#{not empty procedato.descripcionError}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_usuario}" sortBy="#{procedato.usuarioCreacion}">
+							<h:outputText value="#{procedato.usuarioCreacion}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_cantidadAvaluos}">
+							<h:outputText value="#{procedato.avaluos.size()}" />
+						</p:column>
+						<!-- 						<p:column headerText="#{etq.gpd_historico}"> -->
+						<!-- 							<h:outputText value="#{not empty procedato.historico?'a':''}" /> -->
+						<!-- 						</p:column> -->
+					</p:dataTable>
+				</h:panelGrid>
+			</p:panelGrid>
+			<p:panel id="generarProcedato" columns="1" toggleable="true" header="#{etq.gpd_generar_titulo}" collapsed="true">
+				<h:outputText value="#{etq.gpd_generarArchivoHasta}" />
+				<p:panelGrid columns="2">
+					<p:calendar styleClass="avaluos-calendar" id="fechaHastaLimite" value="#{procedatosBean.consulta.fechaHasta}" showOn="both" size="6"
+						pattern="#{etq.formatoFecha}" />
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" id="generarButton" value="#{etq.gpd_generar}" actionListener="#{procedatosBean.generar}" ajax="true"
+						update="generarProcedato,consultaTabla,consultarButton,procedatosForm, errorForm" />
+					<p:message for="fechaHastaLimite" />
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+	<!-- fin tabla de resultados -->
+	<!-- inicio formulario hora -->
+	<ui:define name="popups">
+		<h:form id="logProcedatoForm">
+			<p:dialog styleClass="avaluos-modal-formulario" id="logProcedatosPopup" header="#{etq.gpd_log}" widgetVar="logModal" closable="true" closeOnEscape="true"
+				modal="true" resizable="false" draggable="false">
+				<p:panelGrid>
+					<h:outputText value="#{etq.gpd_archivo}#{procedatosBean.nombreArchivo}" />
+					<p:separator />
+					<p:scrollPanel style="width:400px;  text-align:center;" rendered="#{not empty procedatosBean.descripcionError}" mode="native">
+						<h:outputText value="#{procedatosBean.descripcionError}" />
+					</p:scrollPanel>
+					<p:panelGrid>
+						<p:commandButton onclick="PF('logModal').hide();" value="#{etq.aceptar}" styleClass="avaluos-cta-gen-aceptar" ajax="true" update="logProcedatoForm" />
+					</p:panelGrid>
+				</p:panelGrid>
+			</p:dialog>
+		</h:form>
+		<h:form id="historicoProcedatoForm">
+			<p:dialog styleClass="avaluos-modal-formulario" id="historicoProcedatosPopup" header="#{etq.gpd_historico}" widgetVar="#{procedatosBean.popupId}"
+				visible="#{procedatosBean.ver}" closable="true" closeOnEscape="true" modal="true" resizable="false" draggable="false">
+				<p:ajax event="close" update="@form" listener="#{procedatosBean.ocultar}" />
+				<p:scrollPanel style="width:600px;  text-align:center;" rendered="#{not empty procedatosBean.historico}" mode="native">
+					<p:dataTable styleClass="avaluos-gen-table" id="historicoTable" var="historico" value="#{procedatosBean.historico}" scrollable="true"
+						style="margin-bottom:0" rows="10" rendered="#{not empty procedatosBean.historico}" currentPageReportTemplate="{currentPage}/{totalPages}"
+						paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+						emptyMessage="#{etq.ca_no_existen_registro}">
+						<p:column headerText="#{etq.gpd_idHistorico}" width="60" sortBy="#{historico.idHistLogsGeneraArch}">
+							<h:outputText value="#{historico.idHistLogsGeneraArch}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_nombreArchivo}" width="200" sortBy="#{historico.nombreArchivo}">
+							<h:outputText value="#{historico.nombreArchivo}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_fechaHasta}" width="150" sortBy="#{historico.fechaHasta}">
+							<h:outputText value="#{historico.fechaHasta}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_fechaDesde}" width="150" sortBy="#{historico.fechaDesde}">
+							<h:outputText value="#{historico.fechaDesde}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_estado}" width="60" sortBy="#{historico.estado}">
+							<h:outputText value="#{lista.descDominio('ESTADOARCHIVO',historico.estado)}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_fechaInicioCreacion}" width="150" sortBy="#{historico.fechaInicioCreacion}">
+							<h:outputText value="#{historico.fechaInicioCreacion}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_fechafFnCreacion}" width="150" sortBy="#{historico.fechaInicioCreacion}">
+							<h:outputText value="#{historico.fechaInicioCreacion}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_usuarioTransaccion}" width="150" sortBy="#{procedato.usuarioTransaccion}">
+							<h:outputText value="#{procedato.usuarioTransaccion}" />
+						</p:column>
+						<p:column headerText="#{etq.gpd_fechaTransaccion}" width="150" sortBy="#{historico.fechaTransaccion}">
+							<h:outputText value="#{historico.fechaTransaccion}">
+								<f:convertDateTime pattern="#{etq.formatoFecha}" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{etq.gpd_usuarioCreacion}" width="150" sortBy="#{procedato.usuarioCreacion}">
+							<h:outputText value="#{procedato.usuarioCreacion}" />
+						</p:column>
+					</p:dataTable>
+				</p:scrollPanel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

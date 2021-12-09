@@ -1,0 +1,83 @@
+<!-- 
+ * Pantalla para realizar el cargue masivo de aval�os, incluidos los de tipo
+ * constructor, el usuario carga los archivos comprimidos con los aval�os a cargar
+ * al sistema, tambien debe asociar un archivo comprimido con el registro
+ * fotografico para cada archivo con la informaci�n de los aval�os.
+ * @author Luis Contreras
+ * @version 1.0
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<script type="text/javascript">
+			function showStatus() {
+				PF('statusDialog').show();
+			}
+			function hideStatus() {
+				PF('statusDialog').hide();
+				confirmarDescarga();
+			}
+		</script>
+		<h:form id="complementoForm">
+			<p:remoteCommand name="refrescar" update="complementoForm,errorForm" />
+			<p:remoteCommand name="confirmarDescarga" update="errorForm" actionListener="#{complementoBean.confirmarDescarga}" />
+			<h:panelGrid columns="1">
+				<h:outputText value="#{etq.com_titulo}" styleClass="avaluos-tittle" />
+				<p:separator />
+				<h:panelGrid columns="2" rendered="#{sesion.permisosEspecificos['ADMINISTRACOMPLE']}" >
+					<h:panelGrid columns="1">
+						<p:fileUpload styleClass="avaluos-zona-cargando" id="cargaDeArchivos" fileUploadListener="#{complementoBean.subirArchivos}" mode="advanced"
+							sizeLimit="20048576" dragDropSupport="true" update="complementoForm,errorForm" multiple="false" auto="true"
+							invalidSizeMessage="#{etq.com_msjSizeInvalido}" fileLimitMessage="#{etq.com_unicoArchivo}" label="#{etq.com_seleccionar}" onerror="refrescar();"
+							onstart="refrescar();">
+							<p:panelGrid columns="1">
+								<h:outputText value="#{etq.com_carga_archivo}" />
+								<h:outputText value="#{etq.com_limite}" />
+							</p:panelGrid>
+						</p:fileUpload>
+						<h:outputText rendered="#{not empty complementoBean.archivo}" value="#{complementoBean.archivo.fileName}" styleClass="avaluos-archivo-titulo"/>
+						<p:message for="cargaDeArchivos" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.com_descripcionArchivo}" />
+						<p:inputTextarea styleClass="avaluos-texto" id="descripcion" value="#{complementoBean.descripcion}" size="100"
+							placeholder="#{etq.com_escribe}*" maxlength="250" counterTemplate="{0}  #{etq.caracteres}" counter="caracteresDescripcion" cols="90" />
+						<h:outputText id="caracteresDescripcion" />
+						<p:message for="descripcion" />
+					</h:panelGrid>
+				</h:panelGrid>
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" ajax="true" value="#{etq.guardar}" actionListener="#{complementoBean.guardar}"
+					update="complementoForm,errorForm" rendered="#{sesion.permisosEspecificos['ADMINISTRACOMPLE']}" />
+				<h:panelGrid columns="1">
+					<p:dataTable styleClass="avaluos-table-comp-manual" id="ArchivosCargados" var="complemento" value="#{complementoBean.listado}"
+						emptyMessage="#{etq.ca_no_existen_registro}" lazy="true" currentPageReportTemplate="{currentPage}/{totalPages}"
+						paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" rows="#{complementoBean.registroPagina}"
+						style="margin-bottom:20px;text-align:center;" paginatorPosition="bottom" paginatorAlwaysVisible="false" tableStyle="width:auto">
+						<p:column headerText="#{etq.com_descargar}">
+							<p:commandButton styleClass="avaluos-descargar" value="#{etq.com_descargar}" ajax="false" update="errorForm"
+								onclick="PrimeFaces.monitorDownload(showStatus, hideStatus)">
+								<p:fileDownload value="#{complementoBean.descargar}" />
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="#{etq.eliminar}" rendered="#{sesion.permisosEspecificos['ADMINISTRACOMPLE']}">
+							<p:commandButton styleClass="avaluos-cta-borrar" action="#{complementoBean.eliminar}" value="#{etq.eliminar}" ajax="true"
+								update="complementoForm,errorForm" >
+								<p:confirm header="#{etq.confirmar}" message="#{etq.confirmarEliminacion} #{complemento.archivo.nombreArchivo}" icon="ui-icon-alert" />
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="#{etq.com_nombreArchivo}" sortBy="#{complemento.archivo.nombreArchivo}">
+							<h:outputText value="#{complemento.archivo.nombreArchivo}" />
+						</p:column>
+						<p:column headerText="#{etq.com_descripcion}" sortBy="#{complemento.descripcionComplemento}">
+							<h:outputText value="#{complemento.descripcionComplemento}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<p:button styleClass="avaluos-cta-gen-aceptar" id="procesarArchivos" value="#{etq.com_capacitacion}" href="#{complementoBean.urlCapacitacion}"
+						target="blank" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

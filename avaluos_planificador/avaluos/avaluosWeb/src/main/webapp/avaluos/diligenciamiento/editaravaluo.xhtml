@@ -1,0 +1,666 @@
+<!-- 
+ * Esta pantalla permite realizar el diligenciamiento de un avaluo individual, la
+ * misma integra todas las secciones del diligenciamiento.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions" template="/template/layoutTimeOut.xhtml">
+	<ui:define name="content">
+		<style>
+html, body, #mapDiv {
+	height: 300px;
+}
+</style>
+		<script type="text/javascript">
+			document.onkeydown=function(e){
+				var e = e || window.event;
+				if (e.altKey &amp;&amp;   e.keyCode == 83) {
+					comandoGuardar();
+					return false;
+				}
+				if (e.altKey &amp;&amp;   e.keyCode == 65) {
+					comandoAnterior();
+					return false;
+				}
+				if (e.keyCode == 33) {
+					comandoRetroceder();
+					return false;
+				}
+				if (e.keyCode == 34) {
+					comandoAvanzar();
+					return false;
+				}
+			}
+		</script>
+
+		<script type="text/javascript">
+			function reLocalizarMapa(longitud, 
+									latitud, 
+									mapaTipo, 
+									spatialReferenceLatestWkid, 
+									spatialReferenceWkid, 
+									centerX, 
+									centerY, 
+									extentXMax, 
+									extentXMin,
+									extentYMax,
+									extentYMin,
+									mapZoom,
+									cargarMarca,
+									esUnClick,
+									mapaBase) {
+				
+				require(["esri/Map",
+					"esri/Basemap",
+					"esri/views/MapView", 
+					"esri/Graphic",
+					"esri/widgets/ScaleBar",
+					"esri/widgets/Compass",
+					"esri/widgets/BasemapGallery",
+					"esri/widgets/Expand", 
+					"esri/widgets/BasemapGallery/support/LocalBasemapsSource",
+					"esri/geometry/Extent",
+					"dojo/domReady!"],
+						function(Map,Basemap, MapView, Graphic,ScaleBar,Compass,BasemapGallery,Expand, LocalBasemapsSource,Extent,) {
+					if(mapaBase=="null"){
+						mapaBase="osm";
+						}
+				var local=new LocalBasemapsSource({
+					basemaps:[Basemap.fromId("osm"),Basemap.fromId("streets"),Basemap.fromId("satellite"),Basemap.fromId("hybrid"),Basemap.fromId("topo"),Basemap.fromId("terrain")]
+				});
+				
+				var base=Basemap.fromId(mapaBase);
+				var mapa = new Map({
+					basemap: base
+				});
+				
+				var vistaMapa = new MapView();
+				
+				if(!esUnClick) {
+				$("#mapDiv").empty();
+					if (latitud == null) {
+						vistaMapa = new MapView({
+						    container: "mapDiv",
+						    map: mapa,
+						    extent: { 
+						        xmax:extentXMax,
+						        xmin:extentXMin,
+						        ymax:extentYMax,
+						        ymin:extentYMin
+						    }
+						});
+						
+					} else if(extentXMax==null){
+							vistaMapa = new MapView({
+							    container: "mapDiv",
+							    map: mapa,
+							    center:{
+										latitude:latitud,
+										longitude:longitud
+									},
+									zoom:mapZoom
+							});
+					}else{
+						vistaMapa = new MapView({
+						    container: "mapDiv",
+						    map: mapa,
+						    center:{
+									latitude:latitud,
+									longitude:longitud
+								},
+						    extent: { // autocasts as new Extent()
+						        xmax:extentXMax,
+						        xmin:extentXMin,
+						        ymax:extentYMax,
+						        ymin:extentYMin
+						    }
+						});
+					}
+				} else {
+				
+				$("#mapDiv").empty();
+				
+					vistaMapa = new MapView({
+					    container: "mapDiv",
+					    map: mapa,
+					    center:{
+								latitude:latitud,
+								longitude:longitud,
+								type:mapaTipo,
+								spatialReference:{
+									latestWkid:spatialReferenceLatestWkid,
+									wkid:spatialReferenceWkid
+								},
+								x:centerX,
+								y:centerY
+							},
+					    extent: { // autocasts as new Extent()
+					        xmax:extentXMax,
+					        xmin:extentXMin,
+					        ymax:extentYMax,
+					        ymin:extentYMin,
+							spatialReference:{
+								latestWkid:spatialReferenceLatestWkid,
+								wkid:spatialReferenceWkid
+							}
+					    },
+							zoom:mapZoom
+					});
+				}
+				var basemapGallery = new BasemapGallery({
+					  view: vistaMapa,
+					  source:local,
+					  container: document.createElement("div")
+					});
+
+				var bgExpand = new Expand({
+			        view: vistaMapa,
+			        content: basemapGallery.container,
+			        expandIconClass: "esri-icon-basemap"
+			      });
+				
+				var scaleBar = new ScaleBar({
+					  view: vistaMapa,
+					  unit: "dual"
+					});
+				
+				var compass = new Compass({
+					  view: vistaMapa
+					});
+				
+				vistaMapa.ui.add(scaleBar, {
+					  position: "bottom-left"
+					});
+				
+				vistaMapa.ui.add(bgExpand, "top-right");
+				vistaMapa.ui.add(compass, "top-left");
+				
+				   vistaMapa.on("click", mostrarCoordenadas);
+				   
+					function mostrarCoordenadas(event) {
+					var vistaLongitud = event.mapPoint.longitude;
+					var vistaLatitud = event.mapPoint.latitude;
+					var vistaTipo = vistaMapa.center.type;
+					var vistaSpatialReferenceLatestWkid = vistaMapa.center.spatialReference.latestWkid;
+					var vistaSpatialReferenceWkid = vistaMapa.center.spatialReference.wkid;
+					var vistaCenterX = vistaMapa.center.x;
+					var vistaCenterY = vistaMapa.center.y;
+					var vistaExtentXmax = vistaMapa.extent.xmax;
+					var vistaExtentXmin = vistaMapa.extent.xmin;
+					var vistaExtentYmax = vistaMapa.extent.ymax;
+					var vistaExtentYmin = vistaMapa.extent.ymin;
+					var vistaZoom = vistaMapa.zoom;
+						rcActualizarCoordenadas(vistaLongitud, vistaLatitud, vistaTipo, vistaSpatialReferenceLatestWkid, vistaSpatialReferenceWkid, 
+						vistaCenterX, vistaCenterY, vistaExtentXmax, vistaExtentXmin, vistaExtentYmax, vistaExtentYmin, vistaZoom)
+					}
+					
+					vistaMapa.when(function(){
+				   if (!cargarMarca) {
+						return;
+					}
+					  var punto = {
+						        type: "point", 
+						        longitude: longitud ,
+						        latitude: latitud
+						      };
+					  
+					    var marca = {
+						type: "picture-marker",
+					    		  url: "#{request.contextPath}/avaluos/resources/images/marcador3.png",
+					    		  width: "40px",
+					    		  height: "50px"
+					          };
+					  
+					var puntoGrafico = new Graphic({
+				        geometry: punto,
+				        symbol: marca
+				      });
+					vistaMapa.graphics.add(puntoGrafico);
+				   });
+				
+			});
+
+			}
+		</script>
+		<h:form id="avaluoForm">
+			<p:defaultCommand target="dummy" />
+			<p:commandButton id="dummy" process="@none" global="false" style="display:none;" />
+<!-- 			<p:remoteCommand autoRun="true" name="rcActualizarMapa" update="avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud avaluoForm:edicionAvaluosTab:panelMapa" actionListener="#{avaluoBean.reLocalizarMapa}" /> -->
+			<p:remoteCommand autoRun="true" name="rcActualizarMapa" update="avaluoForm:edicionAvaluosTab:panelMapa" actionListener="#{avaluoBean.reLocalizarMapa}" />
+			<p:remoteCommand name="cargarFotos" actionListener="#{avaluoBean.cargarArchivoFotografico}"/>
+			<pe:remoteCommand name="rcActualizarCoordenadas"
+				update="avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud avaluoForm:edicionAvaluosTab:panelMapa"
+				actionListener="#{avaluoBean.enviarCoordenadasSeleccionadas}">
+				<pe:methodSignature
+					parameters="java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, 
+				java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String" />
+				<pe:methodParam name="vistaLongitud" />
+				<pe:methodParam name="vistaLatitud" />
+				<pe:methodParam name="vistaTipo" />
+				<pe:methodParam name="vistaSpatialReferenceLatestWkid" />
+				<pe:methodParam name="vistaSpatialReferenceWkid" />
+				<pe:methodParam name="vistaCenterX" />
+				<pe:methodParam name="vistaCenterY" />
+				<pe:methodParam name="vistaExtentXmax" />
+				<pe:methodParam name="vistaExtentXmin" />
+				<pe:methodParam name="vistaExtentYmax" />
+				<pe:methodParam name="vistaExtentYmin" />
+				<pe:methodParam name="vistaZoom" />
+			</pe:remoteCommand>
+			<p:remoteCommand name="comandoGuardar" update="edicionAvaluosTab,errorForm,errorEspecifico" actionListener="#{avaluoBean.comandoGuardar}" oncomplete="rcActualizarMapa();" />
+			<p:remoteCommand name="comandoAnterior" update="edicionAvaluosTab,errorForm,errorEspecifico" actionListener="#{avaluoBean.comandoAnterior}" oncomplete="rcActualizarMapa();" />
+			<p:remoteCommand name="comandoAvanzar" update="edicionAvaluosTab,errorForm" actionListener="#{avaluoBean.comandoAvanzar}" oncomplete="rcActualizarMapa();" />
+			<p:remoteCommand name="comandoRetroceder" update="edicionAvaluosTab,errorForm" actionListener="#{avaluoBean.comandoRetroceder}"
+				oncomplete="rcActualizarMapa();" />
+			<h:outputText value="#{etq.ina_tituloEditarAvaluo}" styleClass="avaluos-tittle" />
+			<br />
+<!-- 			<h:outputText value="#{etq.ina_descEditarAvaluos}" styleClass="avaluos-subtittle" /> -->
+			<p:message for="errorEspecifico" id="errorEspecifico"  />
+<!-- 			<p:tabView styleClass="avaluos-add" id="edicionAvaluosTab" rendered="#{not empty avaluoBean.avaluo}" activeIndex="#{avaluoBean.tab}" onTabChange="rcActualizarMapa();" scrollable="true"> -->
+			<p:tabView styleClass="avaluos-add" id="edicionAvaluosTab" rendered="#{not empty avaluoBean.avaluo}" activeIndex="#{avaluoBean.tab}" scrollable="true" onTabShow="cargarFotos();rcActualizarMapa();" >	
+				<p:ajax event = "tabChange" process="@this" update="@(.ui-tabs-panel:visible .tab-content)"></p:ajax>
+				
+				<p:tab id="avaluoTab" title="#{etq.ina_informacionBasica}" titleStyleClass="avaluos-inf-basica-li">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<p:focus id="focusNombreSolicitante" for="nombreSolicitante" />
+					<p:panelGrid cellpadding="5" id="contenidoAvaluo">
+						<p:row>
+							<p:column>
+								<p:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="nombreSolicitante" value="#{etq.ina_nombreSolicitante}" />
+									<p:inputText styleClass="avaluos-input-txt" id="nombreSolicitante" value="#{avaluoBean.avaluo.nombreSolicitante}" maxlength="60"
+										disabled="#{not avaluoBean.editable}" />
+									<p:message for="nombreSolicitante" />
+								</p:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="idTipoIdentificacion" value="#{etq.ina_tipoDocumento}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="idTipoIdentificacion" value="#{avaluoBean.avaluo.idTipoIdentificacion}"
+										disabled="#{not avaluoBean.esNuevo or not avaluoBean.editable}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+									</p:selectOneMenu>
+									<p:message for="idTipoIdentificacion" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="numeroIdentificacion" value="#{etq.ina_numeroIdentificacion}" />
+									<p:inputNumber styleClass="avaluos-input-txt" id="numeroIdentificacion" value="#{avaluoBean.avaluo.numeroIdentificacion}" decimalPlaces="0"
+										minValue="0" disabled="#{not avaluoBean.editable}" valueChangeListener="#{avaluoBean.cambiarDocumento}"
+										maxValue="9999999999" immediate="true" maxlength="10">
+										<p:ajax update="consecutivoBanco" event="change" oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:fechaAvaluo');})" />
+									</p:inputNumber>
+									<p:message for="numeroIdentificacion" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="nombreBanco" value="#{etq.ina_nombreBanco}" />
+									<p:inputText styleClass="avaluos-input-txt" id="nombreBanco" value="#{avaluoBean.avaluo.nombreBanco}" disabled="true" maxlength="30" />
+									<p:message for="nombreBanco" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<h:panelGrid columns="1">
+									<h:outputLabel value="#{etq.ina_fecha_avaluo}" />
+									<p:calendar styleClass="avaluos-calendario-add" id="fechaAvaluo" value="#{avaluoBean.avaluo.fechaAvaluo}" pattern="#{etq.formatoFecha}" mask="true"
+										disabled="#{not avaluoBean.esNuevo or not avaluoBean.editable}" valueChangeListener="#{avaluoBean.cambiarFecha}"  showOn="both">
+										<p:ajax update="consecutivoBanco" event="change" oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:idObjetoAvaluo');})" />
+										<p:ajax update="consecutivoBanco" event="dateSelect" oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:idObjetoAvaluo');})" />
+									</p:calendar>
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="fechaAvaluo" value="#{etq.formatoFechaTexto}" />
+									<p:message for="fechaAvaluo" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="consecutivoBanco" value="#{etq.ina_consecutivoBanco}" />
+									<p:inputText styleClass="avaluos-input-txt" id="consecutivoBanco" value="#{avaluoBean.avaluo.consecutivoBanco}" decimalPlaces="0" minValue="0"
+										disabled="true" maxlength="22">
+									</p:inputText>
+									<p:message for="consecutivoBanco" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="idObjetoAvaluo" value="#{etq.ina_idObjetoAvaluo}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="idObjetoAvaluo" value="#{avaluoBean.avaluo.idObjetoAvaluo}" disabled="#{not avaluoBean.editable}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('OBJETOAVALUO')}" />
+									</p:selectOneMenu>
+									<p:message for="idObjetoAvaluo" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="idDepartamento" value="#{etq.ina_idDepartamento}" />
+									<p:selectOneMenu ajax="false" styleClass="avaluos-dropdown" id="idDepartamento" value="#{avaluoBean.avaluo.idDepartamento}"
+										valueChangeListener="#{avaluoBean.cambiarDepartamento}" disabled="#{not avaluoBean.editable}">
+										<p:ajax update="idCiudad codigoDaneDepartamento panelMapa latitud longitud" event="change"
+											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:idCiudad');})" />
+<!-- 											<p:ajax update="idCiudad codigoDaneDepartamento" event="change" -->
+<!-- 											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:idCiudad');})" /> -->
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+										<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+									</p:selectOneMenu>
+									<p:message for="idDepartamento" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:panelGrid cellpadding="5" styleClass="avaluos-tabla-ciudad-add">
+									<p:column>
+										<p:inputText styleClass="avaluos-input-txt" id="codigoDaneDepartamento" size="1" disabled="true" value="#{avaluoBean.avaluo.codigoDaneDepartamento}">
+										</p:inputText>
+									</p:column>
+									<p:column>
+										<h:panelGrid columns="1">
+											<p:outputLabel styleClass="avaluos-lbl-campo" for="idCiudad" value="#{etq.ina_idCiudad}" />
+											<p:selectOneMenu styleClass="avaluos-dropdown" id="idCiudad" value="#{avaluoBean.avaluo.idCiudad}" valueChangeListener="#{avaluoBean.cambiarCiudad}"
+												disabled="#{not avaluoBean.editable}">
+<!-- 												<p:ajax update="panelMapa codigoDaneCiudad panelMapa latitud longitud" event="change" oncomplete="rcActualizarMapa();$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:barrio');})" /> -->
+												<p:ajax update="codigoDaneCiudad panelMapa avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud" event="change" oncomplete="rcActualizarMapa();$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:barrio');})" />
+												<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+												<f:selectItems value="#{avaluoBean.ciudades}" />
+											</p:selectOneMenu>
+											<p:message for="idCiudad" />
+										</h:panelGrid>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+							<p:column>
+								<p:panelGrid cellpadding="5" styleClass="avaluos-tabla-inputs">
+									<p:column>
+										<p:inputText styleClass="avaluos-input-txt" size="1" id="codigoDaneCiudad" disabled="true" value="#{avaluoBean.avaluo.codigoDaneCiudad}" />
+									</p:column>
+									<p:column>
+										<h:panelGrid columns="1">
+											<p:outputLabel styleClass="avaluos-lbl-campo" for="barrio" value="#{etq.ina_barrio}" />
+											<p:inputText styleClass="avaluos-input-txt" id="barrio" value="#{avaluoBean.avaluo.barrio}" maxlength="30"
+												valueChangeListener="#{avaluoBean.cambiarBarrio}" disabled="#{not avaluoBean.editable}">
+												<p:ajax event="change" update="panelMapa avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud"
+													oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:direccionInmueble');})" />
+											</p:inputText>
+<!-- 											<p:inputText styleClass="avaluos-input-txt" id="barrio" value="#{avaluoBean.avaluo.barrio}" maxlength="30" -->
+<!-- 												valueChangeListener="#{avaluoBean.cambiarBarrio}" disabled="#{avaluoBean.estadoAprobado}"> -->
+<!-- 												<p:ajax event="change" oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:direccionInmueble');})" /> -->
+<!-- 											</p:inputText> -->
+											<p:message for="barrio" />
+										</h:panelGrid>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="direccionInmueble" value="#{etq.ina_direccionInmueble}" />
+									<p:inputText styleClass="avaluos-input-txt" id="direccionInmueble" value="#{avaluoBean.avaluo.direccionInmueble}" maxlength="100"
+										valueChangeListener="#{avaluoBean.cambiarDireccion}" disabled="#{not avaluoBean.editable}">
+										<p:ajax event="change"
+											update="panelMapa direccionInmueble direccionimu direccionComplementaria avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud"
+											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:direccionComplementaria');})" />
+<!-- 											<p:ajax event="change" -->
+<!-- 											update="direccionInmueble direccionimu direccionComplementaria" -->
+<!-- 											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:direccionComplementaria');})" /> -->
+									</p:inputText>
+									<p:message id="direccionimu" for="direccionInmueble" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="direccionComplementaria" value="#{etq.ina_direccionComplementaria}" />
+									<p:inputText styleClass="avaluos-input-txt" id="direccionComplementaria" value="#{avaluoBean.avaluo.direccionComplementaria}" maxlength="100"
+										valueChangeListener="#{avaluoBean.cambiarDireccionComplementaria}" disabled="#{not avaluoBean.editable}">
+										<p:ajax event="change" update="#{not empty avaluoBean.avaluo.direccionInmueble ? 'direccionComplementaria direccionimucomplementaria' : 'panelMapa direccionComplementaria direccionimucomplementaria avaluoForm:edicionAvaluosTab:latitud avaluoForm:edicionAvaluosTab:longitud'}"
+											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:nombreConjuntoEdificio');})" />
+									</p:inputText>
+<!-- 									<p:inputText styleClass="avaluos-input-txt" id="direccionComplementaria" value="#{avaluoBean.avaluo.direccionComplementaria}" maxlength="100" -->
+<!-- 										valueChangeListener="#{avaluoBean.cambiarDireccionComplementaria}" disabled="#{avaluoBean.estadoAprobado}"> -->
+<!-- 										<p:ajax event="change" update="direccionComplementaria direccionimucomplementaria" -->
+<!-- 											oncomplete="$(function(){PrimeFaces.focus('avaluoForm:edicionAvaluosTab:nombreConjuntoEdificio');})" /> -->
+<!-- 									</p:inputText> -->
+									<p:message id="direccionimucomplementaria" for="direccionComplementaria" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="nombreConjuntoEdificio" value="#{etq.ina_nombreConjuntoEdificio}" />
+									<p:inputText styleClass="avaluos-input-txt" id="nombreConjuntoEdificio" value="#{avaluoBean.avaluo.nombreConjuntoEdificio}" maxlength="30"
+										disabled="#{not avaluoBean.editable}" />
+									<p:message for="nombreConjuntoEdificio" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="sector" value="#{etq.ina_sector}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="sector" value="#{avaluoBean.avaluo.sector}" disabled="#{not avaluoBean.editable}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('SECTOR')}" />
+									</p:selectOneMenu>
+									<p:message for="sector" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="telefonoSolicitante" value="#{etq.ina_telefonoSolicitante}" />
+									<p:inputNumber styleClass="avaluos-input-txt" id="telefonoSolicitante" value="#{avaluoBean.avaluo.telefonoSolicitante}" decimalPlaces="0" minValue="0"
+										thousandSeparator="" maxValue="9999999" disabled="#{not avaluoBean.editable}" />
+									<p:message for="telefonoSolicitante" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="celularSolicitante" value="#{etq.ina_celularSolicitante}" />
+									<p:inputNumber styleClass="avaluos-input-txt" id="celularSolicitante" value="#{avaluoBean.avaluo.celularSolicitante}" decimalPlaces="0" minValue="0"
+										thousandSeparator="" maxValue="9999999999" disabled="#{not avaluoBean.editable}" />
+									<p:message for="celularSolicitante" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="correoSolicitante" value="#{etq.ina_correoSolicitante}" />
+									<p:inputText styleClass="avaluos-input-txt" id="correoSolicitante" value="#{avaluoBean.avaluo.correoSolicitante}" maxlength="60"
+										disabled="#{not avaluoBean.editable}" />
+									<p:message for="correoSolicitante" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="idMetodologia" value="#{etq.ina_idMetodologia}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="idMetodologia" value="#{avaluoBean.avaluo.idMetodologia}" disabled="#{not avaluoBean.editable}">
+										<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('METODOLOGIA')}" />
+									</p:selectOneMenu>
+									<p:message for="idMetodologia" />
+								</h:panelGrid>
+							</p:column>
+							<p:column colspan="2">
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="justificacion" value="#{etq.ina_justificacion}" />
+									<p:inputTextarea styleClass="avaluos-parrafo" id="justificacion" value="#{avaluoBean.avaluo.justificacion}" maxlength="150" cols="90" rows="2"
+										counterTemplate="{0}  #{etq.caracteres}" counter="displayJustificacionAvaluo" disabled="#{not avaluoBean.editable}" />
+									<h:outputText id="displayJustificacionAvaluo" />
+									<p:message for="justificacion" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="constructor" value="#{avaluoBean.avaluo.constructor}" disabled="#{not avaluoBean.editable}">
+									<p:ajax update="avaluoForm:errorEspecifico" listener="#{avaluoBean.cambiarConstructor}" />
+								</p:selectBooleanCheckbox>
+								<h:outputLabel value="#{etq.ina_constructor}" />
+								<p:message for="constructor" />
+							</p:column>
+							<p:column>
+								<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="provisional" value="#{avaluoBean.avaluo.provisional}"
+									disabled="#{not avaluoBean.editable}">
+									<p:ajax update="avaluoForm:errorEspecifico" listener="#{avaluoBean.cambiarProvisional}" />
+								</p:selectBooleanCheckbox>
+								<h:outputText value="#{lista.descDominio('TIPOAVALUO', 1)}" />
+								<p:message for="provisional" />
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="codigoProcedencia" value="#{etq.ina_codigoProcedencia}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="codigoProcedencia" value="#{avaluoBean.avaluo.codigoProcedencia}" disabled="true">
+										<f:selectItem itemLabel="#{etq.ina_codigoProcedencia}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('PROCEDENCIA_AVALUO')}" />
+									</p:selectOneMenu>
+									<p:message for="codigoProcedencia" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1">
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="estadoAvaluo" value="#{etq.ina_estadoAvaluo}" />
+									<p:selectOneMenu styleClass="avaluos-dropdown" id="estadoAvaluo" value="#{avaluoBean.avaluo.estadoAvaluo}" disabled="true">
+										<f:selectItem itemLabel="#{etq.ina_estadoAvaluo}" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{lista.cargarLista('ESTADOAVALUO')}" />
+									</p:selectOneMenu>
+									<p:message for="estadoAvaluo" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+						
+						
+						<p:row>					
+							<p:column>	
+							   					
+								<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="tradicional" value="#{avaluoBean.avaluo.tradicional}" disabled="#{not avaluoBean.editable}" >
+									<p:ajax update="avaluoForm:edicionAvaluosTab:movill,avaluoForm:edicionAvaluosTab:movil" listener="#{avaluoBean.ocultarLabel}"    />
+								</p:selectBooleanCheckbox>
+								<h:outputLabel value="#{lista.descDominio('TIPO_AVALUO', 1)}" /> 
+								<p:message for="tradicional" />	
+							   							
+							</p:column>
+							
+							<p:column>
+							  											
+								<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="movil" value="#{avaluoBean.avaluo.movil}" disabled="#{not avaluoBean.editable}"  >
+									<p:ajax update="avaluoForm:edicionAvaluosTab:movill,avaluoForm:edicionAvaluosTab:tradicional" listener="#{avaluoBean.mostrarLabel}"   />
+								</p:selectBooleanCheckbox>
+								<h:outputLabel value="#{lista.descDominio('TIPO_AVALUO', 2)}" />
+								<p:message for="movil" />	
+							  														
+							</p:column>						
+							
+							<p:column>
+							 <h:panelGrid id="movill">													
+									<p:outputLabel styleClass="avaluos-lbl-campo" for="numeroSolicitud" value="#{etq.ina_numero_movil}" rendered="#{avaluoBean.labelMovil}" />
+									<p:inputNumber styleClass="avaluos-input-txt" id="numeroSolicitud"  value="#{avaluoBean.avaluo.numeroSolicitudMovil}" decimalPlaces="0" minValue="0"
+									maxlength="18" maxValue="999999999999999999" thousandSeparator="" disabled="#{not avaluoBean.editable}" rendered="#{avaluoBean.labelMovil}" />
+									<p:message for="numeroSolicitud" />	
+							 </h:panelGrid>							
+							</p:column>							
+						</p:row>	
+						<p:separator />
+						<p:row>
+							<p:column colspan="3" disabled="#{not avaluoBean.editable}">
+								<h:panelGrid id="panelMapa" width="100%" styleClass="avaluos-mapa-add">
+									<p:panel id="seccionMapa" visible="#{avaluoBean.verMapa}" styleClass="gisfacesMapPanel">
+										<div id="applicationDiv">
+											<div id="mapDiv"></div>
+										</div>
+									</p:panel>
+									<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{avaluoBean.verMapa ? etq.ca_ocultar_mapa:etq.ca_ver_mapa}"
+										actionListener="#{avaluoBean.ocultarMapa}" ajax="true" update="panelMapa" oncomplete="rcActualizarMapa();" />
+								</h:panelGrid>
+							</p:column>
+							<p:column>
+								<h:panelGrid columns="1" styleClass="avaluos-lat-long">
+									<h:outputLabel value="#{etq.ina_seleccioneUbicacion}" />
+									<h:outputLabel value="#{etq.ina_latitud}" />
+									<p:inputText styleClass="avaluos-input-txt" id="latitud" value="#{avaluoBean.avaluo.latitudSFBUA}" disabled="true" widgetVar="latitudVar" />
+									<p:message for="latitud" />
+									<h:outputLabel value="#{etq.ina_longitud}" />
+									<p:inputText styleClass="avaluos-input-txt" id="longitud" value="#{avaluoBean.avaluo.longitudSFBUA}" disabled="true" widgetVar="longitudVar" />
+									<p:message for="longitud" />
+								</h:panelGrid>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+					<p:separator />
+					<h:panelGrid id="seccionAuditoria" styleClass="avaluos-mostrar-ocultar-aud">
+						<p:panel header="#{not avaluoBean.ocultarAuditoria ? etq.ina_ocultarAuditoria : etq.ina_mostrarAuditoria}" styleClass="avaluos-ver-content"
+							toggleable="true" collapsed="#{avaluoBean.ocultarAuditoria}">
+							<p:ajax event="toggle" listener="#{avaluoBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoria" />
+							<h:panelGrid columns="7">
+								<h:panelGrid columns="1">
+									<!-- 									<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.ina_usuarioCreacion}" for="usuarioCreacionInfoBasica" /> -->
+									<h:outputLabel styleClass="avaluos-input-txt" value="#{avaluoBean.avaluo.usuarioCreacion}" />
+								</h:panelGrid>
+								<p:separator />
+								<h:panelGrid columns="1">
+									<h:outputLabel value="#{etq.ina_fechaCreacion}" />
+									<h:outputText value="#{avaluoBean.avaluo.fechaCreacion}">
+										<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+									</h:outputText>
+								</h:panelGrid>
+								<p:separator />
+								<h:panelGrid columns="1">
+									<!-- 									<p:outputLabel styleClass="avaluos-lbl-campo" value="#{etq.ina_usuarioTransaccion}" for="usuarioTransaccionInfoBasica" /> -->
+									<h:outputLabel styleClass="avaluos-input-txt" value="#{avaluoBean.avaluo.usuarioTransaccion}" />
+								</h:panelGrid>
+								<p:separator />
+								<h:panelGrid columns="1">
+									<h:outputLabel value="#{etq.ina_fechaTransaccion}" />
+									<h:outputText value="#{avaluoBean.avaluo.fechaTransaccion}">
+										<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+									</h:outputText>
+								</h:panelGrid>
+							</h:panelGrid>
+						</p:panel>
+					</h:panelGrid>
+					<p:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+						<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{avaluoBean.anterior}" ajax="true"
+							update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" oncomplete="rcActualizarMapa();" disabled="true" />
+						<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{avaluoBean.siguiente}" ajax="true"
+							update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico" oncomplete="rcActualizarMapa();" />
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="#{etq.ina_informacionBarrio}" rendered="#{not avaluoBean.esNuevo}" id="infoBarrioTab" titleStyleClass="avaluos-inf-barrio-li">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/informacionbarrio.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_informacionInmueble}" rendered="#{not avaluoBean.esNuevo}" id="infoInmuebleTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/informacioninmueble.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_informacionConstruccion}" rendered="#{not avaluoBean.esNuevo}" id="infoConstrucTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/informacionconstruccion.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_ofertaDemanda}" rendered="#{not avaluoBean.esNuevo}" id="ofertaTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/ofertademanda.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_liquidacion}" rendered="#{not avaluoBean.esNuevo}" id="liquidacionTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/liquidacion.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_observacion}" rendered="#{not avaluoBean.esNuevo}" id="observacionesTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/observaciones.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.ina_registroFotografico}" rendered="#{not avaluoBean.esNuevo and not avaluoBean.avaluo.provisional}" id="regFotrograficoTab">
+					<ui:include src="../diligenciamiento/barrasuperior.xhtml" />
+					<ui:include src="../diligenciamiento/registrofotografico.xhtml" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+	<ui:define name="popups">
+		<ui:include src="popupfotografia.xhtml" />
+	</ui:define>
+</ui:composition>

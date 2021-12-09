@@ -1,0 +1,161 @@
+<!--
+ * Esta pantalla permite que el usuario cree nuevos valores de dominio para los
+ * diferentes listados del sistema.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="dominioForm">
+			<p:panelGrid columns="1">
+				<h:outputText value="#{etq.dom_titulo}" styleClass="avaluos-tittle" />
+				<p:separator />
+			</p:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" id="ResultData"
+				var="dominio" value="#{dominioBean.listado}" reflow="true"
+				widgetVar="entidadTable" rendered="#{empty dominioBean.dominio}"
+				dynamic="true" lazy="true"
+				currentPageReportTemplate="{currentPage}/{totalPages}"
+				paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}"
+				paginator="true" rows="#{dominioBean.registroPagina}"
+				style="margin-bottom:20px" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" scrollable="true"
+				emptyMessage="#{etq.no_existen_registro}">
+				<p:column headerText="#{etq.opciones}">
+					<p:outputPanel columns="2">
+						<p:commandButton styleClass="avaluos-edit" value="#{etq.editar}"
+							actionListener="#{dominioBean.editar}" update=" @form"
+							ajax="true" />
+					</p:outputPanel>
+				</p:column>
+				<p:column sortBy="#{dominio}">
+					<f:facet name="header">
+						<table>
+							<tr>
+								<td style="border: 0px;"><h:outputText value="#{etq.domninio}" /></td>
+							</tr>
+							<tr>
+								<td style="border: 0px;"><p:inputText
+										styleClass="avaluos-texto" id="dominioFiltro"
+										value="#{dominioBean.filtro.rvDomain}" maxlength="60">
+										<p:ajax event="keyup" listener="#{dominioBean.consultar}"
+											update="ResultData" delay="300" />
+									</p:inputText></td>
+							</tr>
+						</table>
+					</f:facet>
+					<h:outputText value="#{dominio}" />
+				</p:column>
+			</p:dataTable>
+			<p:dataTable styleClass="avaluos-gen-table" id="valoresData"
+				var="valor" value="#{dominioBean.valores}" reflow="true"
+				widgetVar="entidadTable" rendered="#{not empty dominioBean.dominio}"
+				dynamic="true" lazy="true"
+				currentPageReportTemplate="{currentPage}/{totalPages}"
+				paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}"
+				paginator="true" rows="#{dominioBean.registroPagina}"
+				style="margin-bottom:20px" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" scrollable="true"
+				emptyMessage="#{etq.no_existen_registro}">
+				<f:facet name="header">
+					<p:commandButton styleClass="avaluos-add-row" value="#{etq.nuevo}"
+						icon="ui-icon-star" actionListener="#{dominioBean.nuevoValor}"
+						update="@form valorDominioForm" />
+				</f:facet>
+				<p:column headerText="#{etq.opciones}">
+					<p:outputPanel columns="2">
+						<p:commandButton styleClass="avaluos-edit" value="#{etq.editar}"
+							actionListener="#{dominioBean.editarValor}"
+							update=" @form valorDominioForm" ajax="true" />
+					</p:outputPanel>
+				</p:column>
+				<p:column headerText="#{etq.codigo}" sortBy="#{valor.rvLowValue}">
+					<h:outputText value="#{valor.rvLowValue}" />
+				</p:column>
+				<p:column headerText="#{etq.codigoAlterno}"
+					sortBy="#{valor.rvHighValue}">
+					<h:outputText value="#{valor.rvHighValue}" />
+				</p:column>
+<!-- 				<p:column headerText="#{etq.descripcion}" sortBy="#{valor.rvMeaning}"> -->
+				<p:column sortBy="#{valor.rvMeaning}">
+					<f:facet name="header">
+						<table>
+							<tr>
+								<td style="border: 0px;"><h:outputText
+										value="#{etq.descripcion}" /></td>
+							</tr>
+							<tr>
+								<td style="border: 0px;"><p:inputText
+										styleClass="avaluos-texto" id="descripcionFiltro"
+										value="#{dominioBean.filtro.rvMeaning}" maxlength="60">
+										<p:ajax event="keyup" listener="#{dominioBean.consultar}"
+											update="valoresData" delay="300" />
+									</p:inputText></td>
+							</tr>
+						</table>
+					</f:facet>
+					<h:outputText value="#{valor.rvMeaning}" />
+				</p:column>
+				<p:column headerText="#{etq.usuarioCreacion}"
+					sortBy="#{valor.rvCreateBy}">
+					<h:outputText value="#{valor.rvCreateBy}" />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton styleClass="avaluos-cta-gen-aceptar"
+				actionListener="#{dominioBean.cancelar}" value="#{etq.cancelar}"
+				ajax="true" update="@form"
+				rendered="#{not empty dominioBean.dominio}" />
+		</h:form>
+	</ui:define>
+	<!-- fin tabla de resultados -->
+	<!-- inicio formulario valor dominio -->
+	<ui:define name="popups">
+		<h:form id="valorDominioForm">
+			<p:dialog styleClass="avaluos-modal-formulario"
+				id="valorDominioPopup" header="#{etq.valorDominio}"
+				widgetVar="#{dominioBean.popupId}" visible="#{dominioBean.ver}"
+				closable="true" closeOnEscape="true" modal="true" resizable="false">
+				<p:ajax event="close" update="@form"
+					listener="#{dominioBean.ocultar}" />
+				<h:panelGrid columns="1" rendered="#{not empty dominioBean.valor}">
+					<h:panelGrid columns="3" cellpadding="5">
+						<h:outputLabel value="#{etq.codigo}:" />
+						<p:inputText styleClass="avaluos-input-txt" id="codigo"
+							value="#{dominioBean.valor.rvLowValue}" label="codigo"
+							disabled="#{!dominioBean.esNuevo}">
+							<f:validateLength maximum="240" />
+						</p:inputText>
+						<p:message for="codigo" />
+						<h:outputLabel value="#{etq.codigoAlterno}:" />
+						<p:inputText styleClass="avaluos-input-txt" id="codigoAlterno"
+							value="#{dominioBean.valor.rvHighValue}" label="codigoAlterno">
+							<f:validateLength maximum="240" />
+						</p:inputText>
+						<p:message for="codigoAlterno" />
+						<h:outputLabel value="#{etq.descripcion}:" />
+						<p:inputText styleClass="avaluos-input-txt" id="descripcion"
+							value="#{dominioBean.valor.rvMeaning}" label="rvMeaning">
+							<f:validateLength maximum="240" />
+						</p:inputText>
+						<p:message for="descripcion" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton styleClass="avaluos-cta-gen-aceptar"
+							actionListener="#{dominioBean.guardarValor}"
+							value="#{etq.guardar}" ajax="true"
+							update="@form dominioForm errorForm" icon="ui-icon-check" />
+						<p:commandButton styleClass="avaluos-cta-gen-cancelar"
+							actionListener="#{dominioBean.cancelarValor}"
+							value="#{etq.cancelar}" ajax="true" update="@form" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:dialog>
+			<!-- fin formulario valor dominio -->
+		</h:form>
+	</ui:define>
+</ui:composition>

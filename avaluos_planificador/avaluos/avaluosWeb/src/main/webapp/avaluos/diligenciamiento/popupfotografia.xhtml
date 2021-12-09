@@ -1,0 +1,26 @@
+<h:form id="fotografiaPopupForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<!-- 	header="#{popupFotografiaBean.fotografia.archivo.nombreArchivo}" -->
+	<p:dialog styleClass="avaluos-modal-formulario" id="fotografiaPopup" widgetVar="#{popupFotografiaBean.popupId}" hideEffect=""
+		visible="#{popupFotografiaBean.ver}" closable="true" closeOnEscape="true" modal="true" draggable="false" resizable="false" width="600" height="600">
+		<p:ajax event="close"  listener="#{popupFotografiaBean.cerrar}" />
+		<f:facet name="header">
+			<h:panelGrid styleClass="avaluos-op-img" columns="1" rendered="#{not empty popupFotografiaBean.fotografia}" cellpadding="0" cellspacing="0">
+				<h:panelGrid columns="4" cellpadding="0" cellspacing="0">
+					<p:commandButton styleClass="avaluos-rotate-left" value="#{etq.ref_rotarIzq}" action="#{popupFotografiaBean.rotarIzquierda}"
+						update="fotografiaPopup,errorForm" ajax="true"  disabled="#{regFotograficoBean.estadoAprobado}"/>
+					<p:commandButton styleClass="avaluos-rotate-right" value="#{etq.ref_rotar}" action="#{popupFotografiaBean.rotar}" update="fotografiaPopup,errorForm"
+						ajax="true" disabled="#{regFotograficoBean.estadoAprobado}"/>
+					<p:commandButton styleClass="avaluos-delete" icon="ui-icon-trash" value="#{etq.eliminar}" action="#{popupFotografiaBean.eliminar}" ajax="true"
+						update="avaluoForm:edicionAvaluosTab:tableroRegistroFotografico,fotografiaPopup,errorForm" disabled="#{regFotograficoBean.estadoAprobado}"/>
+					<p:commandButton styleClass="avaluos-cta-descargar" value="#{etq.ref_descargar}" ajax="false">
+						<p:fileDownload value="#{popupFotografiaBean.imagen}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</h:panelGrid>
+		</f:facet>
+		<h:panelGrid columns="1" rendered="#{not empty popupFotografiaBean.fotografia}" cellpadding="0" cellspacing="0">
+			<p:graphicImage value="#{popupFotografiaBean.imagen}" stream="false" width="580" height="580"/>
+		</h:panelGrid>
+	</p:dialog>
+</h:form>

@@ -1,0 +1,228 @@
+<!-- 
+ * Interfaz para la gestión y consulta de los avalúos registrados en el sistema.
+ * Desde esta pantalla el usuario puede realizar las principales funciones y
+ * operaciones que aplican a un avalúo.
+ * 
+ * La pantalla permite la visualización de la ubicación de los avalúos, una vez se
+ * realiza la consulta.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+  -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml" xmlns:gis="http://gisfaces.com">
+	<ui:define name="content">
+		<h:form id="consultarHistoricoForm">
+			<p:hotkey bind="alt+c" update="consultarHistoricoForm errorForm" actionListener="#{historicoBean.consultarAvaluo}" />
+			<p:panelGrid columns="1">
+				<p:panelGrid columns="3">
+					<p:panelGrid columns="1">
+						<h:outputText value="#{etq.hca_titulo}" styleClass="avaluos-tittle" />
+					</p:panelGrid>
+					<p:commandButton styleClass="#{historicoBean.verFiltros?'avaluos-add-row':'avaluos-btn-mostrar-filtro'}"
+						value="#{historicoBean.verFiltros?etq.ocultarFiltros:etq.mostrarFiltros}" actionListener="#{historicoBean.mostrarFiltro}" ajax="true"
+						update="consultarHistoricoForm" />
+				</p:panelGrid>
+				<h:panelGrid columns="4" rendered="#{historicoBean.verFiltros}">
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.tipoIdentificacion}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="tipoDocumento"
+							value="#{historicoBean.consulta.idTipoIdentificacion}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+						</p:selectOneMenu>
+						<p:message for="tipoDocumento" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.numeroIdentificacion}" />
+						<p:inputNumber styleClass="avaluos-input-txt" id="numeroIdentificacion" value="#{historicoBean.consulta.numeroIdentificacion}" label="NumeroDocumento"
+							thousandSeparator="," decimalPlaces="0" minValue="0" maxValue="2147483647" size="32" />
+						<p:message for="numeroIdentificacion" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.nombreSolicitante}" />
+						<p:inputText styleClass="avaluos-input-txt" id="nombreSolicitante" value="#{historicoBean.consulta.nombreSolicitante}" size="32" />
+						<p:message for="nombreSolicitante" />
+					</h:panelGrid>
+					<h:panelGrid>
+						<h:outputText value="#{etq.fechaAvaluo}" />
+						<h:panelGrid columns="2" id="fechaAvaluo">
+							<p:calendar styleClass="avaluos-calendar" id="avaluosDesde" value="#{historicoBean.consulta.fechaAvaluoDesde}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<p:calendar styleClass="avaluos-calendar" id="avaluosHasta" value="#{historicoBean.consulta.fechaAvaluoHasta}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<h:outputText value="#{etq.desde}" />
+							<h:outputText value="#{etq.hasta}" />
+						</h:panelGrid>
+						<p:message for="fechaAvaluo" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.departamento}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="departamento"
+							value="#{historicoBean.consulta.idDepartamento}">
+							<p:ajax update="ciudad" oncomplete="$(function(){PrimeFaces.focus('consultarHistoricoForm:ciudad');})" />
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+						</p:selectOneMenu>
+						<p:message for="departamento" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:panelGrid>
+							<h:outputText value="#{etq.ciudad}" />
+							<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="ciudad" value="#{historicoBean.consulta.idCiudad}"
+								disabled="#{empty historicoBean.consulta.idDepartamento}">
+								<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+								<f:selectItems value="#{lista.cargarCiudades(historicoBean.consulta.idDepartamento)}" />
+							</p:selectOneMenu>
+							<p:message for="ciudad" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.direccion}" />
+						<p:inputText styleClass="avaluos-input-txt" id="direccion" value="#{historicoBean.consulta.direccionInmueble}" size="32" />
+						<p:message for="direccion" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="Matricula Inmobiliaria" />
+						<p:inputText styleClass="avaluos-input-txt" id="matricula" value="#{historicoBean.consulta.matriculaInmobiliaria}" size="32" />
+						<p:message for="matricula" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="#{etq.ca_estadoAvaluo}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" style="width:170px !important;" autoWidth="false" id="estadoAvaluo"
+							value="#{historicoBean.consulta.estadoAvaluo}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('ESTADOAVALUO')}" />
+						</p:selectOneMenu>
+						<p:message for="estadoAvaluo" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="Usuario Aprueba" />
+						<p:inputText styleClass="avaluos-input-txt" id="usuarioAprueba" value="#{historicoBean.consulta.usuarioAprueba}" size="32" />
+						<p:message for="usuarioAprueba" />
+					</h:panelGrid>
+					<h:panelGrid>
+						<h:outputText value="#{etq.fechaCreacion}" />
+						<h:panelGrid columns="2" id="fechaCreacion">
+							<p:calendar styleClass="avaluos-calendar" id="fechaCreacionDesde" value="#{historicoBean.consulta.fechaCreacionDesde}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<p:calendar styleClass="avaluos-calendar" id="fechaCreacionHasta" value="#{historicoBean.consulta.fechaCreacionHasta}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<h:outputText value="#{etq.desde}" />
+							<h:outputText value="#{etq.hasta}" />
+						</h:panelGrid>
+						<p:message for="fechaCreacion" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputText value="Usuario Transacción" />
+						<p:inputText styleClass="avaluos-input-txt" id="usuarioTransaccion" value="#{historicoBean.consulta.usuarioTransaccion}" size="32" />
+						<p:message for="usuarioTransaccion" />
+					</h:panelGrid>
+					<h:panelGrid>
+						<h:outputText value="#{etq.fechaTransaccion}" />
+						<h:panelGrid columns="2" id="fechaTransaccion">
+							<p:calendar styleClass="avaluos-calendar" id="fechaTransaccionDesde" value="#{historicoBean.consulta.fechaTransaccionDesde}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<p:calendar styleClass="avaluos-calendar" id="fechaTransaccionHasta" value="#{historicoBean.consulta.fechaTransaccionHasta}" showOn="both" size="6"
+								pattern="#{etq.formatoFecha}" />
+							<h:outputText value="#{etq.desde}" />
+							<h:outputText value="#{etq.hasta}" />
+						</h:panelGrid>
+						<p:message for="fechaTransaccion" />
+					</h:panelGrid>
+				</h:panelGrid>
+				<p:panelGrid>
+					<p:commandButton styleClass="avaluos-btn-centro-consultar" id="consultarBtn" value="#{etq.consultar}" actionListener="#{historicoBean.consultarAvaluo}"
+						rendered="#{historicoBean.verFiltros}" ajax="true" update="consultarHistoricoForm errorForm" />
+					<p:defaultCommand target="consultarBtn" />
+				</p:panelGrid>
+				<!--Tabla de consulta-->
+				<h:outputText value="#{etq.hca_resultados}" styleClass="avaluos-tittle2" rendered="#{historicoBean.mostrarTabla}" />
+				<p:separator rendered="#{historicoBean.mostrarTabla}" />
+				<p:dataTable styleClass="avaluos-resultado-consulta-historicos" id="ResultData" var="avaluo" scrollable="true" value="#{historicoBean.listado}"
+					widgetVar="entidadTable" rendered="#{historicoBean.mostrarTabla}" emptyMessage="#{etq.ca_no_existen_registro}" lazy="true"
+					currentPageReportTemplate="{currentPage}/{totalPages}" paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true"
+					rows="#{historicoBean.registroPagina}" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+					<p:column headerText="#{etq.hca_consecutivo}" width="150" sortBy="#{avaluo.codigoBanco}">
+						<h:outputText value="#{avaluo.codigoBanco}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_tipo_identificacion}" width="120" sortBy="#{avaluo.idTipoIdentificacion}">
+						<h:outputText value="#{lista.descDominio('TIPOIDENTIFICACION', avaluo.idTipoIdentificacion)}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_numero_identificacion}" width="120" sortBy="#{avaluo.numeroIdentificacion}">
+						<h:outputText value="#{avaluo.numeroIdentificacion}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_nombreSolicitante}" width="150" sortBy="#{avaluo.nombreSolicitante}">
+						<h:outputText value="#{avaluo.nombreSolicitante}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_telefono}" width="150" sortBy="#{avaluo.telefonoSolicitante}">
+						<h:outputText value="#{avaluo.telefonoSolicitante}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_celular}" width="150" sortBy="#{avaluo.celularSolicitante}">
+						<h:outputText value="#{avaluo.celularSolicitante}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_correo}" width="150" sortBy="#{avaluo.correoSolicitante}">
+						<h:outputText value="#{avaluo.correoSolicitante}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_estado}" width="60" sortBy="#{avaluo.estadoAvaluo}">
+						<h:outputText value="#{lista.descDominio('ESTADOAVALUO',avaluo.estadoAvaluo)}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_nombre_banco}" width="150" sortBy="#{avaluo.nombreBanco}">
+						<h:outputText value="#{avaluo.nombreBanco}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_tipo_informe}" width="120" sortBy="#{avaluo.tipoInforme}">
+						<h:outputText value="#{lista.descDominio('TIPOINFORME', avaluo.tipoInforme)}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_tipo_avaluo}" width="60" sortBy="#{avaluo.idMetodologia}">
+						<h:outputText value="#{lista.descDominio('METODOLOGIA',avaluo.idMetodologia)}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_objeto_avaluo}" width="60" sortBy="#{avaluo.idObjetoAvaluo}">
+						<h:outputText value="#{lista.descDominio('OBJETOAVALUO',avaluo.idObjetoAvaluo)}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_fecha_avaluo}" width="80" sortBy="#{avaluo.fechaAvaluo}">
+						<h:outputText value="#{avaluo.fechaAvaluo}">
+							<f:convertDateTime pattern="#{etq.formatoFecha}" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.fecha_creacion}" width="80" sortBy="#{avaluo.fechaCreacion}">
+						<h:outputText value="#{avaluo.fechaCreacion}">
+							<f:convertDateTime pattern="#{etq.formatoFecha}" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.fecha_transaccion}" width="80" sortBy="#{avaluo.fechaTransaccion}">
+						<h:outputText value="#{avaluo.fechaTransaccion}">
+							<f:convertDateTime pattern="#{etq.formatoFecha}" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_consecutivo_banco}" width="100" sortBy="#{avaluo.consecutivoBanco}">
+						<h:outputText value="#{avaluo.consecutivoBanco}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_barrio}" width="100" sortBy="#{avaluo.barrio}">
+						<h:outputText value="#{avaluo.barrio}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_direccion}" width="100" sortBy="#{avaluo.direccionInmueble}">
+						<h:outputText value="#{avaluo.direccionInmueble} #{avaluo.direccionComplementaria}" />
+					</p:column>
+					<p:column headerText="#{etq.hca_justificacion}" width="100" sortBy="#{avaluo.justificacion}">
+						<h:outputText value="#{avaluo.justificacion}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_conjunto_edificio}" width="100" sortBy="#{avaluo.nombreConjuntoEdificio}">
+						<h:outputText value="#{avaluo.nombreConjuntoEdificio}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_sector}" width="100" sortBy="#{avaluo.sector}">
+						<h:outputText value="#{avaluo.sector}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="#{etq.hca_matricula_inmobiliaria}" width="100" sortBy="#{avaluo.matriculaInmobiliaria}">
+						<h:outputText value="#{avaluo.matriculaInmobiliaria}">
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

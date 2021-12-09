@@ -1,0 +1,133 @@
+<!-- 
+ * Interfaz para la gestión de las ubicaciones del sistema, tanto departamentos
+ * como ciudades.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="listadoDepartamentoForm">
+			<p:panelGrid columns="2" style="width:100%">
+				<p:panelGrid columns="1">
+					<h:outputText value="#{etq.dep_titulo}" styleClass="avaluos-tittle" />
+					<p:separator />
+				</p:panelGrid>
+				<p:commandButton styleClass="avaluos-add-row" value="#{etq.dep_crear_departamento}" actionListener="#{departamentoBean.nuevo}"
+					update="departamentoForm,errorForm" />
+			</p:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" id="DepartamentoData" var="departamento" value="#{departamentoBean.listado}" widgetVar="departamentoTable"
+				lazy="true" emptyMessage="#{etq.no_existen_registro}" currentPageReportTemplate="{currentPage}/{totalPages}" scrollable="true"
+				paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}" paginator="true" rows="#{departamentoBean.registroPagina}"
+				paginatorPosition="bottom" paginatorAlwaysVisible="false" rowKey="#{departamento.idDepartamento}">
+				<p:column width="40">
+					<p:commandButton styleClass="avaluos-ver-opt" id="menuEmpresa" type="button" icon="ui-icon-gear">
+						<p:menu styleClass="avaluos-ver-opt" id="menuOpcionesEmpresa" overlay="true" trigger="menuEmpresa" my="left top" at="left bottom">
+							<p:menuitem styleClass="avaluos-edit" value="#{etq.editar}" actionListener="#{departamentoBean.editar}" update="departamentoForm,errorForm" />
+							<p:menuitem styleClass="avaluos-cta-borrar" value="#{etq.eliminar}" actionListener="#{departamentoBean.eliminar}" update=" DepartamentoData,errorForm">
+								<p:confirm header="#{etq.confirmar}" message="#{etq.confirmarEliminacion}" icon="ui-icon-alert" />
+							</p:menuitem>
+							<p:menuitem styleClass="avaluos-cta-gen-aceptar" ajax="true" value="#{etq.dep_ver_ciudades}" actionListener="#{departamentoBean.verCiudades}"
+								update=" listadoDepartamentoForm,ciudadForm,errorForm" />
+						</p:menu>
+					</p:commandButton>
+				</p:column>
+				<p:column sortBy="#{departamento.departamento}">
+					<f:facet name="header">
+						<table>
+							<tr>
+								<td style="border: 0px;"><h:outputText value="#{etq.dep_departamento}" /></td>
+							</tr>
+							<tr>
+								<td style="border: 0px;"><p:inputText styleClass="avaluos-texto" id="departamentoFiltro" value="#{departamentoBean.filtro.departamento}"
+										maxlength="60">
+										<p:ajax event="keyup" listener="#{departamentoBean.consultar}" update="DepartamentoData" delay="300" />
+									</p:inputText></td>
+							</tr>
+						</table>
+					</f:facet>
+					<h:outputText value="#{departamento.departamento}" />
+				</p:column>
+				<p:column headerText="#{etq.dep_codigo_asobancaria}" sortBy="#{departamento.codAsobancaria}">
+					<h:outputText value="#{departamento.codAsobancaria}" />
+				</p:column>
+				<p:column headerText="#{etq.dep_codigo_dane}" sortBy="#{departamento.codDane}">
+					<h:outputText value="#{departamento.codDane}" />
+				</p:column>
+				<p:column headerText="#{etq.dep_codigo_tronador}" sortBy="#{departamento.codDivpol}">
+					<h:outputText value="#{departamento.codDivpol}" />
+				</p:column>
+			</p:dataTable>
+			<p:panelGrid columns="2" styleClass="avaluos-botones-ciudades">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" ajax="true" value="#{etq.dep_sincronizar}" actionListener="#{departamentoBean.sincronizar}"
+					update=" listadoDepartamentoForm,errorForm" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+	<ui:define name="popups">
+		<h:form id="departamentoForm">
+			<p:dialog styleClass="avaluos-modal-formulario" id="departamentoPopup"
+				header="#{departamentoBean.esNuevo ? etq.dep_departamento_nuevo : etq.dep_departamento_editar}" widgetVar="#{departamentoBean.popupId}"
+				visible="#{departamentoBean.ver}" closable="true" closeOnEscape="true" modal="true" resizable="false">
+				<p:ajax event="close" update="departamentoForm" listener="#{departamentoBean.ocultar}" />
+				<h:panelGrid columns="1" rendered="#{not empty departamentoBean.departamento}">
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.dep_codigo_asobancaria_f}" />
+							<p:inputNumber styleClass="avaluos-input-txt" id="codigoAsobancaria" maxlength="22" value="#{departamentoBean.departamento.codAsobancaria}"
+								decimalPlaces="0" />
+							<p:message for="codigoAsobancaria" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.dep_codigo_divpol_f}" />
+							<p:inputNumber styleClass="avaluos-input-txt" id="codigoDivpol" maxlength="22" value="#{departamentoBean.departamento.codDivpol}" decimalPlaces="0" />
+							<p:message for="codigoDivpol" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.dep_codigo_dane_f}" />
+							<p:inputNumber styleClass="avaluos-input-txt" id="codigoDane" maxlength="22" value="#{departamentoBean.departamento.codDane}" decimalPlaces="0" />
+							<p:message for="codigoDane" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.dep_departamento_f}" />
+							<p:inputText styleClass="avaluos-input-txt" id="departamento" value="#{departamentoBean.departamento.departamento}" maxlength="60" />
+							<p:message for="departamento" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.usuario_creacion}" />
+							<h:outputLabel value="#{departamentoBean.departamento.usuarioCreacion}" id="usuCreacion" />
+							<p:message for="usuCreacion" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.fecha_creacion}" />
+							<h:outputLabel value="#{departamentoBean.departamento.fechaCreacion}" id="fechaCreacion">
+								<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+							</h:outputLabel>
+							<p:message for="fechaCreacion" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.usuario_transaccion}" />
+							<h:outputLabel value="#{departamentoBean.departamento.usuarioTransaccion}" id="usuTransaccion" />
+							<p:message for="usuTransaccion" />
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="#{etq.fecha_transaccion}" />
+							<h:outputLabel value="#{departamentoBean.departamento.fechaTransaccion}" id="fechaTransaccion">
+								<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+							</h:outputLabel>
+							<p:message for="fechaTransaccion" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid columns="2" styleClass="avaluos-btn-nueva-ciudad-modal">
+						<p:commandButton styleClass="avaluos-cta-gen-aceptar" actionListener="#{departamentoBean.guardar}" value="#{etq.guardar}" ajax="true"
+							update="listadoDepartamentoForm,departamentoForm,errorForm" icon="ui-icon-check" />
+						<p:commandButton styleClass="avaluos-cta-gen-cancelar" actionListener="#{departamentoBean.cancelar}" value="#{etq.cancelar}" ajax="true"
+							update="departamentoForm,errorForm" icon="ui-icon-check" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<ui:include src="ciudad.xhtml" />
+	</ui:define>
+</ui:composition>

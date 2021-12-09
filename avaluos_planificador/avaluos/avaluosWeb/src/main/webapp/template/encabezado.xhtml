@@ -1,0 +1,66 @@
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" columns="6" style="width:100%;">
+		<h:outputScript target="head">
+ 			 (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+  				n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+
+ 				 ineum('reportingUrl', 'https://eum-orange-saas.instana.io');
+  				 ineum('key', 'rKFurmn0TReBfGPYealUrg');
+ 				 ineum('trackSessions');
+		</h:outputScript>
+		<script  defer="defer" crossorigin="anonymous" src="https://eum.instana.io/eum.min.js"></script>	
+<script>
+	var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+	var eventer = window[eventMethod];
+	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+	eventer(messageEvent,function (e) {
+ 	// console.log('parent received message!:  ',e.data);
+ 	 //console.log(document.getElementById("menuForm:menuPrincipal").style.display);
+  	var estado = document.getElementById("menuForm:menuPrincipal").style.display;
+  		if (estado == "block"){
+            document.getElementById("menuForm:menuPrincipal").style.display = "none";
+        					}
+			},false);
+</script>
+	
+	<div class="titulo-menu" id="titulo-menu">
+		<h:form  id="menuForm">		   
+			<p:remoteCommand name="refrescarEncabezado" autoRun="true" update="encabezadoForm" />
+			<p:remoteCommand update="contenidocentral, encabezadoForm" name="actualizarMenu" actionListener="#{sesion.cambioMenu}" />
+			<p:commandButton styleClass="avaluos-menu" id="dynaButton" icon="fa fa-align-justify" title="MENU" type="button" />
+			<p:menu overlay="true"  trigger="dynaButton" my="left top" at="left bottom" id="menuPrincipal" toggleable="true" model="#{sesion.menu}" visibility="visible" >			
+			</p:menu>
+		</h:form>
+	</div>
+	<div class="titulo-cabezote">
+		<img src="#{request.contextPath}/avaluos/resources/images/logo.png" />
+	</div>
+	<div class="titulo-cabezote">
+		<h:form id="encabezadoForm">
+			<h:panelGrid id="encabezadoPanel" columns="3">
+				<!-- 			<p:remoteCommand update="" name="refrescarAprobacion"  /> -->
+				<p:commandButton id="botonConsulta" styleClass="avaluos-cta-consulta" value="Informe Avaluo Comercial" actionListener="#{sesion.informeAvaluo}"
+					update="encabezadoForm,errorForm" ajax="true" />
+<!-- 					<p:commandButton styleClass="avaluos-cta-consulta" value="Informe Avaluo Comercial" actionListener="#{sesion.informeAvaluo}"   oncomplete="this.disabled=true" ajax="false" /> -->
+				<p:commandButton styleClass="avaluos-cta-nuevo" value="Nuevo Avaluo" actionListener="#{avaluoBean.nuevo}" update="encabezadoForm errorForm" ajax="true"
+					disabled="#{not sesion.editable}" />
+				<p:commandButton styleClass="#{avaluoBean.estadoAprobado or not sesion.estaEditandoAvaluo? 'avaluos-cta-rayo-inactivo':'avaluos-rayo-activo'}"
+					style="float:right" value="#{etq.validar}" actionListener="#{avaluoBean.ejecutarValidador}" ajax="true"
+					update="contenidoActualizar,confirmacionPropiaForm,errorForm"
+					disabled="#{avaluoBean.estadoAprobado or avaluoBean.estadoEliminado or not sesion.estaEditandoAvaluo}" />
+			</h:panelGrid>
+			<p:blockUI block="encabezadoPanel" trigger="botonConsulta">
+				<p:graphicImage value="#{resource['images/ajax-processing.gif']}"/>
+			</p:blockUI>
+		</h:form>
+	</div>
+	<div class="titulo-sesion">
+		<label>BIENVENIDO</label><br /> <label>#{sesion.obtenerNombre}</label>
+	</div>
+	<div class="titulo-salir">
+		<h:form id="fBtnSalir">
+			<p:commandButton styleClass="avaluos-menu-salir" id="SalirButton" value="Salir" actionListener="#{sesion.cerrarSesion}" update="@all" ajax="false" />
+		</h:form>
+	</div>
+</h:panelGrid>

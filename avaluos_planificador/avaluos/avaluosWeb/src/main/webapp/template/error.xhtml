@@ -1,0 +1,38 @@
+<h:form id="errorForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:remoteCommand name="refrescarError" update="errorForm" />
+	<p:remoteCommand name="aceptarCommand" update="errorForm" actionListener="#{error.ocultar}" />
+	<p:dialog styleClass="#{error.esValidador ?'avaluos-rayo-val': (error.esError ? 'avaluos-errorModal':'avaluos-notificacion')}" id="errorPopup"
+		widgetVar="#{error.popupId}" width="400" hideEffect="" visible="#{error.ver}" closeOnEscape="true" appendToBody="true" modal="true" resizable="false"
+		closable="#{error.esValidador }" header="#{error.esValidador ? error.titulo:''}" focus="aceptarErrorBtn" >
+		<f:facet name="header">
+			<p:panelGrid columns="1">
+				<h:outputText value="#{etq.tit_validador}" rendered="#{error.esValidador}" />
+				<h:outputText value="#{error.titulo}" rendered="#{error.esValidador}" />
+			</p:panelGrid>
+		</f:facet>
+		<p:ajax event="close" update="@form" listener="#{error.ocultar}" />
+		<p:panelGrid style="width:100%; margin:0 auto; text-align:center;" columns="1">
+			<p:panelGrid style="width:100%; margin:0 auto; text-align:center;" rendered="#{error.esError}">
+				<img src="#{request.contextPath}/avaluos/resources/images/equis.png" />
+			</p:panelGrid>
+			<p:panelGrid style="width:100%; margin:0 auto; text-align:center;" rendered="#{error.esExitoso}">
+				<img src="#{request.contextPath}/avaluos/resources/images/chulo.png" />
+			</p:panelGrid>
+			<h:outputText id="tituloError" value="#{error.titulo}" styleClass="#{error.esExitoso ? 'exitoso':'error'}" rendered="#{not error.esValidador}" />
+			<p:separator rendered="#{not error.esValidador}" />
+			<h:outputText id="descripcionError" value="#{error.descripcion}" />
+			<p:separator rendered="#{error.esValidador}" />
+			<p:scrollPanel style="max-width:400px;max-height:200px" rendered="#{not empty error.detalle}">
+				<h:outputText value="#{error.detalle}" />
+			</p:scrollPanel>
+			<p:scrollPanel style="max-width:400px;max-height:200px" rendered="#{not empty error.anidados}">
+				<p:dataList id="anidadoError" var="anidado" value="#{error.anidados}">
+					<h:outputText value="#{anidado}" />
+				</p:dataList>
+			</p:scrollPanel>
+			<p:defaultCommand target="aceptarErrorBtn" />
+			<p:commandButton id="aceptarErrorBtn" value="#{etq.aceptar}" global="false" update="errorForm" actionListener="#{error.ocultar}" ajax="true" />
+		</p:panelGrid>
+	</p:dialog>
+</h:form>

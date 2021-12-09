@@ -1,0 +1,306 @@
+<!-- 
+ * Representa la sección para registrar la información del inmueble asociado a un
+ * avalúo. Hace parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:44 a.m.
+ -->
+<h:panelGrid id="infoInmueble" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" styleClass="avaluos-table-inf-inmueble">
+	<p:focus for="tipoVivienda" id="focusTipoVivienda" />
+	<h:panelGrid columns="4" rowClasses="avaluos-tr-inmueble">
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="tipoVivienda" value="#{etq.inm_tipoVivienda}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="tipoVivienda" value="#{inmuebleBean.inmueble.tipoVivienda}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('TIPOVIVIENDA')}" />
+				</p:selectOneMenu>
+				<p:message for="tipoVivienda" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="usoInmueble" value="#{etq.inm_usoInmueble}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="usoInmueble" value="#{inmuebleBean.inmueble.usoInmueble}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('USOINMUEBLE')}" />
+				</p:selectOneMenu>
+				<p:message for="usoInmueble" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="otroUsoInmueble" value="#{etq.inm_otroUsoInmueble}" />
+				<p:inputText styleClass="avaluos-texto" id="otroUsoInmueble" value="#{inmuebleBean.inmueble.otroUsoInmueble}" maxlength="30"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="otroUsoInmueble" />
+			</h:panelGrid>
+		</p:column>
+		<p:column />
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="claseInmueble" value="#{etq.inm_claseInmueble}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="claseInmueble" value="#{inmuebleBean.inmueble.claseInmueble}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CLASEINMUEBLE')}" />
+				</p:selectOneMenu>
+				<p:message for="claseInmueble" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="otroClase" value="#{etq.inm_otroClase}" />
+				<p:inputText styleClass="avaluos-texto" id="otroClase" value="#{inmuebleBean.inmueble.otroClase}" maxlength="30" disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="otroClase" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="idCategoria" value="#{etq.inm_idCategoria}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="idCategoria" value="#{inmuebleBean.inmueble.idCategoria}"
+					valueChangeListener="#{inmuebleBean.cambiarCategoria}" disabled="#{not inmuebleBean.editable}">
+					<p:ajax event="change" update="ubicacion3Seccion" />
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('CATEGORIA')}" />
+				</p:selectOneMenu>
+				<p:message for="idCategoria" />
+			</h:panelGrid>
+		</p:column>
+		<p:column />
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="ubicacion2" value="#{etq.inm_ubicacion2}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="ubicacion2" value="#{inmuebleBean.inmueble.ubicacion2}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('UBICACION2')}" />
+				</p:selectOneMenu>
+				<p:message for="ubicacion2" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="ediContUso" value="#{etq.inm_ediContUso}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="ediContUso" value="#{inmuebleBean.inmueble.ediContUso}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('AFIRMAR')}" />
+				</p:selectOneMenu>
+				<p:message for="ediContUso" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid id="ubicacion3Seccion">
+				<h:panelGrid rendered="#{inmuebleBean.verUbicacion3}">
+					<p:outputLabel styleClass="avaluos-lbl-campo" for="ubicacion3" value="#{etq.inm_ubicacion3}" />
+					<p:selectOneMenu styleClass="avaluos-texto" id="ubicacion3" value="#{inmuebleBean.inmueble.ubicacion3}" disabled="#{not inmuebleBean.editable}">
+						<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{lista.cargarLista('UBICACION3')}" />
+					</p:selectOneMenu>
+					<p:message for="ubicacion3" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:column>
+		<p:column />
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="notaria" value="#{etq.inm_notaria}" />
+				<p:inputText styleClass="avaluos-texto" id="notaria" value="#{inmuebleBean.inmueble.notaria}" maxlength="5" disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="notaria" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="numeroEscritura" value="#{etq.inm_numeroEscritura}" />
+				<p:inputText styleClass="avaluos-texto" id="numeroEscritura" value="#{inmuebleBean.inmueble.numeroEscritura}" maxlength="5"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="numeroEscritura" />
+			</h:panelGrid>
+		</p:column>
+		<p:column />
+		<p:column />
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="departamentoEscritura" value="#{etq.inm_departamentoEscritura}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="departamentoEscritura" value="#{inmuebleBean.inmueble.departamentoEscritura}"
+					valueChangeListener="#{inmuebleBean.cambiarDepartamento}" disabled="#{not inmuebleBean.editable}">
+					<p:ajax update="ciudadSeccion,avaluoForm:errorEspecifico, avaluoForm:edicionAvaluosTab:latitud,avaluoForm:edicionAvaluosTab:longitud" event="change" />
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+				</p:selectOneMenu>
+				<p:message for="departamentoEscritura" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid id="ciudadSeccion" columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="ciudadEscritura" value="#{etq.inm_ciudadEscritura}" />
+				<p:selectOneMenu styleClass="avaluos-texto" id="ciudadEscritura" value="#{inmuebleBean.inmueble.ciudadEscritura}" disabled="#{not inmuebleBean.editable}">
+					<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{inmuebleBean.ciudades}" />
+				</p:selectOneMenu>
+				<p:message for="ciudadEscritura" />
+			</h:panelGrid>
+		</p:column>
+		<p:column />
+		<p:column />
+		<p:column styleClass="avaluos-tr-inmueble">
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inm_fechaEscritura}" />
+				<p:calendar styleClass="avaluos-calendar" id="fechaEscritura" value="#{inmuebleBean.inmueble.fechaEscritura}" pattern="#{etq.formatoFecha}" mask="true"
+					disabled="#{not inmuebleBean.editable}" showOn="both"/>
+			</h:panelGrid>
+			<p:message for="fechaEscritura" />
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaPpal1" value="#{etq.inm_matriculaInmobiliariaPpal1}" />
+				<h:panelGrid columns="2">
+					<p:inputText styleClass="avaluos-texto" id="matriculaInmobiliariaPpal1" value="#{inmuebleBean.inmueble.matriculaInmobiliariaPpal1}" maxlength="20"
+						disabled="#{not inmuebleBean.editable}">
+					</p:inputText>
+					<p:commandButton value="#{inmuebleBean.verMatriculaInmobiliaria ? etq.inm_quitarMatricular: etq.inm_agregarMatricular}"
+						actionListener="#{inmuebleBean.verMatricula}" update="infoInmueble,errorForm" ajax="true" disabled="#{not inmuebleBean.editable}" />
+				</h:panelGrid>
+				<p:message for="matriculaInmobiliariaPpal1" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaInmobiliaria}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaPpal2" value="#{etq.inm_matriculaInmobiliariaPpal2}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaPpal2" value="#{inmuebleBean.inmueble.matriculaInmobiliariaPpal2}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaPpal2" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaGaraje1" value="#{etq.inm_matriculaInmobiliariaGaraje1}" />
+				<h:panelGrid columns="3">
+					<p:inputText styleClass="avaluos-texto" id="matriculaInmobiliariaGaraje1" value="#{inmuebleBean.inmueble.matriculaInmobiliariaGaraje1}" maxlength="20"
+						disabled="#{not inmuebleBean.editable}">
+					</p:inputText>
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inm_agregarMatricular}" actionListener="#{inmuebleBean.verGaraje}"
+						update="avaluoForm,errorForm" ajax="true" rendered="#{inmuebleBean.verMatriculaGaraje lt 4}" disabled="#{not inmuebleBean.editable}" />
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.inm_quitarMatricular}" actionListener="#{inmuebleBean.quitarGaraje}"
+						update="avaluoForm,errorForm" ajax="true" rendered="#{inmuebleBean.verMatriculaGaraje gt 0}" disabled="#{not inmuebleBean.editable}" />
+				</h:panelGrid>
+				<p:message for="matriculaInmobiliariaGaraje1" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaGaraje ge 1}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaGaraje2" value="#{etq.inm_matriculaInmobiliariaGaraje2}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaGaraje2" value="#{inmuebleBean.inmueble.matriculaInmobiliariaGaraje2}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaGaraje2" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaGaraje ge 2}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaGaraje3" value="#{etq.inm_matriculaInmobiliariaGaraje3}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaGaraje3" value="#{inmuebleBean.inmueble.matriculaInmobiliariaGaraje3}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaGaraje3" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaGaraje ge 3}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaGaraje4" value="#{etq.inm_matriculaInmobiliariaGaraje4}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaGaraje4" value="#{inmuebleBean.inmueble.matriculaInmobiliariaGaraje4}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaGaraje4" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaGaraje ge 4}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaGaraje5" value="#{etq.inm_matriculaInmobiliariaGaraje5}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaGaraje5" value="#{inmuebleBean.inmueble.matriculaInmobiliariaGaraje5}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaGaraje5" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaDeposito1" value="#{etq.inm_matriculaInmobiliariaDeposito1}" />
+				<h:panelGrid columns="2">
+					<p:inputText styleClass="avaluos-texto" id="matriculaInmobiliariaDeposito1" value="#{inmuebleBean.inmueble.matriculaInmobiliariaDeposito1}" maxlength="20"
+						disabled="#{not inmuebleBean.editable}">
+					</p:inputText>
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{inmuebleBean.verMatriculaDeposito ? etq.inm_quitarMatricular: etq.inm_agregarMatricular}"
+						actionListener="#{inmuebleBean.verDeposito}" update="avaluoForm,errorForm" ajax="true" disabled="#{not inmuebleBean.editable}" />
+				</h:panelGrid>
+				<p:message for="matriculaInmobiliariaDeposito1" />
+			</h:panelGrid>
+		</p:column>
+		<p:column rendered="#{inmuebleBean.verMatriculaDeposito}">
+			<h:panelGrid columns="1" styleClass="avaluos-table-matricula">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="matriculaInmobiliariaDeposito2" value="#{etq.inm_matriculaInmobiliariaDeposito2}" />
+				<p:inputText styleClass="avaluos-texto avaluos-input-no-btn" id="matriculaInmobiliariaDeposito2" value="#{inmuebleBean.inmueble.matriculaInmobiliariaDeposito2}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="matriculaInmobiliariaDeposito2" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="chip" value="#{etq.inm_chip}" />
+				<p:inputText styleClass="avaluos-texto" id="chip" value="#{inmuebleBean.inmueble.chip}" maxlength="20" disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="chip" />
+			</h:panelGrid>
+		</p:column>
+		<p:column>
+			<h:panelGrid columns="1">
+				<p:outputLabel styleClass="avaluos-lbl-campo" for="catastralSF" value="#{etq.inm_catastralSF}" />
+				<p:inputText styleClass="avaluos-texto" id="catastralSF" value="#{inmuebleBean.inmueble.catastralSF}" maxlength="20"
+					disabled="#{not inmuebleBean.editable}">
+				</p:inputText>
+				<p:message for="catastralSF" />
+			</h:panelGrid>
+		</p:column>
+	</h:panelGrid>
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaInmueble" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not inmuebleBean.ocultarAuditoria ? etq.inm_ocultarAuditoria : etq.inm_mostrarAuditoria}" styleClass="avaluos-ver-content"
+			toggleable="true" collapsed="#{inmuebleBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{inmuebleBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaInmueble" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{inmuebleBean.inmueble.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.inm_fechaCreacion}" />
+					<h:outputText value="#{inmuebleBean.inmueble.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{inmuebleBean.inmueble.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.inm_fechaTransaccion}" />
+					<h:outputText value="#{inmuebleBean.inmueble.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	<h:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{inmuebleBean.anterior}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" oncomplete="rcActualizarMapa();" />
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{inmuebleBean.siguiente}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" oncomplete="rcActualizarMapa();" />
+	</h:panelGrid>
+</h:panelGrid>

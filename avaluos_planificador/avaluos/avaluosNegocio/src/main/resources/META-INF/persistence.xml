@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--- 
+Archivo de configuracion para los Estos parametros de persistencia,
+cache y transaccionalidad de JPA (Eclipselink)
+-->
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<!--- unidad de persistencia y tipo de conexcion (Datasource/Url)-->
+	<persistence-unit name="avaluosJpa" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<!--- Datasource -->
+<!-- desarrollo -->
+<!-- 		<jta-data-source>jdbc/avaluosDS</jta-data-source>  -->
+<!-- pruebas -->
+<!--  		<jta-data-source>jdbc/AvaluosPruebaDS</jta-data-source>  -->
+<!-- Producción -->
+      <jta-data-source>jdbc/avaluoswebDS</jta-data-source>
+		<!-- Entidades (POJOS) -->
+		<class>com.segurosbolivar.avaluos.modelo.entity.CargueTmp</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ArchivosTmp</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.PeritosEmpresa</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Observaciones</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.MaestroCarguePK</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.MaestroCargue</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.LogsGeneraArchivo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.LiquidacionAvaluoTotal</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.LiquidacionAvaluo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.InformacionInmueble</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.InformacionConstruccion</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.InformacionBarrio</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.HorasCorteArchivo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.HistoricoAvaluo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.FormatoAvaluo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ArchivoPlano</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ErroresCarguePK</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ErroresCargue</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.EmpresasAvaluos</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Dominios</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Departamento</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.CondicionesSalubridad</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ComportamientoOfertaDemanda</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Ciudad</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Calendario</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Archivo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.AnexoFotografico</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Alarma</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.AlertaAvaluos</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.BloqLogsGeneraArchivo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.HistoricoLogsGeneraArch</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.ListaAnexosPdf</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Avaluo</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.DaReglaEstDir</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.VResumenCargue</class>
+		<class>com.segurosbolivar.avaluos.modelo.entity.Parametrizacion</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadAvicola</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadFinanciera</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadFinancieraSolicitud</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadFinancieraSolicitudPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadGanadera</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadPiscicola</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ActividadPorcicola</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Beneficiario</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.BeneficiarioPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Cultivo</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.DatosUnidad</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Documento</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.MedioComunicacion</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Parametro</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ParametroValor</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ParametroValorPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Planificador</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.PlanificadorPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Predio</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ProductoRelacionado</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ProductoRelacionadoSolicitud</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ProductoRelacionadoSolicitudPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Solicitud</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.SolicitudBeneficiario</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.SolicitudBeneficiarioPK</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.SolicitudMovimiento</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Soporte</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.TecnificacionAgricola</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.Unidad</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.UnidadProductiva</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ValorPorcentaje</class>
+		<class>com.segurosbolivar.avaluos.planificador.modelo.entity.ValorPorcentajePK</class>
+
+		<!--- 
+	 	  Propiedades de configuracion de JPA Eclipselink
+		-->		
+		<properties>
+			<!--- Nivel de log -->				
+			<!--<property name="javax.persistence.logging.level" value="FINE" />-->
+			<property name="eclipselink.target-database" value="Oracle"/>	
+			<property name="javax.persistence.session-name" value="avaluosSession"/>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
+			<property name="javax.persistence.target-server" value="WebLogic_12" />
+			<!--- Exclusion de entidades del cache -->
+			
+			<property name="javax.persistence.cache.type.EmpresasAvaluos" value="NONE" />
+			<property name="eclipselink.cache.type.VResumenCargue" value="NONE" />
+			<property name="javax.persistence.cache.type.HorasCorteArchivo" value="NONE"/>
+			<property name="eclipselink.logging.timestamp" value="true"/>
+			<property name="javax.persistence.query.timeout" value="200000"/>
+			<property name="eclipselink.logging.thread" value="true"/>
+			<property name="eclipselink.logging.session" value="true"/>
+			<property name="eclipselink.logging.exceptions" value="true"/>
+			<property name="eclipselink.jdbc.cache-statements" value="true"/>
+			<property name="eclipselink.logging.level" value="off"/>
+			<property name="eclipselink.jdbc.batch-writing" value="oracle-jdbc"/>
+			<property name="eclipselink.jdbc.batch-writing.size" value="150"/>
+		</properties>
+	</persistence-unit>
+</persistence>

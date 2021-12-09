@@ -1,0 +1,250 @@
+<!-- 
+ * Representa la sección para registrar la información del barrio asociado a un
+ * avalúo. Hace parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:43 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" styleClass="avaluos-table-inf-barrio">
+	<h:panelGrid columns="5">
+		<p:column>
+			<h:panelGrid styleClass="avaluos-div-campos-barrio avaluos-tabla-serv-publico" columns="1">
+				<h:outputLabel value="#{etq.inb_ServiciosPublicos}"  styleClass="avaluos-tittle-lab-barrio"/>
+				<h:panelGrid columns="3" cellpadding="0" cellspacing="0">
+					<h:outputLabel />
+					<h:outputLabel value="#{etq.inb_Sector}" />
+					<h:outputLabel value="#{etq.inb_predio}" />
+					<h:outputLabel value="#{etq.inb_acueduto}" />
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="acueductoSector" value="#{barrioBean.barrio.acueductoSector}"
+							disabled="#{not barrioBean.editable}" />
+						<p:focus for="acueductoSector" id="focusAcueducto" />
+						<p:message for="acueductoSector" />
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="acueductoPredio" value="#{barrioBean.barrio.acueductoPredio}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="acueductoPredio" />
+					</p:outputPanel>
+					<h:outputLabel value="#{etq.inb_alcantarillado}" />
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="alcantarilladoSector" value="#{barrioBean.barrio.alcantarilladoSector}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="alcantarilladoSector" />
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="alcantarilladoPredio" value="#{barrioBean.barrio.alcantarilladoPredio}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="alcantarilladoPredio" />
+					</p:outputPanel>
+					<h:outputLabel value="#{etq.inb_electricidad}" />
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="electricidadSector" value="#{barrioBean.barrio.electricidadSector}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="electricidadSector" />
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="electricidadPredio" value="#{barrioBean.barrio.electricidadPredio}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="electricidadPredio" />
+					</p:outputPanel>
+					<h:outputLabel value="#{etq.inb_gas}" />
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="gasSector" value="#{barrioBean.barrio.gasSector}" disabled="#{not barrioBean.editable}" />
+						<p:message for="gasSector" />
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="gasPredio" value="#{barrioBean.barrio.gasPredio}" disabled="#{not barrioBean.editable}" />
+						<p:message for="gasPredio" />
+					</p:outputPanel>
+					<h:outputLabel value="#{etq.inb_telefono}" />
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="telefonoSector" value="#{barrioBean.barrio.telefonoSector}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="telefonoSector" />
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="telefonoPredio" value="#{barrioBean.barrio.telefonoPredio}"
+							disabled="#{not barrioBean.editable}" />
+						<p:message for="telefonoPredio" />
+					</p:outputPanel>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:column>
+		<p:separator style="height:220px;" />
+		<p:column>
+			<h:panelGrid styleClass="avaluos-div-campos-barrio" columns="1">
+				<h:outputLabel value="#{etq.inb_UsoPredominante}"  styleClass="avaluos-tittle-lab-barrio"/>
+				<h:panelGrid columns="3">
+					<h:outputLabel value="#{etq.inb_vivienda}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="vivienda" value="#{barrioBean.barrio.vivienda}" disabled="#{not barrioBean.editable}" />
+					<p:message for="vivienda" />
+					<h:outputLabel value="#{etq.inb_industria}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="industria" value="#{barrioBean.barrio.industria}" disabled="#{not barrioBean.editable}" />
+					<p:message for="industria" />
+					<h:outputLabel value="#{etq.inb_comercio}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="comercio" value="#{barrioBean.barrio.comercio}" disabled="#{not barrioBean.editable}" />
+					<p:message for="comercio" />
+					<h:outputLabel value="#{etq.inb_otrosUsos}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="otrosUsos" value="#{barrioBean.barrio.otrosUsos}" disabled="#{not barrioBean.editable}">
+						<p:ajax update="textoOtrosUsos" event="change" listener="#{barrioBean.cambiarOtrosUsos}" />
+					</p:selectBooleanCheckbox>
+					<p:message for="otrosUsos" />
+					<h:outputLabel value="#{etq.inb_textoOtrosUsos}" />
+					<p:inputText styleClass="avaluos-input-txt" id="textoOtrosUsos" value="#{barrioBean.barrio.barrio.textoOtrosUsos}"
+						disabled="#{not barrioBean.barrio.otrosUsos and not barrioBean.editable}" maxlength="30" />
+					<p:message for="textoOtrosUsos" />
+					<h:outputLabel value="#{etq.inb_edificacionesIguales}" />
+					<p:inputNumber styleClass="avaluos-input-txt" id="edificacionesIguales" value="#{barrioBean.barrio.barrio.edificacionesIguales}" decimalPlaces="0"
+						minValue="0" maxValue="99999" maxlength="5" disabled="#{not barrioBean.editable}" />
+					<p:message for="edificacionesIguales" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:column>
+		<p:separator style="height:220px;" />
+		<p:column>
+			<h:panelGrid styleClass="avaluos-div-campos-barrio" columns="1">
+				<h:outputLabel value="#{etq.inb_ViasAcceso}"  styleClass="avaluos-tittle-lab-barrio"/>
+				<h:panelGrid columns="3">
+					<h:outputLabel value="#{etq.inb_estadosViaAcceso}" />
+					<p:selectOneMenu styleClass="avaluos-dropdown" id="estadosViaAcceso" value="#{barrioBean.barrio.barrio.estadosViaAcceso}"
+						disabled="#{not barrioBean.editable}">
+						<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{lista.cargarLista('MBR')}" />
+					</p:selectOneMenu>
+					<p:message for="estadosViaAcceso" />
+					<h:outputLabel value="#{etq.inb_pavimentada}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="pavimentada" value="#{barrioBean.barrio.pavimentada}" disabled="#{not barrioBean.editable}" />
+					<p:message for="pavimentada" />
+					<h:outputLabel value="#{etq.inb_andenes}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="andenes" value="#{barrioBean.barrio.andenes}" disabled="#{not barrioBean.editable}" />
+					<p:message for="andenes" />
+					<h:outputLabel value="#{etq.inb_sardeneles}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="sardeneles" value="#{barrioBean.barrio.sardeneles}" disabled="#{not barrioBean.editable}" />
+					<p:message for="sardeneles" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:column>
+	</h:panelGrid>
+	<p:separator />
+	<h:panelGrid columns="3">
+		<p:column>
+			<h:panelGrid styleClass="avaluos-div-campos-barrio" columns="1">
+				<h:outputLabel value="#{etq.inb_AmoblamientoUrbano}"  styleClass="avaluos-tittle-lab-barrio"/>
+				<h:panelGrid columns="3">
+					<h:outputLabel value="#{etq.inb_parques}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="parques" value="#{barrioBean.barrio.parques}" disabled="#{not barrioBean.editable}" />
+					<p:message for="parques" />
+					<h:outputLabel value="#{etq.inb_paradero}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="paradero" value="#{barrioBean.barrio.paradero}" disabled="#{not barrioBean.editable}" />
+					<p:message for="paradero" />
+					<h:outputLabel value="#{etq.inb_alumbrado}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="alumbrado" value="#{barrioBean.barrio.alumbrado}" disabled="#{not barrioBean.editable}" />
+					<p:message for="alumbrado" />
+					<h:outputLabel value="#{etq.inb_zonasVerdes}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="zonasVerdes" value="#{barrioBean.barrio.zonasVerdes}" disabled="#{not barrioBean.editable}" />
+					<p:message for="zonasVerdes" />
+					<h:outputLabel value="#{etq.inb_arborizacion}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="arborizacion" value="#{barrioBean.barrio.arborizacion}" disabled="#{not barrioBean.editable}" />
+					<p:message for="arborizacion" />
+					<h:outputLabel value="#{etq.inb_alamedas}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="alamedas" value="#{barrioBean.barrio.alamedas}" disabled="#{not barrioBean.editable}" />
+					<p:message for="alamedas" />
+					<h:outputLabel value="#{etq.inb_cicloRutas}" />
+					<p:selectBooleanCheckbox styleClass="avaluos-checkbox" id="cicloRutas" value="#{barrioBean.barrio.cicloRutas}" disabled="#{not barrioBean.editable}" />
+					<p:message for="cicloRutas" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:column>
+		<p:separator style="height:300px;" />
+		<h:panelGrid styleClass="avaluos-div-campos-barrio" columns="1">
+			<h:outputLabel value="#{etq.inb_InformacionAdicional}"  styleClass="avaluos-tittle-lab-barrio"/>
+			<h:panelGrid columns="2">
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inb_estrato}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="estrato" value="#{barrioBean.barrio.barrio.estrato}" disabled="#{not barrioBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('ESTRATO')}" />
+						</p:selectOneMenu>
+						<p:message for="estrato" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inb_legalidad}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="legalidad" value="#{barrioBean.barrio.barrio.legalidad}" disabled="#{not barrioBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('LEGALBARRIO')}" />
+						</p:selectOneMenu>
+						<p:message for="legalidad" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inb_topografia}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="topografia" value="#{barrioBean.barrio.barrio.topografia}" disabled="#{not barrioBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('TOPOGRAFIA')}" />
+						</p:selectOneMenu>
+						<p:message for="topografia" />
+					</h:panelGrid>
+				</p:column>
+				<p:column>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.inb_transporte}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="transporte" value="#{barrioBean.barrio.barrio.transporte}" disabled="#{not barrioBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('MBR')}" />
+						</p:selectOneMenu>
+						<p:message for="transporte" />
+					</h:panelGrid>
+				</p:column>
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="#{etq.inb_perspectivas}" />
+				<p:inputTextarea styleClass="avaluos-parrafo" id="perspectivas" value="#{barrioBean.barrio.barrio.perspectivas}" counter="displayperspectivas"
+					counterTemplate="{0} #{etq.caracteres}" maxlength="500" cols="60" disabled="#{not barrioBean.editable}" />
+				<h:outputText id="displayperspectivas" />
+				<p:message for="perspectivas" />
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:panelGrid>
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaBarrio" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not barrioBean.ocultarAuditoria ? etq.inb_ocultarAuditoria : etq.inb_mostrarAuditoria}" styleClass="avaluos-ver-content" toggleable="true"
+			collapsed="#{barrioBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{barrioBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaBarrio" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{barrioBean.barrio.barrio.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.inb_fechaCreacion}" />
+					<h:outputText value="#{barrioBean.barrio.barrio.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{barrioBean.barrio.barrio.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.inb_fechaTransaccion}" />
+					<h:outputText value="#{barrioBean.barrio.barrio.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	<h:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{barrioBean.anterior}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" oncomplete="rcActualizarMapa();" />
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{barrioBean.siguiente}" update="edicionAvaluosTab,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" oncomplete="rcActualizarMapa();" />
+	</h:panelGrid>
+</h:panelGrid>

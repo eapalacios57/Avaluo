@@ -1,0 +1,127 @@
+<h:form id="constructorForm" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<p:dialog styleClass="#{constructorBean.verConstructora ? 'avaluos-modal-constructora': 'avaluos-modal-formulario'}" id="constructorPopup"
+		header="#{constructorBean.verConstructora?etq.con_titulo_constructora:etq.con_titulo}" widgetVar="dlg_ConstructorPopup"
+		width="#{constructorBean.verConstructora?400:1000}" hideEffect="" visible="#{constructorBean.ver}" closable="true" closeOnEscape="true" appendToBody="true"
+		modal="false" resizable="false">
+		<p:ajax event="close" update="constructorForm" listener="#{constructorBean.ocultar}" />
+		<p:remoteCommand name="actualizarTabla" process="@all" action="#{constructorBean.actualizarTabla}" update="constructorPopup" />
+		<h:panelGrid id="seccionConstructora" columns="1" rendered="#{constructorBean.verConstructora}">
+			<p:watermark value="#{etq.inc_codigoNombreConstructora}" for="codigoNombreConstructora" />
+			<p:selectOneMenu styleClass="avaluos-texto" id="codigoNombreConstructora" value="#{constructorBean.codigoNombreConstructora}"
+				valueChangeListener="#{constructorBean.cambiarConstructora}">
+				<p:ajax update="seccionConstructora" event="change" />
+				<f:selectItem itemLabel="#{etq.inc_codigoNombreConstructora}" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{lista.cargarLista('NOMBRECONSTRUCTORA')}" />
+			</p:selectOneMenu>
+			<p:message for="codigoNombreConstructora" />
+			<p:watermark value="#{etq.con_nombre_constructora}" for="nombreConstructora" rendered="#{constructorBean.verNombreConstructora}" />
+			<p:inputText styleClass="avaluos-texto" id="nombreConstructora" value="#{constructorBean.nombreConstructora}" maxlength="100"
+				rendered="#{constructorBean.verNombreConstructora}" />
+			<p:message for="nombreConstructora" />
+			<h:panelGrid columns="3">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.actualizar}" actionListener="#{constructorBean.aceptarConstructora}" ajax="true"
+					update="constructorForm,errorForm" />
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.cancelar}" actionListener="#{constructorBean.ocultar}" ajax="true"
+					update="constructorForm,errorForm" />
+			</h:panelGrid>
+		</h:panelGrid>
+		<h:panelGrid rendered="#{!constructorBean.verConstructora}" rowClasses="avaluos-tittle-multiple">
+			<h:outputText value="#{etq.con_copiar_pegar}" />
+			<p:dataTable styleClass="avaluos-gen-table" id="tablaConstructor" widgetVar="tablaConstructorWv" paginator="fakse" var="avaluo" scrollable="true"
+				scrollHeight="400" value="#{constructorBean.copias}" binding="#{constructorBean.tabla}">
+				<f:facet name="emptyMessage">
+					<p:outputLabel value="#{etq.con_no_existen_registro}" styleClass="avaluos-textoInicial-constructor"/>
+				</f:facet>
+				<p:column headerText="#{etq.con_nombreSolicitante}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="nombreSolicitante" value="#{avaluo.nombreSolicitante}" maxlength="60" />
+					<p:message for="nombreSolicitante" />
+				</p:column>
+				<p:column headerText="#{etq.con_tipoIdentificacion}" width="230">
+					<p:selectOneMenu styleClass="avaluos-dropdown" id="idTipoIdentificacion" value="#{avaluo.idTipoIdentificacion}">
+						<f:selectItem itemLabel="#{etq.ina_tipoDocumento}" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+					</p:selectOneMenu>
+					<p:message for="idTipoIdentificacion" />
+				</p:column>
+				<p:column headerText="#{etq.con_numeroIdentificacion}" width="140">
+					<p:inputNumber styleClass="avaluos-input-txt" id="numeroIdentificacion" value="#{avaluo.numeroIdentificacion}" decimalPlaces="0" minValue="0"
+						maxValue="9999999999999999" immediate="true" maxlength="10" />
+					<p:message for="numeroIdentificacion" />
+				</p:column>
+				<p:column headerText="#{etq.con_direccionInmueble}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="direccionInmueble" value="#{avaluo.direccionInmueble}" maxlength="100"
+						valueChangeListener="#{constructorBean.cambiarDireccion}">
+						<p:ajax event="change" update="direccionInmueble direccionimu direccionComplementaria" />
+					</p:inputText>
+					<p:message id="direccionimu" for="direccionInmueble" />
+				</p:column>
+				<p:column headerText="#{etq.con_direccionComplementaria}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="direccionComplementaria" value="#{avaluo.direccionComplementaria}" maxlength="100"
+						valueChangeListener="#{constructorBean.cambiarDireccionComplementaria}">
+						<p:ajax event="change" update="direccionComplementaria" />
+					</p:inputText>
+					<p:message for="direccionComplementaria" />
+				</p:column>
+				<p:column headerText="#{etq.con_telefono}" width="140">
+					<p:inputNumber styleClass="avaluos-input-txt" id="telefonoSolicitante" value="#{avaluo.telefonoSolicitante}" decimalPlaces="0" minValue="0"
+						thousandSeparator="" maxValue="9999999999999999" />
+					<p:message for="telefonoSolicitante" />
+				</p:column>
+				<p:column headerText="#{etq.con_celular}" width="150">
+					<p:inputNumber styleClass="avaluos-input-txt" id="celularSolicitante" value="#{avaluo.celularSolicitante}" decimalPlaces="0" minValue="0"
+						thousandSeparator="" maxValue="9999999999999999" />
+					<p:message for="celularSolicitante" />
+				</p:column>
+				<p:column headerText="#{etq.con_email}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="correoSolicitante" value="#{avaluo.correoSolicitante}" maxlength="30" />
+					<p:message for="correoSolicitante" />
+				</p:column>
+				<p:column headerText="#{etq.con_matriculaInmobiliaria1}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliariaPpal1" value="#{avaluo.matriculaInmobiliariaPpal1}" maxlength="20" />
+					<p:message for="matriculaInmobiliariaPpal1" />
+				</p:column>
+				<p:column headerText="#{etq.con_matriculaInmobiliaria2}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliariaPpal2" value="#{avaluo.matriculaInmobiliariaPpal2}" maxlength="20" />
+					<p:message for="matriculaInmobiliariaPpal2" />
+				</p:column>
+				<p:column headerText="#{etq.con_garaje1}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliariaGaraje1" value="#{avaluo.matriculaInmobiliariaGaraje1}" maxlength="20" />
+					<p:message for="matriculaInmobiliariaGaraje1" />
+				</p:column>
+				<p:column headerText="#{etq.con_garaje2}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliariaGaraje2" value="#{avaluo.matriculaInmobiliariaGaraje2}" maxlength="20" />
+					<p:message for="matriculaInmobiliariaGaraje2" />
+				</p:column>
+				<p:column headerText="#{etq.con_deposito}" width="140">
+					<p:inputText styleClass="avaluos-input-txt" id="matriculaInmobiliariaDeposito1" value="#{avaluo.matriculaInmobiliariaDeposito1}" maxlength="20" />
+					<p:message for="matriculaInmobiliariaDeposito1" />
+				</p:column>
+				<p:column width="70">
+					<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.eliminar}" actionListener="#{constructorBean.eliminarFila}" ajax="true"
+						update="constructorForm" />
+				</p:column>
+			</p:dataTable>
+			<h:panelGrid columns="3">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.con_ejecutarConstructor}" action="#{constructorBean.guardar}"
+					update="constructorForm,errorForm"/>
+				<p:commandButton styleClass="avaluos-add-row" value="#{etq.con_agregar}" actionListener="#{constructorBean.agregar}" ajax="true"
+					update="constructorForm,errorForm" />
+				<p:commandButton styleClass="avaluos-cta-cancelar" value="#{etq.cancelar}" actionListener="#{constructorBean.ocultar}" ajax="true"
+					update="constructorForm,errorForm" />
+			</h:panelGrid>
+		</h:panelGrid>
+	</p:dialog>
+	<script>
+		$(function() {
+			PF("dlg_ConstructorPopup").jq.on("paste", function(e) {
+				e.preventDefault();
+				var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+				actualizarTabla([ {
+					name : 'data',
+					value : text
+				} ]);
+			});
+		});
+	</script>
+</h:form>

@@ -1,0 +1,317 @@
+<!-- 
+  Esta pantalla permite la gestión de las empresas avaluadoras asociadas al banco
+  davivienda y la asociación de lo peritos existentes en la plataforma de
+  terceros, a una empresa avaluadora.
+  @author stilaguy
+  @version 1.0
+  @created 31-ago-2017 10:30:42 a.m.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="listadoEmpresaForm">
+			<p:panelGrid columns="2" style="width:100%">
+				<h:outputText value="#{etq.emp_titulo}" styleClass="avaluos-tittle" />
+				<p:commandButton styleClass="avaluos-add-row"
+					value="#{etq.emp_crear_empresa}"
+					actionListener="#{empresasAvaluadorasBean.nuevo}"
+					update="empresaForm,errorForm" />
+				<p:separator />
+			</p:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" id="empresaData"
+				var="empresa" value="#{empresasAvaluadorasBean.listado}"
+				widgetVar="empresaTabla" lazy="true"
+				currentPageReportTemplate="{currentPage}/{totalPages}"
+				paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}"
+				paginator="true" rows="#{empresasAvaluadorasBean.registroPagina}"
+				style="margin-bottom:20px" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" selectionMode="single"
+				rowKey="#{empresa.idEmpresaAvaluo}"
+				selection="#{empresasAvaluadorasBean.empresa}" scrollable="true">
+				<p:ajax event="page" update="errorForm" />
+				<p:ajax event="sort" update="errorForm" />
+				<p:column width="40">
+					<p:commandButton styleClass="avaluos-ver-opt" id="menu"
+						type="button" icon="ui-icon-gear">
+						<p:menu styleClass="avaluos-ver-opt" id="menuOpciones"
+							overlay="true" trigger="menu" my="left top" at="left bottom">
+							<p:menuitem styleClass="avaluos-edit" value="#{etq.editar}"
+								actionListener="#{empresasAvaluadorasBean.editar}"
+								update="empresaForm,errorForm" />
+							<p:menuitem styleClass="avaluos-cta-borrar"
+								value="#{etq.eliminar}" icon="fa fa-fw fa-trash-o"
+								actionListener="#{empresasAvaluadorasBean.eliminar}"
+								update="listadoEmpresaForm,errorForm">
+								<p:confirm header="#{etq.confirmar}"
+									message="#{etq.confirmarEliminacion}" icon="ui-icon-alert" />
+							</p:menuitem>
+							<p:menuitem value="#{etq.emp_asociar}"
+								actionListener="#{empresasAvaluadorasBean.asociarPerito}"
+								update="peritoForm,errorForm" />
+							<p:menuitem value="#{etq.emp_ver_peritos}"
+								actionListener="#{empresasAvaluadorasBean.consultarPeritos}"
+								update="peritoForm,errorForm" />
+						</p:menu>
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="#{etq.emp_tipo_documento}"
+					sortBy="#{empresa.idTipoIdentificacion}">
+					<h:outputText
+						value="#{lista.descDominio('TIPOIDENTIFICACION',empresa.idTipoIdentificacion)}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_numero_documento}"
+					sortBy="#{empresa.numeroDocumento}">
+					<f:facet name="header">
+					<table>
+						<tr>
+							<td style="border: 0px;"><h:outputText
+									value="#{etq.emp_numero_documento}" /></td>
+						</tr>
+						<tr>
+							<td style="border: 0px;"><p:inputText
+									styleClass="avaluos-texto" id="numeroDocumentoFiltro"
+									value="#{empresasAvaluadorasBean.filtro.numeroDocumento}"
+									maxlength="60">
+									<p:ajax event="keyup"
+										listener="#{empresasAvaluadorasBean.consultar}"
+										update="empresaData" delay="300" />
+								</p:inputText></td>
+						</tr>
+					</table>
+					</f:facet>
+					<h:outputText value="#{empresa.numeroDocumento}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_razon_social}"
+					sortBy="#{empresa.descEmpresa}">
+					<f:facet name="header" >
+					<table>		
+						<tr>
+							<td style="border: 0px;"><h:outputText
+									value="#{etq.emp_razon_social}" /></td>
+						</tr>				
+						<tr>
+							<td style="border: 0px;"><p:inputText
+									styleClass="avaluos-texto" id="descEmpresaFiltro"
+									value="#{empresasAvaluadorasBean.filtro.descEmpresa	}"
+									maxlength="60">
+									<p:ajax event="keyup" listener="#{empresasAvaluadorasBean.consultar}"
+										update="empresaData" delay="300" />
+								</p:inputText></td>
+						</tr>
+					</table>
+					</f:facet>
+					<h:outputText value="#{empresa.descEmpresa}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_estado}" sortBy="#{empresa.estado}">
+					<h:outputText
+						value="#{lista.descDominio('ESTADO_ACTIVO',empresa.estado)}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_sucursal}"
+					sortBy="#{empresa.sucursalDavivienda}">
+					<h:outputText
+						value="#{empresa.sucursalDavivienda} #{lista.descDominio('DEPARTAMENTOS',empresa.sucursalDavivienda)}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_certificacion_raa}"
+					sortBy="#{empresa.registroSic}">
+					<h:outputText value="#{empresa.registroSic}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_registro_privado}"
+					sortBy="#{empresa.registroPrivado}">
+					<h:outputText value="#{empresa.registroPrivado}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_carga_archivo}"
+					sortBy="#{empresa.cargaArchivoPlano}">
+					<h:outputText
+						value="#{lista.descDominio('SI_NO',empresa.cargaArchivoPlano)}" />
+				</p:column>
+				<p:column headerText="#{etq.emp_logo}">
+					<p:graphicImage value="#{empresasAvaluadorasBean.imagenLogo}"
+						stream="false" width="150" height="150"
+						rendered="#{not empty empresasAvaluadorasBean.imagenLogo}"
+						styleClass="avaluos-img-emp" />
+				</p:column>
+				<p:column headerText="#{etq.emp_firma}">
+					<p:graphicImage value="#{empresasAvaluadorasBean.imagenFirma}"
+						stream="false" width="150" height="150"
+						rendered="#{not empty empresasAvaluadorasBean.imagenFirma}"
+						styleClass="avaluos-img-emp" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+	<!-- fin tabla de resultados -->
+	<!-- inicio formulario  -->
+	<ui:define name="popups">
+		<h:form id="empresaForm">
+			<p:dialog styleClass="avaluos-modal-formulario" id="empresaPopup"
+				header="#{etq.emp_empresa_avaluadora}"
+				widgetVar="#{empresasAvaluadorasBean.popupId}"
+				visible="#{empresasAvaluadorasBean.ver}" closable="true"
+				closeOnEscape="true" modal="true" resizable="false">
+				<p:ajax event="close" update="@form"
+					listener="#{empresasAvaluadorasBean.ocultar}" />
+				<h:panelGrid columns="2" cellpadding="5"
+					rendered="#{not empty empresasAvaluadorasBean.empresa}">
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_tipo_documento_f}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="tipoDocumento"
+							value="#{empresasAvaluadorasBean.empresa.idTipoIdentificacion}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('TIPOIDENTIFICACION')}" />
+						</p:selectOneMenu>
+						<p:message for="tipoDocumento" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_numero_documento_f}" />
+						<p:inputNumber styleClass="avaluos-input-txt" id="numeroDocumento"
+							value="#{empresasAvaluadorasBean.empresa.numeroDocumento}"
+							label="NumeroDocumento" decimalPlaces="0" maxlength="10"
+							maxValue="99999999999" minValue="0" thousandSeparator="" />
+						<p:message for="numeroDocumento" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_desc_empresa_f}" />
+						<p:inputText styleClass="avaluos-input-txt" id="descEmpresa"
+							value="#{empresasAvaluadorasBean.empresa.descEmpresa}"
+							label="DescEmpresa" />
+						<p:message for="descEmpresa" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_estado_f}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="estado"
+							value="#{empresasAvaluadorasBean.empresa.estado}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('ESTADO_ACTIVO')}" />
+						</p:selectOneMenu>
+						<p:message for="estado" />
+					</h:panelGrid>
+					<h:panelGrid id="seccionLogo">
+						<h:outputLabel value="#{etq.emp_logo_f}"
+							styleClass="avaluos-label-carga" />
+						<p:remoteCommand update="seccionLogo" name="refrescarLogo" />
+						<h:panelGrid styleClass="avaluo-imagen"
+							rendered="#{not empty empresasAvaluadorasBean.empresa.logo.anexo}">
+							<p:graphicImage
+								value="#{empresasAvaluadorasBean.obtenerImagen(empresasAvaluadorasBean.empresa.logo)}"
+								stream="false" id="logoImagen" width="150" height="150" />
+						</h:panelGrid>
+						<h:panelGrid columns="2" rowClasses="avaluos-btns-eliminar-cargar">
+							<p:fileUpload styleClass="avaluos-zona-cargando" id="logo"
+								invalidSizeMessage="#{etq.ref_msjSizeInvalido}"
+								invalidFileMessage="#{etq.ref_msjTipoArchivo}"
+								sizeLimit="1048576" uploadLabel="#{etq.emp_agregar_archivo}"
+								dragDropSupport="true"
+								fileUploadListener="#{empresasAvaluadorasBean.subirLogo}"
+								sequential="true" multiple="false" auto="true" mode="advanced"
+								label="#{etq.emp_carga_logo}" allowTypes="/(\.|\/)(jpeg)$/"
+								oncomplete="refrescarLogo()" />
+							<p:commandButton styleClass="avaluos-eliminar-carga"
+								id="eliminarLogo"
+								rendered="#{not empty empresasAvaluadorasBean.empresa.logo.anexo}"
+								action="#{empresasAvaluadorasBean.eliminarLogo}"
+								update="seccionLogo" ajax="true"
+								style="height:30px; width:30px;" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<h:panelGrid id="seccionFirma">
+						<h:outputLabel value="#{etq.emp_firma_f}"
+							styleClass="avaluos-label-carga" />
+						<p:remoteCommand update="seccionFirma" name="refrescarFirma" />
+						<h:panelGrid styleClass="avaluo-imagen"
+							rendered="#{not empty empresasAvaluadorasBean.empresa.firma.anexo}">
+							<p:graphicImage
+								value="#{empresasAvaluadorasBean.obtenerImagen(empresasAvaluadorasBean.empresa.firma)}"
+								stream="false" id="firmaImagen" width="150" height="150" />
+						</h:panelGrid>
+						<h:panelGrid columns="2" rowClasses="avaluos-btns-eliminar-cargar">
+							<p:fileUpload
+								styleClass="avaluos-zona-cargando avaluos-carga-firma"
+								id="firma" invalidSizeMessage="#{etq.ref_msjSizeInvalido}"
+								invalidFileMessage="#{etq.ref_msjTipoArchivo}"
+								sizeLimit="1048576" uploadLabel="#{etq.emp_agregar_archivo}"
+								dragDropSupport="true"
+								fileUploadListener="#{empresasAvaluadorasBean.subirFirma}"
+								sequential="true" multiple="false" auto="true" mode="advanced"
+								label="#{etq.emp_carga_firma}" allowTypes="/(\.|\/)(jpeg)$/"
+								oncomplete="refrescarFirma()" />
+							<p:commandButton styleClass="avaluos-eliminar-carga"
+								id="eliminarFirma"
+								rendered="#{not empty empresasAvaluadorasBean.empresa.firma.anexo}"
+								action="#{empresasAvaluadorasBean.eliminarFirma}"
+								update="seccionFirma" ajax="true"
+								style="height:30px; width:30px;" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<p:message for="logo" />
+					<p:message for="firma" />
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_certificacion_raa_f}" />
+						<p:inputText styleClass="avaluos-input-txt" id="registroSic"
+							value="#{empresasAvaluadorasBean.empresa.registroSic}"
+							label="RegistroSic" />
+						<p:message for="registroSic" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_registro_privado_f}" />
+						<p:inputText styleClass="avaluos-input-txt" id="registroPrivado"
+							value="#{empresasAvaluadorasBean.empresa.registroPrivado}"
+							label="RegistroPrivado" />
+						<p:message for="registroPrivado" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_carga_archivo_f}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown"
+							id="cargaArchivoPlano"
+							value="#{empresasAvaluadorasBean.empresa.cargaArchivoPlano}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" />
+							<f:selectItems value="#{lista.cargarLista('SI_NO')}" />
+						</p:selectOneMenu>
+						<p:message for="cargaArchivoPlano" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{etq.emp_sucursal_f}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown"
+							id="sucursalDavivienda"
+							value="#{empresasAvaluadorasBean.empresa.sucursalDavivienda}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('DEPARTAMENTOS')}" />
+						</p:selectOneMenu>
+						<p:message for="sucursalDavivienda" />
+					</h:panelGrid>
+					<!-- 					<h:outputLabel value="#{etq.usuario_creacion}" /> -->
+					<!-- 					<h:outputText value="#{empresasAvaluadorasBean.empresa.usuarioCreacion}" id="usuarioCreacion" /> -->
+					<!-- 					<p:message for="usuarioCreacion" /> -->
+					<!-- 					<h:outputLabel value="#{etq.fecha_creacion}" /> -->
+					<!-- 					<h:outputText value="#{empresasAvaluadorasBean.empresa.fechaCreacion}" id="fechaCreacion"> -->
+					<!-- 						<f:convertDateTime pattern="#{etq.formatoFechaHora}" /> -->
+					<!-- 					</h:outputText> -->
+					<!-- 					<p:message for="fechaCreacion" /> -->
+					<!-- 					<h:outputLabel value="#{etq.usuario_transaccion}" /> -->
+					<!-- 					<h:outputText value="#{empresasAvaluadorasBean.empresa.usuarioTransaccion}" id="usuarioTransaccion" /> -->
+					<!-- 					<p:message for="usuarioTransaccion" /> -->
+					<!-- 					<h:outputLabel value="#{etq.fecha_transaccion}" /> -->
+					<!-- 					<h:outputText value="#{empresasAvaluadorasBean.empresa.fechaTransaccion}" id="fechaTransaccion"> -->
+					<!-- 						<f:convertDateTime pattern="#{etq.formatoFechaHora}" /> -->
+					<!-- 					</h:outputText> -->
+					<!-- 					<p:message for="fechaTransaccion" /> -->
+				</h:panelGrid>
+				<h:panelGrid columns="2"
+					rendered="#{not empty empresasAvaluadorasBean.empresa}">
+					<p:commandButton styleClass="avaluos-cta-gen-aceptar"
+						actionListener="#{empresasAvaluadorasBean.guardar}"
+						value="#{etq.aceptar}" ajax="true"
+						update="listadoEmpresaForm,empresaForm,errorForm"
+						icon="ui-icon-check" />
+					<p:commandButton styleClass="avaluos-cta-gen-cancelar"
+						actionListener="#{empresasAvaluadorasBean.cancelar}"
+						value="#{etq.cancelar}" ajax="true" update="empresaForm" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<ui:include src="perito.xhtml" />
+	</ui:define>
+</ui:composition>

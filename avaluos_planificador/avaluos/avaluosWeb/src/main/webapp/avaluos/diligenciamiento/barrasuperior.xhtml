@@ -1,0 +1,40 @@
+<!-- 
+ * Contiene los botones de comandos comunes para todos los tabs de la edicion de avaluos.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:41 a.m.
+ -->
+<h:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<h:panelGrid columns="6" style="width:100%;" styleClass="avaluos-btns-add-avaluo">
+		<p:commandLink styleClass="avaluos-btn-aprobar" value="#{etq.aprobar}" actionListener="#{avaluoBean.aprobar}" ajax="true" update="contenidoActualizar,confirmacionPropiaForm,errorForm"
+		 rendered="#{sesion.permisosEspecificos.get('APROBADOR')}" disabled="#{avaluoBean.esNuevo or avaluoBean.estadoAprobado or avaluoBean.estadoEliminado}">
+			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" />
+		</p:commandLink>
+<!-- 		<p:commandButton styleClass="avaluos-btn-aprobar" value="#{etq.aprobar}" actionListener="#{avaluoBean.aprobar}" ajax="true" update="contenidoActualizar,confirmacionPropiaForm,errorForm" -->
+<!-- 			rendered="#{sesion.permisosEspecificos.get('APROBADOR')}" disabled="#{avaluoBean.esNuevo or avaluoBean.estadoAprobado or avaluoBean.estadoEliminado}"> -->
+<!-- 			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" /> -->
+<!-- 		</p:commandButton> -->
+		<p:separator style="height:20px;" rendered="#{sesion.permisosEspecificos.get('APROBADOR')}" />
+		<p:commandLink styleClass="avaluos-imprimir" value="#{etq.imprimir}" actionListener="#{avaluoBean.imprimir}" ajax="true" update="avaluoForm,errorForm"
+			disabled="#{avaluoBean.esNuevo}">
+			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" />
+		</p:commandLink>
+<!-- 		<p:commandButton styleClass="avaluos-imprimir" value="#{etq.imprimir}" actionListener="#{avaluoBean.imprimir}" ajax="true" update="avaluoForm,errorForm" -->
+<!-- 			disabled="#{avaluoBean.esNuevo}"> -->
+<!-- 			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" /> -->
+<!-- 		</p:commandButton> -->
+		<p:separator style="height:20px;" rendered="#{sesion.permisosEspecificos.get('APROBADOR_HIJO')}" />
+		<p:commandLink styleClass="avaluos-btn-enviar-aprobr" value="#{etq.enviarAprobacion}" actionListener="#{avaluoBean.enviarAprobacion}" ajax="true"
+			update="avaluoForm,errorForm" disabled="#{avaluoBean.estadoAprobado or not avaluoBean.envioAprobacion or avaluoBean.esNuevo}"
+			rendered="#{sesion.permisosEspecificos.get('APROBADOR_HIJO')}">
+			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" />
+		</p:commandLink>
+<!-- 		<p:commandButton styleClass="avaluos-btn-enviar-aprobr" value="#{etq.enviarAprobacion}" actionListener="#{avaluoBean.enviarAprobacion}" ajax="true" -->
+<!-- 			update="avaluoForm,errorForm" disabled="#{avaluoBean.estadoAprobado or not avaluoBean.envioAprobacion or avaluoBean.esNuevo}" -->
+<!-- 			rendered="#{sesion.permisosEspecificos.get('APROBADOR_HIJO')}"> -->
+<!-- 			<f:actionListener binding="#{avaluoBean.reLocalizarMapa()}" /> -->
+<!-- 		</p:commandButton> -->
+	</h:panelGrid>
+	<p:separator />
+</h:panelGrid>

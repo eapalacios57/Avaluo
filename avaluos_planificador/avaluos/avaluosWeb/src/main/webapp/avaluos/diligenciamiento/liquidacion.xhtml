@@ -1,0 +1,154 @@
+<!-- 
+ * Representa la sección para realizar la liquidación del valor del avalúo. Hace
+ * parte de la pantalla de editar avalúo individual.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:44 a.m.
+ -->
+<p:panelGrid xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" styleClass="avaluos-table-liq-avaluo">
+	<h:panelGrid cellpadding="5">
+		<p:row>
+			<p:column colspan="4">
+				<p:dataTable styleClass="avaluos-table-datos-liq" id="ResultData" var="liquidacion" value="#{liquidacionBean.listado}" widgetVar="entidadTable" rows="10"
+					paginatorPosition="bottom" paginatorAlwaysVisible="false">
+					<p:column headerText="#{etq.liq_descripcionLiquidacion}">
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="descripcionLiquidacion" value="#{liquidacion.descripcionLiquidacion}"
+							disabled="#{not liquidacionBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{liquidacionBean.listaDescLiq}" />
+						</p:selectOneMenu>
+						<p:message for="descripcionLiquidacion" />
+					</p:column>
+					<p:column headerText="#{etq.liq_descripcionDependencia}">
+						<p:inputText styleClass="avaluos-input-txt" id="descripcionDependencia" value="#{liquidacion.descripcionDependencia}" maxlength="20"
+							disabled="#{not liquidacionBean.editable}" />
+						<p:message for="descripcionDependencia" />
+					</p:column>
+					<p:column headerText="#{etq.liq_areaLiquidacion}">
+						<p:inputNumber styleClass="avaluos-input-txt" id="areaLiquidacion" value="#{liquidacion.areaLiquidacion}" decimalPlaces="2" minValue="0"
+							thousandSeparator="," maxValue="9999999" disabled="#{not liquidacionBean.editable}">
+							<p:ajax
+								update="valorTotal, avaluoForm:edicionAvaluosTab:totalAvaluo, avaluoForm:edicionAvaluosTab:avaluoUvr,avaluoForm:edicionAvaluosTab:valorAsegurable"
+								event="change" listener="#{liquidacionBean.calcularTotal(liquidacion)}" />
+						</p:inputNumber>
+						<p:message for="areaLiquidacion" />
+					</p:column>
+					<p:column headerText="#{etq.liq_valor}">
+						<p:inputNumber styleClass="avaluos-input-txt" id="valorLiquidacion" value="#{liquidacion.valor}" decimalPlaces="2" minValue="0" thousandSeparator=","
+							maxValue="999999999" symbol="$" disabled="#{not liquidacionBean.editable}">
+							<p:ajax
+								update="valorTotal, avaluoForm:edicionAvaluosTab:totalAvaluo, avaluoForm:edicionAvaluosTab:avaluoUvr,avaluoForm:edicionAvaluosTab:valorAsegurable"
+								event="change" listener="#{liquidacionBean.calcularTotal(liquidacion)}" />
+						</p:inputNumber>
+						<p:message for="valorLiquidacion" />
+					</p:column>
+					<p:column headerText="#{etq.liq_valorTotal}">
+						<h:inputText id="valorTotal" value="#{liquidacion.valorTotal}" disabled="true">
+							<f:converter converterId="moneda" />
+						</h:inputText>
+						<p:message for="valorTotal" />
+					</p:column>
+					<p:column width="50">
+						<p:commandButton styleClass="avaluos-cta-borrar" id="eliminarFila" actionListener="#{liquidacionBean.eliminarFila(liquidacion)}" ajax="true"
+							update="ResultData,avaluoForm:edicionAvaluosTab:totalAvaluo,avaluoForm:edicionAvaluosTab:avaluoUvr,avaluoForm:edicionAvaluosTab:valorAsegurable,avaluoForm:edicionAvaluosTab:botonAgregarPnl,errorForm"
+							icon="ui-icon-trash" disabled="#{not liquidacionBean.editable or not liquidacionBean.puedeEliminar}" />
+					</p:column>
+				</p:dataTable>
+				<p:focus id="focusLiquidacion" context="ResultData" />
+			</p:column>
+		</p:row>
+		<p:row>
+			<p:column colspan="5">
+				<p:commandButton id="botonAgregarPnl" styleClass="avaluos-add-row" value="#{etq.liq_agregar}" actionListener="#{liquidacionBean.agregar}"
+					rendered="#{liquidacionBean.puedeAgregar}" update="ResultData,totalAvaluo,botonAgregarPnl,errorForm" disabled="#{not liquidacionBean.editable}" />
+				<h:outputLabel value="#{etq.liq_maximo10}" styleClass="avaluos-label-maximo" />
+			</p:column>
+		</p:row>
+		<p:row>
+			<p:column colspan="3">
+				<p:panelGrid columns="3" layout="grid" styleClass="avaluos-info-liq-izquierda">
+					<h:panelGrid columns="1" layout="grid">
+						<h:outputLabel value="#{etq.liq_calificacion}" />
+						<p:watermark for="calificacion" value="#{etq.liq_calificacion}" />
+						<p:selectOneMenu styleClass="avaluos-dropdown" id="calificacion" value="#{liquidacionBean.total.calificacion}"
+							disabled="#{not liquidacionBean.editable}">
+							<f:selectItem itemLabel="#{etq.seleccione}" itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{lista.cargarLista('CALGARANTIA')}" />
+						</p:selectOneMenu>
+						<p:message for="calificacion" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" layout="grid">
+						<h:outputLabel value="#{etq.liq_valorUvrDia}" />
+						<p:inputNumber styleClass="avaluos-input-txt" id="valorUvrDia" value="#{liquidacionBean.total.valorUvrDia}" decimalPlaces="5" minValue="0"
+							thousandSeparator="," disabled="true" maxlength="20" />
+						<p:message for="valorUvrDia" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" layout="grid">
+						<h:outputLabel value="#{etq.liq_avaluoUvr}" />
+						<p:inputNumber styleClass="avaluos-input-txt" id="avaluoUvr" value="#{liquidacionBean.total.avaluoUvr}" decimalPlaces="5" minValue="0"
+							thousandSeparator="," disabled="true" maxlength="20" />
+						<p:message for="avaluoUvr" />
+					</h:panelGrid>
+				</p:panelGrid>
+			</p:column>
+			<p:column styleClass="avaluos-info-liq-derecha">
+				<h:panelGrid columns="1" layout="grid">
+					<h:outputLabel value="#{etq.liq_totalAvaluo}" />
+					<p:inputNumber styleClass="avaluos-input-txt" id="totalAvaluo" value="#{liquidacionBean.total.totalAvaluo}" decimalPlaces="2" minValue="0"
+						thousandSeparator="," disabled="true" maxlength="20" />
+					<p:message for="totalAvaluo" />
+				</h:panelGrid>
+				<h:panelGrid columns="1" layout="grid">
+					<h:outputLabel value="#{etq.liq_valorAsegurable}" />
+					<p:inputNumber styleClass="avaluos-input-txt" id="valorAsegurable" value="#{liquidacionBean.total.valorAsegurable}" decimalPlaces="2" minValue="0"
+						thousandSeparator="," disabled="true" maxlength="20" />
+					<p:message for="valorAsegurable" />
+				</h:panelGrid>
+				<p:separator rendered="#{sesion.permisosEspecificos['TRANSACCIONA']}" />
+				<h:panelGrid columns="1" layout="grid" rendered="#{sesion.permisosEspecificos['TRANSACCIONA']}">
+					<h:outputLabel value="#{etq.liq_costoTransaccion}" />
+					<p:inputNumber styleClass="avaluos-input-txt" id="costoTransaccion" value="#{liquidacionBean.total.numCostoTransaccion}" decimalPlaces="2" minValue="0"
+						thousandSeparator="," maxlength="20" disabled="#{not liquidacionBean.editable}" />
+					<p:message for="costoTransaccion" />
+				</h:panelGrid>
+			</p:column>
+		</p:row>
+	</h:panelGrid>
+	<p:separator />
+	<h:panelGrid id="seccionAuditoriaLiquidacion" styleClass="avaluos-mostrar-ocultar-aud">
+		<p:panel header="#{not liquidacionBean.ocultarAuditoria ? etq.liq_ocultarAuditoria : etq.liq_mostrarAuditoria}" styleClass="avaluos-ver-content"
+			toggleable="true" collapsed="#{liquidacionBean.ocultarAuditoria}">
+			<p:ajax event="toggle" listener="#{liquidacionBean.ocultar}" update="avaluoForm:edicionAvaluosTab:seccionAuditoriaLiquidacion" />
+			<h:panelGrid columns="7">
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{liquidacionBean.total.usuarioCreacion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.liq_fechaCreacion}" />
+					<h:outputText value="#{liquidacionBean.total.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel styleClass="avaluos-input-txt" value="#{liquidacionBean.total.usuarioTransaccion}" />
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{etq.liq_fechaTransaccion}" />
+					<h:outputText value="#{liquidacionBean.total.fechaTransaccion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaAuditoria}" />
+					</h:outputText>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:panelGrid>
+	<h:panelGrid columns="2" styleClass="avaluos-sig-atras-add">
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.anterior}" actionListener="#{liquidacionBean.anterior}" update="avaluoForm,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" />
+		<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.siguiente}" actionListener="#{liquidacionBean.siguiente}" update="avaluoForm,errorForm,avaluoForm:errorEspecifico"
+			ajax="true" />
+	</h:panelGrid>
+</p:panelGrid>

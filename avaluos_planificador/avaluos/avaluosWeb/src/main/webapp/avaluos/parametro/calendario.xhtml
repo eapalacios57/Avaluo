@@ -1,0 +1,102 @@
+<!-- 
+ * Pantalla del calendario que permite al usuario registrar la fechas no habiles
+ * en que no se procesara el archivo de procedatos respectivo para asobancaria.
+ * @author stilaguy
+ * @version 1.0
+ * @created 31-ago-2017 10:30:39 a.m.
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="calendarioConsultarForm">
+			<p:panelGrid columns="2" style="width:100%" styleClass="avaluos-title-button">
+				<h:outputText value="#{etq.cal_titulo}" styleClass="avaluos-tittle" />
+				<p:commandButton styleClass="avaluos-add-row" value="#{etq.cal_nuevo}" icon="ui-icon-star" actionListener="#{calendarioBean.nuevo}" update="calendarioForm"
+					ajax="true" />
+			</p:panelGrid>
+			<p:panelGrid columns="3" style="width:100%" styleClass="avaluos-filtros">
+				<p:panelGrid columns="1">
+					<h:outputText value="#{etq.cal_seleccione_anio_consultar}" />
+					<p:selectOneMenu styleClass="avaluos-dropdown" valueChangeListener="#{calendarioBean.filtrar}" onchange="submit()">
+						<f:selectItem itemLabel="#{etq.seleccione}" itemValue="0" />
+						<f:selectItems value="#{calendarioBean.anios}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:panelGrid columns="1">
+					<h:outputText value="#{etq.cal_digite_anio_cargar}" />
+					<p:inputNumber id="anioCargar" value="#{calendarioBean.anioCargar}" maxValue="2100" minValue="0" maxlength="4" />
+					<p:message for="anioCargar" />
+				</p:panelGrid>
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.cal_cargar_anio}" actionListener="#{calendarioBean.cargar}"
+					update="calendarioConsultarForm,errorForm" ajax="true" />
+			</p:panelGrid>
+			<p:dataTable styleClass="avaluos-gen-table" id="ResultData" var="calendario" value="#{calendarioBean.listado}" reflow="true" widgetVar="entidadTable"
+				dynamic="true" lazy="true" currentPageReportTemplate="{currentPage}/{totalPages}" paginatorTemplate="{PreviousPageLink}  {CurrentPageReport} {NextPageLink}"
+				paginator="true" rows="#{calendarioBean.registroPagina}" style="margin-bottom:20px" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+				scrollable="true" emptyMessage="#{etq.no_existen_registro}">
+				<p:column>
+					<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.eliminar}" actionListener="#{calendarioBean.eliminar}" update="calendarioConsultarForm"
+						ajax="true">
+						<p:confirm header="#{etq.confirmar}" message="#{etq.confirmarEliminacion}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="#{etq.cal_anio}" sortBy="#{calendario.anio}">
+					<h:outputText value="#{calendario.anio}" />
+				</p:column>
+				<p:column headerText="#{etq.cal_fecha_no_habil}" sortBy="#{calendario.fechaNoHabil}">
+					<h:outputText value="#{calendario.fechaNoHabil}">
+						<f:convertDateTime pattern="#{etq.formatoFecha}" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="#{etq.usuario_creacion}" sortBy="#{calendario.usuarioCreacion}">
+					<h:outputText value="#{calendario.usuarioCreacion}" />
+				</p:column>
+				<p:column headerText="#{etq.fecha_creacion}" sortBy="#{calendario.fechaCreacion}">
+					<h:outputText value="#{calendario.fechaCreacion}">
+						<f:convertDateTime pattern="#{etq.formatoFechaHora}" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+	<!-- fin tabla de resultados -->
+	<!-- inicio formulario calendario -->
+	<ui:define name="popups">
+		<h:form id="calendarioForm">
+			<p:dialog styleClass="avaluos-modal-formulario" id="calendarioPopup" header="#{etq.cal_ingreso_dias_festivos}" widgetVar="#{calendarioBean.popupId}"
+				visible="#{calendarioBean.ver}" closable="true" closeOnEscape="true" modal="true" resizable="false">
+				<p:ajax event="close" update="calendarioForm" listener="#{calendarioBean.ocultar}" />
+				<h:panelGrid columns="1" rendered="#{calendarioBean.creando}">
+					<h:panelGrid columns="2">
+						<p:calendar styleClass="avaluos-calendar" id="agregar" value="#{calendarioBean.fecha}" mode="inline">
+							<p:ajax event="dateSelect" listener="#{calendarioBean.agregar}" update="calendarioForm,errorForm" />
+						</p:calendar>
+						<p:dataTable styleClass="avaluos-gen-table" id="AgregarData" var="fecha" value="#{calendarioBean.fechasNuevas}" scrollable="true"
+							paginatorTemplate=" {PreviousPageLink} {NextPageLink} " emptyMessage="#{etq.ca_no_existen_registro}" binding="#{calendarioBean.tablaFechas}"
+							paginator="true" rows="#{calendarioBean.registroPagina}" style="margin-bottom:20px" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+							tableStyle="width:auto">
+							<f:facet name="header">
+								<h:outputText value="#{etq.cal_fecha_seleccionada}" />
+							</f:facet>
+							<p:column width="100px">
+								<h:outputText value="#{fecha}">
+									<f:convertDateTime pattern="#{etq.formatoFechaCalendario}" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<p:commandButton styleClass="avaluos-cta-borrar" value="#{etq.quitar}" actionListener="#{calendarioBean.quitar}" update=" calendarioForm" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+					<h:panelGrid columns="2" styleClass="avaluos-calendario-button">
+						<p:commandButton styleClass="avaluos-cta-gen-aceptar" value="#{etq.guardar}" actionListener="#{calendarioBean.guardar}"
+							update="calendarioForm,calendarioConsultarForm,errorForm" rendered="#{not empty calendarioBean.fechasNuevas}" ajax="true" />
+						<p:commandButton styleClass="avaluos-cta-gen-cancelar" value="#{etq.cancelar}" actionListener="#{calendarioBean.cancelar}" update="calendarioForm"
+							ajax="true" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:dialog>
+			<!-- fin formulario calendario -->
+		</h:form>
+	</ui:define>
+</ui:composition>

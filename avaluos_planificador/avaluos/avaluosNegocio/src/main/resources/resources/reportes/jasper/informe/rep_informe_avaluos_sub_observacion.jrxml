@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_informe_avaluos_sub_observacion" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="146ed50d-cc76-4255-8a4a-cc6c604d1f25">
+	<property name="ireport.zoom" value="2.8039511958511394"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="observacionAvaluo" class="java.lang.String">
+		<fieldDescription><![CDATA[observacionAvaluo]]></fieldDescription>
+	</field>
+	<field name="direccionAnexos" class="java.lang.String">
+		<fieldDescription><![CDATA[direccionAnexos]]></fieldDescription>
+	</field>
+	<field name="idObservacion" class="java.lang.Long">
+		<fieldDescription><![CDATA[idObservacion]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<field name="usuarioTransaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaTransaccion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="idArchivo" class="java.lang.Long">
+		<fieldDescription><![CDATA[idArchivo]]></fieldDescription>
+	</field>
+	<field name="otrasDirecciones" class="java.lang.String">
+		<fieldDescription><![CDATA[otrasDirecciones]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="574" height="63" uuid="0e8c211c-e37d-4763-a7dc-7876da02fc4c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="97" y="0" width="205" height="8" uuid="7723afdc-3a7a-444c-a09e-41c32f7affef"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionAnexos}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="360" y="0" width="214" height="8" uuid="e9c9726d-976e-4e18-98af-53fa72820776"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otrasDirecciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="0" width="57" height="8" uuid="23ceb3b4-b8a2-42d3-b28f-e8159bee47d3"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCION ANEXOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="0" width="58" height="8" uuid="6f9d43ac-e529-46fc-af3e-9f647f8499ab"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[OTRAS DIRECCIONES]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="8" width="574" height="55" uuid="1868be29-f450-483f-859d-763856891e17">
+					<printWhenExpression><![CDATA[$F{observacionAvaluo}.length()>=1500]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="5" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacionAvaluo}==null?"":$F{observacionAvaluo}.contains("\n")?$F{observacionAvaluo}.replaceAll("\n"," "):$F{observacionAvaluo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="8" uuid="04df720f-51ae-41b6-98e8-7b180f0e6efb"/>
+				<box leftPadding="1" bottomPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteListadoAvaluos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="verAsegurabilidad" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="estadoAvaluoDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[estadoAvaluoDescripcion]]></fieldDescription>
+	</field>
+	<field name="numeroIdentificacion" class="java.lang.Long">
+		<fieldDescription><![CDATA[numeroIdentificacion]]></fieldDescription>
+	</field>
+	<field name="estadoConstruccionDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[estadoConstruccionDescripcion]]></fieldDescription>
+	</field>
+	<field name="asegurabilidadDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[asegurabilidadDescripcion]]></fieldDescription>
+	</field>
+	<field name="tipoViviendaNombre" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoViviendaNombre]]></fieldDescription>
+	</field>
+	<field name="departamento" class="com.segurosbolivar.avaluos.modelo.entity.Departamento">
+		<fieldDescription><![CDATA[departamento]]></fieldDescription>
+	</field>
+	<field name="estrato" class="java.lang.String">
+		<fieldDescription><![CDATA[estrato]]></fieldDescription>
+	</field>
+	<field name="valorTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorTotal]]></fieldDescription>
+	</field>
+	<field name="archivoZip" class="java.lang.String">
+		<fieldDescription><![CDATA[archivoZip]]></fieldDescription>
+	</field>
+	<field name="asegurabilidad" class="java.lang.String">
+		<fieldDescription><![CDATA[asegurabilidad]]></fieldDescription>
+	</field>
+	<field name="fechaImpresion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaImpresion]]></fieldDescription>
+	</field>
+	<field name="direccionInmueble" class="java.lang.String">
+		<fieldDescription><![CDATA[direccionInmueble]]></fieldDescription>
+	</field>
+	<field name="consecutivoBanco" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[consecutivoBanco]]></fieldDescription>
+	</field>
+	<field name="codTipoAvaluo" class="java.lang.Long">
+		<fieldDescription><![CDATA[codTipoAvaluo]]></fieldDescription>
+	</field>
+	<field name="nombreSolicitante" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreSolicitante]]></fieldDescription>
+	</field>
+	<field name="tipoDocumento" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoDocumento]]></fieldDescription>
+	</field>
+	<field name="nombreConjuntoEdificio" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreConjuntoEdificio]]></fieldDescription>
+	</field>
+	<field name="tipoInforme" class="java.lang.Long">
+		<fieldDescription><![CDATA[tipoInforme]]></fieldDescription>
+	</field>
+	<field name="tipoAvaluoNombre" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoAvaluoNombre]]></fieldDescription>
+	</field>
+	<field name="calificacion" class="java.lang.String">
+		<fieldDescription><![CDATA[calificacion]]></fieldDescription>
+	</field>
+	<field name="avance" class="java.lang.Long">
+		<fieldDescription><![CDATA[avance]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<field name="barrio" class="java.lang.String">
+		<fieldDescription><![CDATA[barrio]]></fieldDescription>
+	</field>
+	<field name="estadoAvaluo" class="java.lang.Long">
+		<fieldDescription><![CDATA[estadoAvaluo]]></fieldDescription>
+	</field>
+	<field name="ciudad" class="com.segurosbolivar.avaluos.modelo.entity.Ciudad">
+		<fieldDescription><![CDATA[ciudad]]></fieldDescription>
+	</field>
+	<field name="fechaAvaluo" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaAvaluo]]></fieldDescription>
+	</field>
+	<field name="direccionComplementaria" class="java.lang.String">
+		<fieldDescription><![CDATA[direccionComplementaria]]></fieldDescription>
+	</field>
+	<field name="vetustez" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[vetustez]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="informacionConstruccion" class="com.segurosbolivar.avaluos.modelo.entity.InformacionConstruccion">
+		<fieldDescription><![CDATA[informacionConstruccion]]></fieldDescription>
+	</field>
+	<field name="informacionBarrio" class="com.segurosbolivar.avaluos.modelo.entity.InformacionBarrio">
+		<fieldDescription><![CDATA[informacionBarrio]]></fieldDescription>
+	</field>
+	<field name="informacionInmueble" class="com.segurosbolivar.avaluos.modelo.entity.InformacionInmueble">
+		<fieldDescription><![CDATA[informacionInmueble]]></fieldDescription>
+	</field>
+	<field name="liquidacionTotal" class="com.segurosbolivar.avaluos.modelo.entity.LiquidacionAvaluoTotal">
+		<fieldDescription><![CDATA[liquidacionTotal]]></fieldDescription>
+	</field>
+	<field name="logsGeneraArchivo" class="com.segurosbolivar.avaluos.modelo.entity.LogsGeneraArchivo">
+		<fieldDescription><![CDATA[logsGeneraArchivo]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaPpal1" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaPpal1]]></fieldDescription>
+	</field>
+	<field name="sistemaCoordenadasBUA" class="java.lang.Long">
+		<fieldDescription><![CDATA[sistemaCoordenadasBUA]]></fieldDescription>
+	</field>
+	<field name="numLinea" class="java.lang.Long">
+		<fieldDescription><![CDATA[numLinea]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="31" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="49" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consecutivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="67" y="0" width="38" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[número Identificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="0" width="38" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="0" width="30" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ciudad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="29" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[tipo Avalúo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="49" y="0" width="18" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="105" y="0" width="37" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="239" y="0" width="30" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha Avalúo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="269" y="0" width="26" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Perito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="294" y="0" width="32" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Cargue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="326" y="0" width="28" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[nombre Edificio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="0" width="31" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[dirección]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="385" y="0" width="38" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricula Inmobiliaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="423" y="0" width="26" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[tipo Vivienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="449" y="0" width="37" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[estado Construcción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="486" y="0" width="22" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[estrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="508" y="0" width="20" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="528" y="0" width="22" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre TXT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="550" y="0" width="38" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha Impresión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="588" y="0" width="40" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="628" y="0" width="36" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Calificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="664" y="0" width="20" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="684" y="0" width="28" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vetustez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="712" y="0" width="20" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Linea]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="732" y="0" width="31" height="34" forecolor="#FFFFFF" backcolor="#009933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Archivo ZIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="763" y="0" width="39" height="34" forecolor="#FFFFFF" backcolor="#009933">
+					<printWhenExpression><![CDATA[$P{verAsegurabilidad}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[asegurabilidad]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="49" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="49" y="0" width="18" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="67" y="0" width="38" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="105" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="142" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="179" y="0" width="31" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="210" y="0" width="29" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="239" y="0" width="30" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="0" width="25" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="294" y="0" width="32" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="326" y="0" width="28" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="354" y="0" width="30" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="384" y="0" width="39" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="423" y="0" width="26" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="449" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="0" width="22" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="508" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="528" y="0" width="22" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="550" y="0" width="38" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="588" y="0" width="40" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="628" y="0" width="36" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="664" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="684" y="0" width="28" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="712" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="732" y="0" width="31" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="763" y="0" width="39" height="34">
+					<printWhenExpression><![CDATA[$P{verAsegurabilidad}]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="0" width="49" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{consecutivoBanco}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="49" y="0" width="18" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoDocumento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="67" y="0" width="38" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroIdentificacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="142" y="0" width="38" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{departamento}.getDepartamento()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="0" width="30" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciudad}.getCiudad()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="210" y="0" width="29" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoAvaluoNombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="105" y="0" width="37" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreSolicitante}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="239" y="0" width="29" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaAvaluo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="269" y="0" width="26" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarioCreacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="294" y="0" width="32" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaCreacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="326" y="0" width="28" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreConjuntoEdificio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="354" y="0" width="31" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{direccionInmueble}==null?"":$F{direccionInmueble})+($F{direccionComplementaria}==null?"":$F{direccionComplementaria})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="385" y="0" width="38" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{informacionInmueble}.getMatriculaInmobiliariaPpal1()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="423" y="0" width="26" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoViviendaNombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="449" y="0" width="37" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadoConstruccionDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="0" width="22" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estrato}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="508" y="0" width="20" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadoAvaluoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="528" y="0" width="22" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{logsGeneraArchivo}.getNombrePlano()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="550" y="0" width="38" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaImpresion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="588" y="0" width="40" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{liquidacionTotal}.getTotalAvaluo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="628" y="1" width="36" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{calificacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="664" y="1" width="20" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{informacionConstruccion}.getAvanceObra()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="684" y="0" width="28" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{informacionConstruccion}.getVetustez()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="712" y="0" width="20" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numLinea}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="732" y="0" width="31" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{logsGeneraArchivo}.getNombreArchivo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="763" y="0" width="39" height="33">
+					<printWhenExpression><![CDATA[$P{verAsegurabilidad}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asegurabilidadDescripcion}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="49" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="49" y="0" width="18" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="67" y="0" width="38" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="105" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="142" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="180" y="0" width="30" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="210" y="0" width="29" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="239" y="0" width="30" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="0" width="25" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="294" y="0" width="32" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="326" y="0" width="28" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="354" y="0" width="30" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="384" y="0" width="39" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="423" y="0" width="26" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="449" y="0" width="37" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="0" width="22" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="508" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="528" y="0" width="22" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="550" y="0" width="38" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="588" y="0" width="40" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="628" y="0" width="36" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="664" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="712" y="0" width="20" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="763" y="0" width="39" height="34">
+					<printWhenExpression><![CDATA[$P{verAsegurabilidad}]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="732" y="0" width="31" height="34"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="684" y="0" width="28" height="34"/>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

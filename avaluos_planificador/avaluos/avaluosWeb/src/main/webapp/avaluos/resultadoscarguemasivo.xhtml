@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/template/layout.xhtml">
+	<ui:define name="content">
+		<h:form id="cargueForm">
+			<p:tabView id="tab" activeIndex="1">
+				<p:tab title="#{etq.car_titulo}" disabled="#{sesion.permisosEspecificos.get('ADMINISTRADOR')}">
+					<ui:include src="/avaluos/carguemasivo/cargue.xhtml" />
+				</p:tab>
+				<p:tab title="#{etq.car_res_titulo}">
+					<ui:include src="/avaluos/carguemasivo/resultados.xhtml" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+	<ui:define name="popups">
+		<ui:include src="popup/popupperito.xhtml" />
+	</ui:define>
+</ui:composition>

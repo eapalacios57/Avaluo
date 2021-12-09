@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:gis="http://gisfaces.com">
+	<ui:define name="titulo">#{etq.inicio}</ui:define>
+	<ui:define name="content">
+			<p:panelGrid style="width:100%;" styleClass="avaluos-content-fondo" columns="1">		
+					<p:graphicImage value="/avaluos/resources/images/#{sesion.fondo}" />
+					<p:outputLabel styleClass="avaluos-home-tittle" value="Bienvenido al renovado portal de avalúos" />
+					<p:panelGrid id="homeSubtitle" columns="2">
+						<p:outputLabel styleClass="avaluos-home-subtittle" value="Ahora el registro de los avalúos será más rápido. Nuestro renovado portal te permitirá realizar un proceso más ágil y amigable, disminuyendo el tiempo que gastas. Ingresa y compruébalo." />
+						<h:panelGroup styleClass="footer-logo" />
+					</p:panelGrid>
+			</p:panelGrid>
+	</ui:define>
+</ui:composition>

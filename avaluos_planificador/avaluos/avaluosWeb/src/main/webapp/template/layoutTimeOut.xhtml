@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view contentType=" text/html" locale="es">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="IE=9" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="pragma" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" charset="UTF-8" />
+			<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+			<title>Avaluos</title>
+		</f:facet>
+
+ 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/avaluos/resources/css/styles_avaluos.css" /> 
+ 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/avaluos/resources/css/styles_avaluos_new.css" /> 
+		<link rel="stylesheet" type="text/css" href="https://js.arcgis.com/4.6/esri/css/main.css" />
+		<script src="https://js.arcgis.com/4.6/"></script>
+		<script src="https://js.arcgis.com/4.6/dojo/dojo.js"></script>
+	 	<script>
+  			(function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+  				n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+
+  				ineum('reportingUrl', 'https://eum-orange-saas.instana.io');
+  				ineum('key', 'rKFurmn0TReBfGPYealUrg');
+  				ineum('trackSessions');
+		</script>
+		<script defer="defer" crossorigin="anonymous" src="https://eum.instana.io/eum.min.js"></script> 
+		<script type="text/javascript">
+		var t;
+
+		function startTimer() {
+			t = setTimeout("PF('statusDialog').hide();", 5000);
+		}
+
+		function stopTimer() {
+			clearTimeout(t);
+		}
+	</script>
+		<script type="text/javascript">
+		  window.history.forward();
+	        /**
+	          cancenla el menu contextual(click derecho).
+	        **/
+	        window.location.hash="no-back-button";
+	        window.location.hash="Again-No-back-button";
+	        window.onhashchange=function(){window.location.hash="no-back-button";}
+	        
+	        function noBack() {
+	            window.history.forward();
+	        }
+		
+		PrimeFaces.locales['es'] = { closeText: 'Cerrar', prevText: 'Anterior', nextText: 'Siguiente', monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'], dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'], dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'], dayNamesMin: ['D','L','M','X','J','V','S'], weekHeader: 'Semana', firstDay: 1, isRTL: false, showMonthAfterYear: false, yearSuffix: '', timeOnlyTitle: 'Sólo hora', timeText: 'Tiempo', hourText: 'Hora', minuteText: 'Minuto', secondText: 'Segundo', currentText: 'Fecha actual', ampm: false, month: 'Mes', week: 'Semana', day: 'Día', allDayText : 'Todo el día' };
+		
+		function numeroEntero(evt) {
+			var keyPressed = (evt.which)?evt.which: evt.keyCode;
+			return keyPressed &lt;= 31 || (keyPressed &gt;=48 &amp;&amp; keyPressed &lt;= 57) ;
+		}
+		
+ 		</script>
+		<style>
+.ui-dialog .ui-dialog-titlebar-close span, .ui-dialog .ui-dialog-titlebar-minimize span, .ui-dialog .ui-dialog-titlebar-maximize span {
+	background: #ffffff !important;
+}
+
+.ui-panelgrid td, .ui-panelgrid tr {
+	border-style: none !important
+}
+
+.ui-widget-overlay {
+	background: #fff;
+	opacity: .30 !important;
+	filter: Alpha(Opacity = 30) !important;
+}
+
+.esriSimpleSlider {
+	border: none !important;
+	background-color: #15131300 !important;
+	color: #2c2727 !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+.esriSimpleSliderIncrementButton:hover {
+	background-color: #0e84f8;
+}
+
+.esriSimpleSliderIncrementButton {
+	background-color: #cfe4f8;
+}
+
+.esriSimpleSliderDecrementButton:hover {
+	background-color: #0e84f8;
+}
+
+.esriSimpleSliderDecrementButton {
+	background-color: #cfe4f8;
+}
+</style>
+	</h:head>
+	<h:body>
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="70" resizable="false" collapsible="false" >
+				<ui:include src="encabezado.xhtml" />
+			</p:layoutUnit>
+			<p:layoutUnit position="south" size="60" resizable="false" collapsible="false">
+				<ui:include src="footer.xhtml" />
+			</p:layoutUnit>
+			<p:layoutUnit id="contenidocentral" position="center">
+				<h:panelGroup id="contenidoActualizar" styleClass="avaluos-content-fondo">
+					<ui:insert name="content"></ui:insert>
+				</h:panelGroup>
+			</p:layoutUnit>
+		</p:layout>
+		<p:dialog styleClass="avaluos-modal-formulario" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			<p:graphicImage value="#{resource['images/ajax-processing.gif']}" />
+		</p:dialog>
+		<h:form id="confirmarForm">
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<!-- como aplicarle el estilo de avaluos sin quitar el que necesitan para que funcione el confirmDialog -->
+				<p:commandButton styleClass="ui-confirmdialog-yes" value="#{etq.si}" type="button" icon="ui-icon-check" update="errorForm" />
+				<p:commandButton styleClass="ui-confirmdialog-no" value="#{etq.no}" type="button" icon="ui-icon-close" update="errorForm" />
+			</p:confirmDialog>
+		</h:form>
+		 <p:ajaxStatus onstart="PF('statusDialog').show();" oncomplete="PF('statusDialog').hide();"  />
+		<ui:insert name="popups" />
+		<ui:include src="error.xhtml" />
+		<ui:include src="confirmar.xhtml" />
+		<ui:include src="popupImpresion.xhtml" />
+		<p:growl id="mensajes" sticky="true" autoUpdate="true" globalOnly="true" life="5000" showDetail="true" showSummary="false" closable="true" />
+		<h:form prependId="false">
+			<p:idleMonitor timeout="3600000">
+				<p:ajax event="idle" listener="#{sesion.abrir}" update="@form" />
+			</p:idleMonitor>
+			<p:dialog styleClass="avaluos-modal-formulario" id="timeoutSession" header="#{etq.sesion_terminada}" widgetVar="#{sesion.popupId}" showEffect="fade"
+				hideEffect="fade" modal="true" closable="false" draggable="false" resizable="false" visible="#{sesion.ver}">
+				<p:commandButton styleClass="avaluos-cta-gen-aceptar" action="#{sesion.cerrarSesion}" value="#{etq.sesion_acceder}" ajax="false" />
+			</p:dialog>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

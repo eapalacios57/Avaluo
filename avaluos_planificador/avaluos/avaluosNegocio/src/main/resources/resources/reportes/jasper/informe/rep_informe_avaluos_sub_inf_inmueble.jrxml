@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_informe_avaluos_sub_inf_inmueble" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="2.120488091862433"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="ediContUso" class="java.lang.Long">
+		<fieldDescription><![CDATA[ediContUso]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaDeposito2" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaDeposito2]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaPpal1" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaPpal1]]></fieldDescription>
+	</field>
+	<field name="otroUsoInmueble" class="java.lang.String">
+		<fieldDescription><![CDATA[otroUsoInmueble]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaDeposito1" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaDeposito1]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaPpal2" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaPpal2]]></fieldDescription>
+	</field>
+	<field name="usuarioCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioCreacion]]></fieldDescription>
+	</field>
+	<field name="usuarioTransaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioTransaccion]]></fieldDescription>
+	</field>
+	<field name="fechaTransaccion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaTransaccion]]></fieldDescription>
+	</field>
+	<field name="idAvaluo" class="java.lang.Long">
+		<fieldDescription><![CDATA[idAvaluo]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaGaraje1" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaGaraje1]]></fieldDescription>
+	</field>
+	<field name="departamentoEscritura" class="java.lang.Long">
+		<fieldDescription><![CDATA[departamentoEscritura]]></fieldDescription>
+	</field>
+	<field name="idCategoria" class="java.lang.Long">
+		<fieldDescription><![CDATA[idCategoria]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaGaraje5" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaGaraje5]]></fieldDescription>
+	</field>
+	<field name="usoInmuebleSF" class="java.lang.Long">
+		<fieldDescription><![CDATA[usoInmuebleSF]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaGaraje4" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaGaraje4]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaGaraje3" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaGaraje3]]></fieldDescription>
+	</field>
+	<field name="matriculaInmobiliariaGaraje2" class="java.lang.String">
+		<fieldDescription><![CDATA[matriculaInmobiliariaGaraje2]]></fieldDescription>
+	</field>
+	<field name="tipoVivienda" class="java.lang.Long">
+		<fieldDescription><![CDATA[tipoVivienda]]></fieldDescription>
+	</field>
+	<field name="ubicacion2" class="java.lang.Long">
+		<fieldDescription><![CDATA[ubicacion2]]></fieldDescription>
+	</field>
+	<field name="chip" class="java.lang.String">
+		<fieldDescription><![CDATA[chip]]></fieldDescription>
+	</field>
+	<field name="ubicacion3" class="java.lang.Long">
+		<fieldDescription><![CDATA[ubicacion3]]></fieldDescription>
+	</field>
+	<field name="usoInmueble" class="java.lang.Long">
+		<fieldDescription><![CDATA[usoInmueble]]></fieldDescription>
+	</field>
+	<field name="catastralSF" class="java.lang.String">
+		<fieldDescription><![CDATA[catastralSF]]></fieldDescription>
+	</field>
+	<field name="claseInmueble" class="java.lang.Long">
+		<fieldDescription><![CDATA[claseInmueble]]></fieldDescription>
+	</field>
+	<field name="otroClase" class="java.lang.String">
+		<fieldDescription><![CDATA[otroClase]]></fieldDescription>
+	</field>
+	<field name="fechaEscritura" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaEscritura]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="usoInmuebleBUA" class="java.lang.Long">
+		<fieldDescription><![CDATA[usoInmuebleBUA]]></fieldDescription>
+	</field>
+	<field name="notaria" class="java.lang.String">
+		<fieldDescription><![CDATA[notaria]]></fieldDescription>
+	</field>
+	<field name="ciudadEscritura" class="java.lang.Long">
+		<fieldDescription><![CDATA[ciudadEscritura]]></fieldDescription>
+	</field>
+	<field name="idInfinmueble" class="java.lang.Long">
+		<fieldDescription><![CDATA[idInfinmueble]]></fieldDescription>
+	</field>
+	<field name="numeroEscritura" class="java.lang.String">
+		<fieldDescription><![CDATA[numeroEscritura]]></fieldDescription>
+	</field>
+	<field name="usoInmuebleDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[usoInmuebleDescripcion]]></fieldDescription>
+	</field>
+	<field name="usoInmuebleBuaDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[usoInmuebleBuaDescripcion]]></fieldDescription>
+	</field>
+	<field name="ediContUsoDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[ediContUsoDescripcion]]></fieldDescription>
+	</field>
+	<field name="ubicacion2Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[ubicacion2Descripcion]]></fieldDescription>
+	</field>
+	<field name="departamentoEscrituraNombre" class="java.lang.String">
+		<fieldDescription><![CDATA[departamentoEscrituraNombre]]></fieldDescription>
+	</field>
+	<field name="ciudadEscrituraNombre" class="java.lang.String">
+		<fieldDescription><![CDATA[ciudadEscrituraNombre]]></fieldDescription>
+	</field>
+	<field name="ubicacion3Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[ubicacion3Descripcion]]></fieldDescription>
+	</field>
+	<field name="categoriaDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[categoriaDescripcion]]></fieldDescription>
+	</field>
+	<field name="claseDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[claseDescripcion]]></fieldDescription>
+	</field>
+	<field name="tipoViviendaDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoViviendaDescripcion]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="133" y="3" width="45" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[UBICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="3" width="47" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[UBICACION LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="3" width="44" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[NUM. ESCRITURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="3" width="80" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[NUM. NOTARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="3" width="53" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CIUDAD ESCRITURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="3" width="96" height="9"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACION DEL INMUEBLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="3" width="71" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[FECHA ESCRITURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="3" width="53" height="9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[DPTO. ESCRITURA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="68" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="-10" width="573" height="78"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="27" width="38" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CLASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="37" width="38" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CATEGORIA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="39" y="7" width="57" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoVivienda}!=null?$F{tipoViviendaDescripcion}:""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="39" y="17" width="57" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usoInmueble}==null?"":$F{usoInmuebleDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="39" y="27" width="57" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claseDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="39" y="37" width="57" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoriaDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="7" width="46" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubicacion3Descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="17" width="36" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OTROS USOS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="133" y="17" width="91" height="10"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otroUsoInmueble}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="27" width="36" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OTRA CLASE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="133" y="27" width="91" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otroClase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="37" width="91" height="11"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CONSTRUIDO PARA EL USO ACTUAL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="310" y="0" width="75" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroEscritura}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="0" width="80" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{notaria}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="0" width="53" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciudadEscritura}==null?"":$F{ciudadEscrituraNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="17" width="38" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[USO]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="499" y="0" width="71" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEscritura}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="310" y="19" width="75" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaGaraje1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="310" y="56" width="75" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaGaraje3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="387" y="11" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. GJ 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="11" width="80" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. PRINCIPAL 1]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="38" width="71" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{chip}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="56" width="108" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaDeposito1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="387" y="49" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. DP 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="11" width="60" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. GJ 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="30" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. GJ 2]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="19" width="71" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaDeposito2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="499" y="30" width="71" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CHIP (Solo Bogotá)	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="11" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. DP 2]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="444" y="0" width="53" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{departamentoEscritura}==null?"":$F{departamentoEscrituraNombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="133" y="7" width="41" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubicacion2Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="19" width="108" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaGaraje4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="49" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. GJ 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="30" width="80" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. PRINCIPAL 2]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="38" width="81" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaPpal2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="38" width="108" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaGaraje5}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="387" y="30" width="44" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[M. INMOB. GJ 5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="7" width="38" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[TIPO VIVIENDA ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="310" y="38" width="75" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaGaraje2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="19" width="80" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matriculaInmobiliariaPpal1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="189" y="37" width="35" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ediContUsoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="56" width="71" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{catastralSF}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="499" y="48" width="71" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CEDULA CATASTRAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="47" width="38" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[CAT. BUA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="39" y="47" width="57" height="10"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usoInmuebleBuaDescripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
