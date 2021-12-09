@@ -1,0 +1,16 @@
+{
+    "develop": {
+        "urlWlBirc": "t3://10.1.5.153:3061", 
+        "idUserANDPassWlBirc": "weblogic-develop-console-user",
+        "idUserANDPassShh": "weblogic-develop-ssh-user",
+        "artifactNameWlBirc": "avaluosEar-1.0-SNAPSHOT",
+        "domainWlBirc": "/oracle/app/wlogic12c/Oracle/Middleware/Oracle_Home/user_projects/domains/externosdesa/bin",
+        "pathwlBirc": "/oracle/app/wlogic12c/Oracle/Middleware/Oracle_Home/user_projects/domains/base_domain/deploysJenkins/App/avaluos",
+        "clusterWlBirc": "Cluster_Avaluos",                                                        
+        "serverWlSshBirc":"10.1.5.153",
+        "puertoWlSshBirc":22,
+        "extension":"ear",
+        "projectName":"Avaluos"
+        
+    }
+}
