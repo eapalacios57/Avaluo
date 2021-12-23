@@ -9,14 +9,13 @@ pipeline {
     }
     stages{
         stage('SonarQube analysis') {
-           agent {
-                label 'master' 
-           }
+           agent any
            steps {
                script {
-                   last_stage = env.STAGE_NAME
-                    def SCANNERHOME = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                   //last_stage = env.STAGE_NAME
+                   def SCANNERHOME = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                    def projectKey="Avaluos-Project"
+                   def organization='segurosbolivar'
                    def pathSourceSonar='avaluos_planificador'
                    def sonarURL='http://192.168.100.158:9000/'
                    withSonarQubeEnv('SonarCloud'){
