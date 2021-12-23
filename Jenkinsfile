@@ -9,7 +9,9 @@ pipeline {
     }
     stages{
         stage('SonarQube analysis') {
-           agent any
+           agent {
+                label 'master' 
+            }
            steps {
                script {
                    //last_stage = env.STAGE_NAME
