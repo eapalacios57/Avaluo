@@ -8,6 +8,26 @@ pipeline {
         )
     }
     stages{
+        stage('SonarQube analysis') {
+           agent {
+                label 'master' 
+           }
+           steps {
+               script {
+                   last_stage = env.STAGE_NAME
+                    def SCANNERHOME = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                   def projectKey="Avaluos-Project"
+                   def pathSourceSonar='avaluos_planificador'
+                   def sonarURL='http://192.168.100.158:9000/'
+                   withSonarQubeEnv('SonarCloud'){
+                         sh """
+                           ${SCANNERHOME}/bin/sonar-scanner -e -Dsonar.java.binaries=. -Dsonar.projectKey=${projectKey} -Dsonar.sources=${pathSourceSonar} -Dsonar.host.url=${sonarURL}
+                         """
+                   }
+               }
+               echo "SonarQube analysis";              
+           }
+        } 
         stage('Set variables'){
             agent {
                 label 'master' 
