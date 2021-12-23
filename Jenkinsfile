@@ -13,7 +13,7 @@ pipeline {
            steps {
                script {
                    //last_stage = env.STAGE_NAME
-                   def SCANNERHOME = tool name: 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                   def SCANNERHOME = tool name: 'sonar-scanner'
                    def projectKey="Avaluos-Project"
                    def organization='segurosbolivar'
                    def pathSourceSonar='avaluos_planificador'
